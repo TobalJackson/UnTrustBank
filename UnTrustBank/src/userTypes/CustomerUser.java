@@ -1,5 +1,5 @@
 package userTypes;
 
-public class CustomerUser {
+public class CustomerUser extends BasicUser {
 
 }
