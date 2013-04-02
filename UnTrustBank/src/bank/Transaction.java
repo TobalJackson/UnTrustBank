@@ -44,4 +44,10 @@ public class Transaction {
 	public BasicUser getInitiator(){
 		return initiator;
 	}
+	public boolean getIsFraudulent(){
+		return isFlaggedFraudulent;
+	}
+	public void setIsFraudulent(){
+		isFlaggedFraudulent = true;
+	}
 }
