@@ -4,20 +4,28 @@ import bank.Transaction;
 import java.util.ArrayList;
 import userTypes.CustomerUser;
 import dateTime.DateTime;
-//Dania makes edits?
-public class BasicAccount {
+public abstract class BasicAccount {
 	private ArrayList<Transaction> transactionList;
 	private double accountBalance;
 	private boolean isActiveAccount;
 	private CustomerUser owner;
-	private int accountID;
+	private int accountID; //acountID is based on other existant accounts, therefore should be generated rather than specified
 	private DateTime accountCreatedOn;
 	private boolean isEmployeesAccount;
 	private double accruedInterest;
 	private double minimumAccountBalance;
 	private double serviceFee;
 	private double maximumAccountBalance;
-	
+	public BasicAccount(CustomerUser owner, int accountID){
+		this.owner = owner;
+		this.accountID = accountID;
+		this.accountBalance = 0;
+		this.isActiveAccount = true;
+		this.accountCreatedOn = new DateTime(); //new DateTime() constructor specifies the time as now
+		this.isEmployeesAccount = false; //accounts are not employee accounts by default
+		this.accruedInterest = 0;
+		
+	}
 	public double getMinAccountBalance(){
 		return minimumAccountBalance;
 	}
