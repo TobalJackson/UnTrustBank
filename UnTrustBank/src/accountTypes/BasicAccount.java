@@ -62,4 +62,7 @@ public class BasicAccount {
 		}
 		return fraudulentTransactions;
 	}
+	public void closeAccount(){
+		isActiveAccount = false;
+	}
 }
