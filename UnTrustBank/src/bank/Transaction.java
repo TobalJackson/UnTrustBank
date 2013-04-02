@@ -9,7 +9,7 @@ public class Transaction {
 	private CustomerUser customer;
 	private BasicUser initiator;
 	private boolean isCredit;
-	private boolean isApplied;
+	private boolean isApplied;//comment here wwooo00t
 	
 	public Transaction(DateTime timeStamp, double amount, CustomerUser customer, BasicUser initiator, boolean isCredit){
 		this.timeStamp = timeStamp;
