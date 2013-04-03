@@ -9,10 +9,10 @@ public class Transaction {
 	private CustomerUser customer;
 	private BasicUser initiator;
 	private boolean isCredit;
-	private boolean isApplied;//comment here wwooo00t
+	private boolean isApplied;
 	
-	public Transaction(DateTime timeStamp, double amount, CustomerUser customer, BasicUser initiator, boolean isCredit){
-		this.timeStamp = timeStamp;
+	public Transaction(double amount, CustomerUser customer, BasicUser initiator, boolean isCredit){
+		this.timeStamp = new DateTime(); //Transactions are timestamped with when they are instantiated.
 		this.amount = amount;
 		isFlaggedFraudulent = false; //by default, transactions are not fraudulent
 		this.customer = customer;
@@ -49,5 +49,20 @@ public class Transaction {
 	}
 	public void setIsFraudulent(){
 		isFlaggedFraudulent = true;
+	}
+	public DateTime getTimeStamp(){
+		return this.timeStamp;
+	}
+	public int compareTime(Transaction transaction){ //allows ordering of transactions based on time
+		return this.getTimeStamp().compare(transaction.getTimeStamp());
+	}
+	public int compareAmount(Transaction transaction){ //allows order of transactions based on amount
+		if (this.getAmount() == transaction.getAmount()){
+			return 0;
+		}
+		else if (this.getAmount() > transaction.getAmount()){
+			return 1;
+		}
+		else return -1;
 	}
 }

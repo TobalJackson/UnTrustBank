@@ -16,7 +16,7 @@ public abstract class BasicAccount {
 	private double minimumAccountBalance;
 	private double serviceFee;
 	private double maximumAccountBalance;
-	public BasicAccount(CustomerUser owner, int accountID){
+	public BasicAccount(CustomerUser owner, int accountID){ //default constructor only accepts Customer and account ID
 		this.owner = owner;
 		this.accountID = accountID;
 		this.accountBalance = 0;
@@ -42,6 +42,9 @@ public abstract class BasicAccount {
 		transactionList.add(transaction);
 	}
 	public double getCurrentAccountBalance(){
+		return accountBalance;
+	}
+	public double updateCurrentAccountBalance(){
 		double total = 0;
 		for (Transaction t : transactionList){
 			if(t.getIsApplied()){

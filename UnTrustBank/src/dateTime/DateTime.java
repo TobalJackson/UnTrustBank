@@ -245,6 +245,45 @@ public class DateTime {
 		}
 		else return true;
 	}
+	public int compare(DateTime otherTime){
+		if (this.isEqual(otherTime)){
+			return 0;
+		}
+		else if (this.getYear() > otherTime.getYear()){
+			return 1;
+		}
+		else if (this.getYear() == otherTime.getYear()){
+			if (this.getMonth() > otherTime.getMonth()){
+				return 1;
+			}
+			else if (this.getMonth() == otherTime.getMonth()){
+				if (this.getDay() > otherTime.getDay()){
+					return 1;
+				}
+				else if (this.getDay() == otherTime.getDay()){
+					if (this.getHour() > otherTime.getHour()){
+						return 1;
+					}
+					else if (this.getHour() == otherTime.getHour()){
+						if (this.getMinute() > otherTime.getMinute()){
+							return 1;
+						}
+						else if (this.getMinute() == otherTime.getMinute()){
+							if (this.getSecond() > otherTime.getSecond()){
+								return 1;
+							}
+							else return -1;
+						}
+						else return -1;
+					}
+					else return -1;
+				}
+				else return -1;
+			}
+			else return -1;
+		}
+		else return -1;
+	}
 	
 	/**
 	 * Public method of DateTime which will return a String with the values from a DateTime object in the form "MM/DD/YYYY, 
