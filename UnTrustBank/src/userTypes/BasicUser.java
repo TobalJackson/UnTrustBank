@@ -20,11 +20,20 @@ public abstract class BasicUser {
 		this.username = username;
 		this.userID = userID;
 	}
-	public BasicUser(){
+	public BasicUser(){ //for testing purposes
 		this("John", "Michael", "Doe", true, new DateTime(0, 0, 0, 0, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe", 0);
 	}
 	public String getName(){
 		return (this.firstName + " " + this.middleName + " " + this.lastName);
+	}
+	public String getFirstName(){
+		return this.firstName;
+	}
+	public String getMiddleName(){
+		return this.middleName;
+	}
+	public String getLastName(){
+		return this.lastName;
 	}
 	public boolean getIsMale(){
 		return this.isMale;
