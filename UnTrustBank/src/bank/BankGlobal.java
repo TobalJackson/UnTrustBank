@@ -89,6 +89,34 @@ public class BankGlobal {
 			break;	
 		}
 	}
-	
+	//Checking
+	double serviceChargeChecking;
+	double overdraftFee;
+	double serviceChargeLimitChecking;
+
+	double getServiceChargeLimitChecking()
+	{
+		return this.serviceChargeChecking;
+	}
+	void setServiceChargeLimitChecking(double newSCLC)
+	{
+		this.serviceChargeChecking = newSCLC;
+	}
+	double getOverdraftFee()
+	{
+		return this.overdraftFee;
+	}
+	void setOverdraftFee(double newOF)
+	{
+		this.overdraftFee = newOF;
+	}
+	double getServiceChargeChecking()
+	{
+		return this.serviceChargeLimitChecking;
+	}
+	void setServiceChargeChecking(double newSCS)
+	{
+		this.serviceChargeLimitChecking = newSCS;
+	}
 	
 }
