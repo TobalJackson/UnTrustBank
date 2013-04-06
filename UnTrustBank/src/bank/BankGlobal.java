@@ -39,7 +39,7 @@ public class BankGlobal {
 	private static double InterestRateCD3Year;
 	private static double InterestRateCD4Year;
 	private static double InterestRateCD5Year;
-	private static double getInterestRateCD(int duration)
+	public static double getInterestRateCD(int duration)
 	{
 	double rate = 0;
 		switch(duration)
