@@ -52,7 +52,7 @@ public class Transaction {
 		isFlaggedFraudulent = true;
 	}
 	public void setIsNotFraudulent(){
-		isFlaggedFraudulent = false;
+		isFlaggedFraudulent = false; // herpderp
 	}
 	public DateTime getTimeStamp(){
 		return this.timeStamp;
