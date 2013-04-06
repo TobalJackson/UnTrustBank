@@ -41,35 +41,54 @@ public class BankGlobal {
 	double InterestRateCD5Year;
 	double getInterestRateCD(int duration)
 	{
+	double rate = 0;
 		switch(duration)
 		{
 		case 0:
-			return this.InterestRateCD6Month;
+			rate = this.InterestRateCD6Month;
 			break;
 		case 1:
-			return InterestRateCD1Year;
+			rate = InterestRateCD1Year;
 			break;
 		case 2:
-			return InterestRateCD2Year;
+			rate = InterestRateCD2Year;
 			break;
 		case 3:
-			return InterestRateCD3Year;
+			rate =InterestRateCD3Year;
 			break;
 		case 4:
-			return InterestRateCD4Year;
+			rate = InterestRateCD4Year;
 			break;
 		case 5:
-			return InterestRateCD5Year;
+			rate = InterestRateCD5Year;
+			break;	
+		}
+	return rate;
+	}
+	void setInterestRateCD(int duration, double newRate)
+	{
+		switch(duration)
+		{
+		case 0:
+			this.InterestRateCD6Month = newRate;
 			break;
+		case 1:
+			InterestRateCD1Year = newRate;
+			break;
+		case 2:
+			InterestRateCD2Year = newRate;
+			break;
+		case 3:
+			InterestRateCD3Year = newRate;
+			break;
+		case 4:
+			InterestRateCD4Year = newRate;
+			break;
+		case 5:
+			InterestRateCD5Year = newRate;
+			break;	
 		}
 	}
-	void getInterestRateCD(int duration)
-	{
-		
-	}
-
-	
-	
 	
 	
 }
