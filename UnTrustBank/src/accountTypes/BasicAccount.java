@@ -22,16 +22,18 @@ public abstract class BasicAccount {
 	private double minimumAccountBalance;
 	private double serviceFee;
 	private double maximumAccountBalance;
-	public BasicAccount(CustomerUser owner, int accountID, Transaction mytransaction){ //default constructor only accepts Customer and account ID
+	public BasicAccount(CustomerUser owner, int accountID){ //default constructor only accepts Customer and account ID
 		this.owner = owner;
 		this.accountID = accountID;
 		
 		this.isActiveAccount = true;
 		this.accountCreatedOn = new DateTime(); //new DateTime() constructor specifies the time as now
-		this.isEmployeesAccount = false; //accounts are not employee accounts by default
+		//this.isEmployeesAccount = owner.; //accounts are not employee accounts by default
 		this.accruedInterest = 0;
-		this.transactionList.add(mytransaction);
+		//this.transactionList.add(mytransaction);
 	}
+	
+
 	
 	public double getMinimumAccountBalance(){
 		return minimumAccountBalance;
