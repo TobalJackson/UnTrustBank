@@ -3,6 +3,7 @@ package userTypes;
 import dateTime.DateTime;
 import java.util.ArrayList;
 import accountTypes.*;
+import bank.Transaction;
 
 public class CustomerUser extends BasicUser {
 	
@@ -16,5 +17,17 @@ public class CustomerUser extends BasicUser {
 	}
 	public CustomerUser(){
 		super();
+	}
+	public ArrayList<Transaction> getFullTransactionHistory(){
+		ArrayList<Transaction> fullTransactionHistory;
+	}
+	public boolean getIsEmployee(){
+		return this.isEmployee;
+	}
+	public void setIsEmployee(){
+		this.isEmployee = true;
+	}
+	public void setIsNotEmployee(){
+		this.isEmployee = false;
 	}
 }
