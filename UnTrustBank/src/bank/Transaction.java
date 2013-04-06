@@ -1,4 +1,5 @@
 package bank;
+import java.util.ArrayList;
 import dateTime.DateTime;
 import userTypes.CustomerUser;
 import userTypes.BasicUser;
@@ -49,6 +50,9 @@ public class Transaction {
 	}
 	public void setIsFraudulent(){
 		isFlaggedFraudulent = true;
+	}
+	public void setIsNotFraudulent(){
+		isFlaggedFraudulent = false;
 	}
 	public DateTime getTimeStamp(){
 		return this.timeStamp;
