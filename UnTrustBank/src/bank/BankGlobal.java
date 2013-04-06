@@ -32,20 +32,20 @@ public class BankGlobal {
 	}
 	
 	//CD
-	double minimumBalanceCD;
-	double InterestRateCD6Month;
-	double InterestRateCD1Year;
-	double InterestRateCD2Year;
-	double InterestRateCD3Year;
-	double InterestRateCD4Year;
-	double InterestRateCD5Year;
-	double getInterestRateCD(int duration)
+	static double minimumBalanceCD;
+	static double InterestRateCD6Month;
+	static double InterestRateCD1Year;
+	static double InterestRateCD2Year;
+	static double InterestRateCD3Year;
+	static double InterestRateCD4Year;
+	static double InterestRateCD5Year;
+	static double getInterestRateCD(int duration)
 	{
 	double rate = 0;
 		switch(duration)
 		{
 		case 0:
-			rate = this.InterestRateCD6Month;
+			rate = InterestRateCD6Month;
 			break;
 		case 1:
 			rate = InterestRateCD1Year;
@@ -54,7 +54,7 @@ public class BankGlobal {
 			rate = InterestRateCD2Year;
 			break;
 		case 3:
-			rate =InterestRateCD3Year;
+			rate = InterestRateCD3Year;
 			break;
 		case 4:
 			rate = InterestRateCD4Year;
