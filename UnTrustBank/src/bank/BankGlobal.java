@@ -12,34 +12,34 @@ public class BankGlobal {
 	ArrayList<BasicAccount> account = new ArrayList<BasicAccount>();
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
 	// Savings
-	double serviceChargeSavings;
-	double interestRateSavings;
-	double getServiceChargeSavings()
+	private double serviceChargeSavings;
+	private double interestRateSavings;
+	public double getServiceChargeSavings()
 	{
 		return this.serviceChargeSavings;
 	}
-	void setServiceChargeSavings(double newSCS)
+	public void setServiceChargeSavings(double newSCS)
 	{
 		this.serviceChargeSavings = newSCS;
 	}
-	double getInterestRateSavings()
+	public double getInterestRateSavings()
 	{
 		return this.interestRateSavings;
 	}
-	void setInterestRateSavings(double newIRS)
+	public void setInterestRateSavings(double newIRS)
 	{
 		this.interestRateSavings = newIRS;
 	}
 	
 	//CD
-	static double minimumBalanceCD;
-	static double InterestRateCD6Month;
-	static double InterestRateCD1Year;
-	static double InterestRateCD2Year;
-	static double InterestRateCD3Year;
-	static double InterestRateCD4Year;
-	static double InterestRateCD5Year;
-	static double getInterestRateCD(int duration)
+	private static double minimumBalanceCD;
+	private static double InterestRateCD6Month;
+	private static double InterestRateCD1Year;
+	private static double InterestRateCD2Year;
+	private static double InterestRateCD3Year;
+	private static double InterestRateCD4Year;
+	private static double InterestRateCD5Year;
+	private static double getInterestRateCD(int duration)
 	{
 	double rate = 0;
 		switch(duration)
