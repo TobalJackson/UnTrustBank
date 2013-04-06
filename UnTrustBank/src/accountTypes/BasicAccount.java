@@ -3,6 +3,8 @@ package accountTypes;
 //will this stay?
 //stay put
 // <3
+import javax.swing.*;
+
 import bank.Transaction;
 import java.util.ArrayList;
 import userTypes.CustomerUser;
@@ -45,8 +47,14 @@ public abstract class BasicAccount {
 		maximumAccountBalance = max;
 	}
  
-	public abstract void appendTransaction(Transaction transaction);
-		//need to add transaction to arraylist
+	public void appendTransaction(Transaction transaction){
+		if(isActiveAccount){
+			transactionList.add(transaction);
+		}
+		else{
+			accountClosedError();
+			}
+	}
 	
 	public void updateCurrentAccountBalance(){
 		double currentbalance=0;
@@ -67,7 +75,7 @@ public abstract class BasicAccount {
 		t.setIsFraudulent();
 	}
 	public void unflagFraudulentTransaction(Transaction t){
-		//finish
+		t.setIsNotFraudulent();
 	}
 	
 	public ArrayList<Transaction> getFraudulentTransactions(){
@@ -82,4 +90,10 @@ public abstract class BasicAccount {
 	public void closeAccount(){
 		isActiveAccount = false;
 	}
-}
+	public void accountClosedError(){
+		String st="this account is closed. you're not allowed to do this :/";
+		JOptionPane.showMessageDialog(null,st);	
+	}
+	}
+	
+
