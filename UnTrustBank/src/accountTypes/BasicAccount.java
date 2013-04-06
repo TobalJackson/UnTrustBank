@@ -28,7 +28,7 @@ public abstract class BasicAccount {
 		
 		this.isActiveAccount = true;
 		this.accountCreatedOn = new DateTime(); //new DateTime() constructor specifies the time as now
-		//this.isEmployeesAccount = owner.; //accounts are not employee accounts by default
+		this.isEmployeesAccount = owner.getIsEmployee(); //accounts are not employee accounts by default
 		this.accruedInterest = 0;
 		//this.transactionList.add(mytransaction);
 	}
