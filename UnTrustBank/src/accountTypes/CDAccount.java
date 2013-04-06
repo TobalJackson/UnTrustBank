@@ -1,6 +1,7 @@
 package accountTypes;
 
 import userTypes.CustomerUser;
+import bank.BankGlobal;
 import bank.Transaction;
 
 public class CDAccount extends BasicAccount implements Withdrawable, WithdrawRequestable {
@@ -27,10 +28,8 @@ public CDAccount(CustomerUser owner, int accountID,
 				super.setMinimumAccountBalance(minaccountbalance);
 			}
 				
-			//interestrate=
+			interestrate=BankGlobal.getInterestRateCD(myCDDuration);
 			
-			
-				
 		// TODO Auto-generated constructor stub
 	}
 }
