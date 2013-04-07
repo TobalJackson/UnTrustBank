@@ -21,7 +21,7 @@ public abstract class BasicUser {
 		this.userID = userID;
 	}
 	public BasicUser(){ //for testing purposes
-		this("John", "Michael", "Doe", true, new DateTime(0, 0, 0, 0, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe", 0);
+		this("John", "Michael", "Doe", true, new DateTime(1987, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe", 0);
 	}
 	public String getName(){
 		return (this.firstName + " " + this.middleName + " " + this.lastName);
