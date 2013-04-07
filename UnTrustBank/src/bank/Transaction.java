@@ -4,6 +4,11 @@ import dateTime.DateTime;
 import userTypes.CustomerUser;
 import userTypes.BasicUser;
 import accountTypes.BasicAccount;
+/**
+ * Transaction Class Transaction(double amount, CustomerUser customer, BasicUser initiator, int transtype)
+ * @author tobaljackson
+ *
+ */
 public class Transaction {
 	//who can create a Transaction? Tellers, Customers?  
 	private DateTime timeStamp;
