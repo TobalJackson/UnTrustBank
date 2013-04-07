@@ -133,11 +133,13 @@ public class BankGlobal {
 	}
 	
 	//Checking
-	private static double serviceChargeChecking;
-	private static double overdraftFee;
-	private static double serviceChargeLimitChecking;
-	private static boolean underlimitfee;
 	
+	private static double overdraftFee;
+	private static double overdraftlimit;
+	
+	private static double serviceChargeLimitChecking;
+	private static boolean underlimitfeechecking;
+	private static double serviceChargeChecking;
 
 	public static double getServiceChargeLimitChecking()
 	{
@@ -155,13 +157,31 @@ public class BankGlobal {
 	{
 		overdraftFee = newOF;
 	}
-	double getServiceChargeChecking()
+	public static double getServiceChargeChecking()
 	{
 		return serviceChargeLimitChecking;
 	}
-	void setServiceChargeChecking(double newSCS)
+	public static void setServiceChargeChecking(double newSCS)
 	{
 		serviceChargeLimitChecking = newSCS;
+	}
+	public static boolean getunderlimitfeecheckingboolean()
+	{
+		
+		return underlimitfeechecking; 
+	}
+	public static void setunderlimitfeecheckingboolean(boolean tf){
+		underlimitfeechecking=tf;
+			}
+	
+	
+	public static double getOverdraftLimit()
+	{
+		return overdraftlimit;
+	}
+	public static void setOverdraftLimit(double newodl)
+	{
+		overdraftlimit = newodl;
 	}
 	
 }
