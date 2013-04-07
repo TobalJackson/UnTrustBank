@@ -1,0 +1,390 @@
+Bank Object:
+
+BankGlobal
+
+	//Global
+		-customers:ArrayList<Customer>
+		-accounts:ArrayList<BasicAccount>
+		-employees:ArrayList<BasicUser>
+		-transactions:ArrayList<Transaction>
+	
+	//Saving
+		-serviceChargeSavings:double
+		-interestRateSavings:double
+		
+		+getServiceChargeSavings(): double
+		+setServiceChargeSavings(double): void
+		+getInterestRateSavings(): double
+		+setInterestRateSavings(double): void
+	
+	//CD
+	
+		-minimumBalanceCD: double
+		-interestRateCD6Month: double
+		-interestRateCD1Year: double
+		-interestRateCD2Year: double
+		-interestRateCD3Year: double
+		-interestRateCD4Year: double
+		-interestRateCD5Year: double
+		
+		+getInterestRateCD(int duration): double //int 0 - 5 == 6 month - 5 year
+		+setInterestRateCD(int duration): void
+	
+	//Checking
+		-overdraftFee: double
+		-serviceChargeChecking: double
+		-serviceChargeLimitChecking: double
+		
+		+getServiceChargeLimitChecking(): double
+		+setServiceChargeLimitChecking(double): void
+		+getOverdraftFee(): double
+		+setOverdraftFee(double): void
+		+getServiceChargeChecking(): double
+		+setServiceChargeChecking(double): void
+	
+	//Loan
+		-maximumLoansTotal: double
+		-currentLoansTotal: double
+		-interestRateLoan:double
+		-penaltyFeeLoan: double
+		
+		+getMaximumLoansTotal(): double
+		+setMaximumLoansTotal(double): void
+		+getCurrentLoansTotal(): double	
+		+getInterestRateLoan(): double
+		+setInterestRateLoan(double): void
+		+getPenaltyFeeLoan(): double
+		+setPenaltyFeeLoan(double): void
+	
+	//LOC
+		-interestRateLOC:double
+		-minimumPaymentLOC: double
+		
+		+getInterestRateLOC():double
+		+setInterestRateLOC(double):void
+		+getMinimumPaymentLOC(): double
+		+setMinimumPaymentLOC(double): void
+
+
+Transaction Object:
+
+	Transaction
+	
+		-timeStamp: DateTime
+		-amount: double
+		-fraudulentFlag: boolean
+		-requestor: Customer
+		-creator: User
+		-moneyIsCredit:boolean
+		-isApplied:boolean
+		
+		+getAmount():double
+		+getIsCredit():boolean
+		+getIsApplied():boolean
+		+setIsApplied(boolean):void
+
+	 	 	
+Request Object:
+
+	Request
+
+		private BasicAccount accountRequest;
+		private double requestAmount;
+		private CustomerUser customerRequestor;
+		//private double depositAmount;
+		//private double withdrawalAmount;
+		private DateTime timeStamp;
+		
+		public Request(BasicAccount accountRequest, double requestAmount, CustomerUser customerRequestor)
+		
+		public double getRequestAmount()
+		public CustomerUser getCustomer()			
+		public BasicAccount getAccount()
+		public DateTime getTime()
+
+	 	 	
+
+
+Accounts:
+
+	BasicAccount:Abstract
+	
+		-transactionList(Arraylist<Transaction>)
+		-accountBalance:double
+		-isActiveAccount:boolean
+		-accountOwner:Customer
+		-accountID:hash
+		-dateCreated:DateTime
+		-isEmployeeAccount:boolean
+		-interest:double
+		-minimumAccountBalance: double
+		-serviceFee: double
+		-accountClosed: boolean
+		-maximumAccountBalance: double
+		
+		+getMinimumAccountBalance(): void
+		+setMinimumAccountBalance(): double
+		+getMaximumAccountBalance(): void
+		+setMaximumAccountBalance(): double
+		+appendTransaction
+		+getCurrentAccountBalance(): double
+		+getFullTransactionHistory(): Arraylist<Transaction>
+		+flagFradulentTransaction(Transaction):void
+		+getFradulentTransactions():ArrayList<Transaction>
+		+closeAccount():void
+		+getCurrentAccountDetails():AccountStats??????
+		+unflagFraudulentAccount()
+		+accountClosedError
+	
+	
+	SavingsAccount extends BasicAccount implements Withdrawable, WithdrawRequestable
+	
+		-setMinimumAccountBalance(0); //savings account minimum balance is 0
+		
+		+getInterestRateSavings():double
+		+withdraw(Double, WithdrawDirectable):void //validates amount and user requesting
+		+deposit(Double, WithdrawDirectable):void //validates amount and user requesting
+		+getAccountStatistics():SavingsAccountStats
+		+incurSeviceCharge(Transaction):void //append Transaction<ServiceCharge> to transactionList
+		+accrueInterest(Transaction):void //append Transaction<Interest> to transactionList
+		+incurServiceFee(Transaction):void //append Transaction<ServiceFee> to transactionList
+	
+	CDAccount extends BasicAccount implements Withdrawable, WithdrawRequestable
+	
+		-CDAccountType:int //0 = 6 month, 1 = 1 year, 2 = year, 3 = 3 year, 4 = 4 year, 5 = 5 year
+		-serviceFeeApplies:boolean
+		-isOverMinBalance:boolean
+		
+		+getInterestRateCD(int duration):double
+		+changeDoesServiceFeeApply(boolean):void
+		+checkOverMinBalance():boolean
+		+withdraw(Double, WithdrawDirectable):void
+		+deposit(Double, WithdrawDirectable):void
+		+incurSeviceCharge(Transaction):void
+		+accrueInterest(Transaction):void
+		+incurPenalty(Transaction):void 
+	
+	
+	CheckingAccount extends BasicAccount implements Withdrawable, WithdrawDirectable
+	
+		-setMinimumAccountBalance(minimumCheckingAccountBalance):void
+		
+		+checkOverMinBalance():boolean
+		+withdraw(Double, WithdrawDirectable):void
+		+deposit(Double, WithdrawDirectable):void
+		+incurOverdraftCharge(Transaction):void
+		+incurServiceCharge(Transaction):void
+	
+	
+	Loan extends BasicAccount
+	
+		-interestRate:double
+		-interestRateHistory:ArrayList<DateTime, double>
+		-minimumMonthlyDeposit:double
+		-interestRateLoanoffset:double
+		
+		+getInterestRateLoanoffset():double
+		+setInterestRateLoanoffset(double):void
+		-setMaximumAccountBalance(0):void
+		+checkMonthsDeposits():void
+		+setInterestRate(double):void
+		+deposit(Double, WithdrawDirectable):void
+		+accrueInterest(Transaction):void
+		+incurPenalty(Transaction):void
+	
+	Line of Credit extends BasicAccount implements WithdrawDirectable
+		
+		-interestRateLOCoffset:double
+		-interestRateHistory:ArrayList<DateTime, double>
+		-interestSumDue:double
+		
+		-setMaximumAccountBalance(0):void
+		+setMinimumAccountBalance(double):void
+		+accrueInterest(Transaction):void
+		+getInterestRateLOCoffset():double
+		+setInterestRateLOCoffset(double):void
+		+void withdraw(Double, WithdrawDirectable)
+		+void deposit(Double, WithdrawDirectable)
+		+checkMonthsDeposits():void
+		+interestSumCalculate():double
+
+Users:
+
+	BasicUser:Abstract
+	
+		private String firstName;
+		private String middleName;
+		private String lastName;
+		private DateTime dob;
+		private boolean isMale;
+		private char[] password;
+		private String username;
+		private int userID;
+	
+	Customer extends BasicUser throws IllegalArgumentException
+	
+		private ArrayList<BasicAccount> customerAccounts;
+		private boolean isEmployee;
+		private boolean isActiveCustomer;
+		
+		+getFullTransactionHistory():ArrayList<Transaction>
+		+getAccountTransactionHistory(Account): ArrayList<Transaction>
+		+getFradulentFlags(): ArrayList
+		+flagFradulentTransaction(Transaction):void
+		+transferMoneyFromChecking(double, CheckingAccount, CheckingAccount):void 
+		+requestDeposit(double, WithdrawRequestable):void
+		+requestWithdrawal(double, WithdrawRequestable):void
+		+withdraw(withdrawDirectable):void
+		+deposit(withdrawDirectable):void
+		+isCustomerActive():boolean
+		+transferFunds(Withdrawable, Account):void
+		+getClosedAccounts(): ArrayList<Account>
+	
+	Teller extends BasicUser
+		
+		+getCurrentAccountDetails(Account):AccountStats
+		+transferMoneyFromChecking(double, Checking Account, CheckingAccount):void
+		+setUpAutomaticDeposits(Account, double): void
+		+withdraw(Transaction, WithdrawDirectable): void
+		+deposit(Transaction, Account): void
+		+incurTellerCharge(Account): void
+		+waiveTellerCharge(Account): void
+		+pendingRequests():ArrayLists<Request>
+		+approverequests(Request):void
+	
+	AccountManager extends BasicUser
+		
+		+getCustomerSSN(Customer):int
+		+openAccount(Customer, BasicAccount):void
+		+closeAccount(Account):void
+		+setLOCCap(Account, double):void
+		+getGlobalLoanCap():double
+	
+	Accountant extends BasicUser
+		
+		+getAccountStats(int... type):ArrayList<AccountStats>
+		+viewAccountStats(ArrayList<AccountStats>):void
+		+getGlobalLoanCap(): double
+		+setGlobalLoanCap(double): void
+		+getCurrentLoansTotal(): double	
+		+getServiceChargeLimitChecking(): double
+		+setServiceChargeLimitChecking(double): void
+	
+	Auditor extends BasicUser
+		
+		+getAccounts(Customer): Arraylist<Account>
+		+getFullTransactionHistory(Customer):ArrayList<Transaction>
+		+getAccountTransactionHistory(Account): ArrayList<Transaction>
+		+getFradulentFlags(): ArrayList
+		+overturnTransaction(Transaction): void
+		+checkIfEmployee(Customer): boolean
+	
+	OperationManager extends BasicUser
+	
+		+getInterestRateSavings():double
+		+setInterestRateSavings(double):void
+		+getServiceChargeChecking(): double
+		+setServiceChargeChecking(double): void
+		+getServiceChargeSavings(): double
+		+setServiceChargeSavings(double): void
+		+getInterestRateLoan(): double
+		+setInterestRateLoan(double): void
+		+getInterestRateLOC():double
+		+setInterestRateLOC(double):void
+		+getInterestRateLOCoffsetLoan():double
+		+setInterestRateLOCoffsetLoan(double):void
+		+getPenaltyFeeLoan(): double
+		+setPenaltyFeeLoan(double): void
+		+getOverdraftFee(): double
+		+setOverdraftFee(double): void
+		+getMinimumPaymentLOC(): double
+		+setMinimumPaymentLOC(double): void
+		+getMasterSavingsRate(): double
+		+setMasterSavingsRate(double): void
+		+getinterestRateCD(int duration): double
+		+setinterestRateCD(int duration, double):void
+		+causeTimePassage(Time): void
+		+createBankNotice(String): void
+
+AccountStatistics:
+
+	AccountStats:Abstract
+	
+		-totalTransactions:int
+		-totalDebits:int
+		-totalCredits:int
+		-totalDebitAmount:double
+		-totalCreditAmount:double
+		
+		+getTotalTransactions():int
+		+getTotalDebits():int
+		+getTotalCredits():int
+		+getTotalDebitAmount():double
+		+getTotalCreditAmount():double
+		+getAccountStatsInDateRange(Account, DateTime, DateTime):AccountStats
+	
+	GlobalAccountStats:Abstract
+		
+		-totalTransactions:int
+		-totalAccountsOfType:int
+		-totalUsersWithAccountType:int
+		-totalDebits:int
+		-totalCredits:int
+		-totalDebitAmount:double
+		-totalCreditAmount:double
+		
+		+getTotalTransactions():int
+		+getTotalAccountsOfType(int... accountType):int
+		+getTotalUsersWithAccountType(int... accountType):int
+		+getTotalDebits():int
+		+getTotalCredits():int
+		+getTotalDebitAmount():double
+		+getTotalCreditAmount():double
+		+getAccountStatsInDateRange(Account, DateTime, DateTime):AccountStats
+	
+	SavingsAccountStats extends GlobalAccountStats
+		
+		-interestRateHistory:ArrayList<DateTime, double>
+		-serviceFeeHistory:ArrayList<DateTime, double>
+		
+		+getInterestRateHistory():ArrayList<DateTime, double>
+		+getServiceFeeHistory():ArrayList<DateTime, double>
+		+addInterestRateChange(double):void
+		+addServiceFeeChange(double):void
+	
+	CDAccountStats extends GlobalAccountStats
+		
+		-minimumBalanceCDHistory:ArrayList<DateTime, double>
+		-numberOf6MonthAccounts:int
+		-numberOf1YearAccounts:int
+		-numberOf2YearAccounts:int
+		-numberOf3YearAccounts:int
+		-numberOf4YearAccounts:int
+		-numberOf5YearAccounts:int
+		
+		+getMinimumBalanceCDHistory():ArrayList<DateTime, double>
+		+addMinimumBalanceCDChange(double):void
+		+getNumberOfAccounts(int... duration):int
+		+addNumberOfAccounts(int duration, int):void
+	
+	CheckingAccountStats extends GlobalAccountStats
+		
+		-serviceChargeFeeHistory:ArrayList<DateTime, double>
+		
+		+getServiceChargeFeeHistory():ArrayList<DateTime, double>
+		+addServiceChargeFeeHistory(double):void
+	
+	LoanAccountStats extends GlobalAccountStats
+		
+		-interestRateLoanHistory:ArrayList<DateTime, double>
+		
+		+getInterestRateLoanHistory():ArrayList<DateTime, double>
+		+addInterestRateLoanHistory(double):void
+	
+	LOCAccountStats extends GlobalAccountStats
+		
+		-interestRateLOCHistory:ArrayList<DateTime, double>
+		
+		+getInterestRateLOCHistory():ArrayList<DateTime, double>
+		+addInterestRateLOCHistory(double):void
+
