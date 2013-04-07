@@ -5,6 +5,14 @@ import java.util.ArrayList;
 import accountTypes.*;
 import bank.Transaction;
 
+/**
+ * @author tobaljackson
+ *
+ */
+/**
+ * @author tobaljackson
+ *
+ */
 public class CustomerUser extends BasicUser {
 	
 	private ArrayList<BasicAccount> customerAccounts;
@@ -50,6 +58,7 @@ public class CustomerUser extends BasicUser {
 	
 	/**
 	 * Method will append to the CusomerUser's list of owned accounts an <b>argument</b> account.
+	 * @see {@link #customerAccounts}
 	 * @param account - add an existing account BasicAccount to a CustomerUser's accountList (customerAccounts)
 	 */
 	public void addCustomerAccount(BasicAccount account){
@@ -64,13 +73,16 @@ public class CustomerUser extends BasicUser {
 		return this.isEmployee;
 	}
 	/**
-	 * Setter for making CustomerUser an EmployeeUser.
+	 * Setter for making CustomerUser an employee.
 	 * @
 	 */
 	public void setIsEmployee(){
 		this.isEmployee = true;
 	}
 	
+	/**
+	 * Setter for making CustomerUser not an employee
+	 */
 	public void setIsNotEmployee(){
 		this.isEmployee = false;
 	}
