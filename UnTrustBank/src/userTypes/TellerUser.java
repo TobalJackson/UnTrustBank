@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import accountTypes.*;
 import bank.Request;
 import bank.Transaction;
-import accountTypes.WithdrawRequestable;
+import accountTypes.Withdrawable;
 
 public class TellerUser extends BasicUser {
 
@@ -28,7 +28,7 @@ public class TellerUser extends BasicUser {
 	public void setUpAutomaticDeposits(BasicAccount account, double amount){
 		//automatically deposit amount to account
 	}
-	public void withdraw(Transaction transaction, WithdrawRequestable account){
+	public void withdraw(Transaction transaction, Withdrawable account){
 		//withdraw amount from account after parsing through the Withdrawable interface
 	}
 	public void deposit(Transaction transaction, BasicAccount account){
