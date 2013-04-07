@@ -229,14 +229,15 @@ Users:
 		private boolean isActiveCustomer;
 		
 		+getFullTransactionHistory():ArrayList<Transaction>
+		+getOpenAccountTransactionHistory():ArrayList<Transaction>
 		+getAccountTransactionHistory(Account): ArrayList<Transaction>
 		+getFradulentTransactions(): ArrayList<Transactions>
 		+getFradulentTransactions(BasicAccount): ArrayList<Transactions>
 		+flagFradulentTransaction(Transaction):void
-		+transferMoneyFromChecking(double, CheckingAccount, CheckingAccount):void 
+		+transferBetweenOwnAccounts(double, CheckingAccount, CheckingAccount):void 
 		+requestDeposit(double, WithdrawRequestable):void
 		+requestWithdrawal(double, WithdrawRequestable):void
-		+withdraw(withdrawDirectable):void
+		+withdrawFromDirectable(withdrawDirectable):void
 		+deposit(withdrawDirectable):void
 		+isCustomerActive():boolean
 		+transferFunds(Withdrawable, Account):void
