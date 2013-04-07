@@ -88,29 +88,53 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	}
 	
 	/**
-	 * Method which will update the accountBalance field based on all Active Transactions in the transaction list.
+	 * Method which will update the accountBalance field based on all Active Transactions in the transaction list. Ignores transactions marked as Fraudulent.
 	 * @see {@link #appendTransaction} {@link #accountBalance}
 	 */
 	public void updateCurrentAccountBalance(){
 		double currentbalance=0;
 		if(transactionList.size()>0){
-		for(Transaction t:transactionList){
-		currentbalance+=t.getAmount();
-		}
+			for(Transaction t:transactionList){
+				if(t.getIsApplied() == true){
+					currentbalance+=t.getAmount();
+				}
+			}
 		}
 		accountBalance=currentbalance;
 	}
-	
+
+	/**
+	 * Method to return the CustomerUser who owns the account.
+	 * @return <b>CustomerUser</b> - the owner of this account.
+	 */
 	public CustomerUser getOwner(){
 		return owner;
 	}
 	
+	/**
+	 * Gets the accountBalance as updated by updateCurrentAccountBalance().
+	 * @return - <b>double</b> - the double balance of the account.
+	 */
 	public double getCurrentAccountBalance(){
 		return accountBalance;
 	}
 	
 	public ArrayList<Transaction> getFullTransactionHistory(){
 		return transactionList;
+	}
+	
+	/**
+	 * Gets a the transaction list of <b>applied</b> transactions only.  Not to be confused with {@link #getFullTransactionHistory()} which will include non-applied transactions (MarkedFraudulent).
+	 * @return <ArrayList<Transaction> - list of Transactions that are applied to account (count toward balance.
+	 */
+	public ArrayList<Transaction> getAppliedTransactionHistory(){
+		ArrayList<Transaction> list = new ArrayList<Transaction>();
+		for(Transaction t : transactionList){
+			if (t.getIsApplied()){
+				list.add(t);
+			}
+		}
+		return list;
 	}
 	public void flagFraudulentTransaction(Transaction t){
 		t.setIsFlaggedFraudulent();

@@ -34,7 +34,7 @@ public class Transaction {
 	 */
 	private long transactionID;
 	private int transactiontype;
-	private final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4;
+	private final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4, SERVICE_CHARGE = 5;
 	
 	public Transaction(double amount, CustomerUser customer, BasicUser initiator, int transtype){
 		transactiontype=transtype; //0=withdrawal, 1=deposit, 2=interest, 3=penalty, 4=other, 5=service charge
@@ -63,14 +63,7 @@ public class Transaction {
 	public double getAmount(){ 
 		return amount;
 	}
-	
-	/**
-	 * This method is called on a transaction to determine whether it was a credit or debit to an account.
-	 * @return <b>boolean</b> - True if the transaction is a Credit, false otherwise.
-	 */
-
-	
-	
+		
 	/**
 	 * Returns true if the Transaction should be applied to the Account when calculating accountBalance.
 	 * @return <b>boolean</b> - true if the Transaction should count toward the account's balance.
@@ -146,6 +139,7 @@ public class Transaction {
 	 */
 	public void setIsMarkedFraudulent(){
 		isMarkedFraudulent = true;
+		isApplied = false;
 	}
 	
 	
