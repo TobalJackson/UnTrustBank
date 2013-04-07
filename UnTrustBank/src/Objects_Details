@@ -314,12 +314,14 @@ AccountStatistics:
 	AccountStats:Abstract
 	
 		-totalTransactions:int
+		-totalAppliedTransactions:int
 		-totalDebits:int
 		-totalCredits:int
 		-totalDebitAmount:double
 		-totalCreditAmount:double
 		
 		+getTotalTransactions():int
+		+getTotalAppliedTransactions():int
 		+getTotalDebits():int
 		+getTotalCredits():int
 		+getTotalDebitAmount():double
