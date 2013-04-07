@@ -7,6 +7,8 @@ import javax.swing.*;
 import dateTime.Time;
 import bank.Transaction;
 import java.util.ArrayList;
+
+import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import dateTime.DateTime;
 
@@ -52,9 +54,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		maximumAccountBalance = max;
 	}
  
-	public void appendTransaction(Transaction transaction){
+	public void appendTransaction(Transaction transaction, BasicUser initiator){
 		if(isActiveAccount){
 			transactionList.add(transaction);
+			updateCurrentAccountBalance();
 		}
 		else{
 			accountClosedError();
@@ -96,9 +99,12 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		}
 		return fraudulentTransactions;
 	}
-	public void closeAccount(){
+	public void closeAccount(BasicUser initiator){
+		Transaction closingTransaction = new Transaction((-accountBalance), owner, initiator, 4);
+		transactionList.add(closingTransaction);
 		isActiveAccount = false;
 	}
+	
 	public void accountClosedError(){
 		String st="this account is closed. you're not allowed to do this :/";
 		JOptionPane.showMessageDialog(null,st);	

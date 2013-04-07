@@ -128,6 +128,10 @@ public class BankGlobal {
 		
 	}
 	
+	public static DateTime getBankTime(){
+		return banktime;
+	}
+	
 	//Checking
 	double serviceChargeChecking;
 	double overdraftFee;

@@ -2,6 +2,7 @@ package accountTypes;
 
 import java.util.Iterator;
 
+import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import bank.BankGlobal;
 import bank.Transaction;
@@ -72,10 +73,37 @@ public CDAccount(CustomerUser owner, int accountID,
 				Time timetomature5 = new Time(1862,0,0,0);
 				maturitydate = accountCreatedOn.add(timetomature5) ;
 			}
+			setMinimumAccountBalance(BankGlobal.getminiumumBalanceCD());
 			
 		// TODO Auto-generated constructor stub
 	}
 
+
+@Override
+public void appendTransaction(Transaction transaction, BasicUser initiator){
+	DateTime currentbanktime = BankGlobal.getBankTime();
+	if(!isActiveAccount){
+		throw new IllegalStateException(); //account closed exception?
+	}
+	
+	if(currentbanktime.compare(maturitydate)>0){
+		double penaltyamount= 6*monthsinterest();
+		transactionList.add(transaction);
+				
+		Transaction penalty = new Transaction(penaltyamount, owner, initiator, 3);
+		transactionList.add(transaction);
+		updateCurrentAccountBalance();
+			if(accountBalance< minimumAccountBalance){
+				closeAccount(initiator);
+				} //close dipping below account balance if statement
+	} //close before maturity date if statement
+	else{
+		transactionList.add(transaction);
+		updateCurrentAccountBalance();
+		
+		
+	}
+}
 
 
 
@@ -86,7 +114,9 @@ public Iterator<BasicAccount> iterator() {
 	return null;
 }
 
-
+public double monthsinterest(){
+	return (interestrate * accountBalance);
+}
 
 
 
