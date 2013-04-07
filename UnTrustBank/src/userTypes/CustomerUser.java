@@ -9,15 +9,12 @@ import bank.Transaction;
  * @author tobaljackson
  *
  */
-/**
- * @author tobaljackson
- *
- */
 public class CustomerUser extends BasicUser {
 	
 	private ArrayList<BasicAccount> customerAccounts;
 	private boolean isEmployee;
 	private boolean isActiveCustomer;
+	
 	
 	public CustomerUser(String firstName, String middleName, String lastName, boolean isMale,
 			DateTime dob, char[] password, String username, int userID){
@@ -74,7 +71,6 @@ public class CustomerUser extends BasicUser {
 	}
 	/**
 	 * Setter for making CustomerUser an employee.
-	 * @
 	 */
 	public void setIsEmployee(){
 		this.isEmployee = true;
