@@ -10,7 +10,7 @@ import bank.Transaction;
 import dateTime.DateTime;
 import dateTime.Time;
 
-public class CheckingAccount extends BasicAccount implements WithdrawDirectable, Withdrawable {
+public class CheckingAccount extends BasicAccount {
 
 	public CheckingAccount(CustomerUser owner, int accountID) {
 					
@@ -38,10 +38,7 @@ public void applyUnderLimitServiceCharge(BasicUser initiator){
 			Transaction ServiceCharge = new Transaction(BankGlobal.getServiceChargeChecking(), owner, initiator, 5);
 			transactionList.add(ServiceCharge);
 			updateCurrentAccountBalance();
-			
 		}//if this account is under limit
-		
-		
 	} //close if boolean==true
 	updateCurrentAccountBalance(); //just to be safe I think
 } //close method
@@ -53,7 +50,7 @@ public void applyUnderLimitServiceCharge(BasicUser initiator){
 		return null;
 	}
 
-	
+	//Need to complete the following method!!!!!!!
 	@Override
 	public void respondToTimeChange(DateTime originalTime, DateTime newTime,
 			Time timeDifference) {
@@ -65,6 +62,5 @@ public void applyUnderLimitServiceCharge(BasicUser initiator){
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
+
 }
