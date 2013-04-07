@@ -96,6 +96,9 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		String st="this account is closed. you're not allowed to do this :/";
 		JOptionPane.showMessageDialog(null,st);	
 	}
+	public CustomerUser getAccountOwner(){
+		return this.owner;
 	}
+}
 	
 

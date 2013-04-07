@@ -51,7 +51,46 @@ public class CustomerUser extends BasicUser {
 		}
 		return fullTransactionHistory;
 	}
-
+	
+	
+	/**
+	 * Method to flag a transaction as fraudulent.
+	 * @param t - the transaction to mark as fraudulent.  The transaction must be one owned by the CustomerUser.
+	 */
+	public void flagFraudulentTransaction(Transaction t){
+		if(!(t.getCustomer() == this)){
+			throw new IllegalArgumentException();
+		}
+		else t.setIsFraudulent();
+	}
+	
+	/**
+	 * Method to get all of a customer's fraudulent Transactions.
+	 * @return <b>ArrayList<Transaction></b> - returns an ArrayList of all a customer's fraudulent flagged Transactions.
+	 */
+	public ArrayList<Transaction> getFraudulentTransactions(){
+		ArrayList<Transaction> fraudulentTransactions = new ArrayList<Transaction>();
+		for (Transaction t : this.getFullTransactionHistory()){
+			if (t.getIsFraudulent()) fraudulentTransactions.add(t);
+		}
+		return fraudulentTransactions;		
+	}
+	
+	/**
+	 * Method to get all of a customer's fraudulent Transactions from an account they own.
+	 * @param account - an account belonging to this CustomerUser.
+	 * @return <b>ArrayList<Transaction></b> - returns an ArrayList of all a customer's fraudulent flagged Transactions from an account.
+	 */
+	public ArrayList<Transaction> getFraudulentTransactions(BasicAccount account){
+		ArrayList<Transaction> fraudulentTransactions = new ArrayList<Transaction>();
+		if (!(account.getAccountOwner() == this)){
+			throw new IllegalArgumentException();
+		}
+		else for (Transaction t : this.getAccountTransactionHistory(account)){
+			if (t.getIsFraudulent()) fraudulentTransactions.add(t);
+		}
+		return fraudulentTransactions;		
+	}
 	
 	/**
 	 * Method will append to the CusomerUser's list of owned accounts an <b>argument</b> account.
@@ -69,6 +108,7 @@ public class CustomerUser extends BasicUser {
 	public boolean getIsEmployee(){
 		return this.isEmployee;
 	}
+	
 	/**
 	 * Setter for making CustomerUser an employee.
 	 */

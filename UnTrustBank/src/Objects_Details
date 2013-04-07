@@ -135,6 +135,7 @@ Accounts:
 		+getCurrentAccountDetails():AccountStats??????
 		+unflagFraudulentAccount()
 		+accountClosedError
+		+getAccountOwner():CustomerUser
 	
 	
 	SavingsAccount extends BasicAccount implements Withdrawable, WithdrawRequestable
@@ -229,7 +230,8 @@ Users:
 		
 		+getFullTransactionHistory():ArrayList<Transaction>
 		+getAccountTransactionHistory(Account): ArrayList<Transaction>
-		+getFradulentFlags(): ArrayList
+		+getFradulentTransactions(): ArrayList<Transactions>
+		+getFradulentTransactions(BasicAccount): ArrayList<Transactions>
 		+flagFradulentTransaction(Transaction):void
 		+transferMoneyFromChecking(double, CheckingAccount, CheckingAccount):void 
 		+requestDeposit(double, WithdrawRequestable):void
