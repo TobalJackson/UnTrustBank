@@ -7,10 +7,31 @@ import accountTypes.BasicAccount;
 import userTypes.CustomerUser;
 
 public class BankGlobal {
-
+	
 	ArrayList<CustomerUser> customers = new ArrayList<CustomerUser>();
 	ArrayList<BasicAccount> account = new ArrayList<BasicAccount>();
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
+	//Yes, but we may need to break up the bank global object to be less cumbersome, divide up the
+	//different control systems for bank.
+	
+	// Transaction
+	private static long currentTransactionID;
+	
+	/**
+	 * Static method to both increment and return a new TransactionID to tag a Transaction with.  Each transaction will have
+	 * a numeric transactionID field to index them by.  calculation of age of transaction can be expedited by referring
+	 * to only it's numeric ID, like customerID and accountID.
+	 * @return <b>Long</b> - returns long transactionID of each new transaction processed.
+	 */
+	public static long getNewTransactionID(){
+		currentTransactionID++;
+		return currentTransactionID;
+		
+	}
+	public static long getCurrentTransactionID(){
+		return currentTransactionID;
+	}
+	
 	// Savings
 	private double serviceChargeSavings;
 	private double interestRateSavings;

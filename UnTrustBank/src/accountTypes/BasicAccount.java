@@ -9,7 +9,7 @@ import bank.Transaction;
 import java.util.ArrayList;
 import userTypes.CustomerUser;
 import dateTime.DateTime;
-public abstract class BasicAccount {
+public abstract class BasicAccount implements Iterable<BasicAccount>{
 	private ArrayList<Transaction> transactionList;
 	//private double accountBalance;
 	private boolean isActiveAccount;
