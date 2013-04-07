@@ -245,6 +245,12 @@ public class DateTime {
 		}
 		else return true;
 	}
+	
+	/**
+	 * Method to compare <b>this</b> to another DateTime.  
+	 * @param otherTime - the other DateTime that you want to compare <b>this</b> to.
+	 * @return <b>int</b> - returns -1, 0, or 1, if <b>this</b> is less than, equal to, or greater than, the argument DateTime passed, respectively.
+	 */
 	public int compare(DateTime otherTime){
 		if (this.isEqual(otherTime)){
 			return 0;
