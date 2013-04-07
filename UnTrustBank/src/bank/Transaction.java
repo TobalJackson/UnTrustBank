@@ -8,7 +8,20 @@ public class Transaction {
 	//who can create a Transaction? Tellers, Customers?  
 	private DateTime timeStamp;
 	private double amount;
+	/**
+	 * Customer-set flag.  To be approved by (?Auditor/?Accountant/?Teller)
+	 * @see #getIsFlaggedFraudulent() 
+	 * @see #setIsFlaggedFraudulent() 
+	 * @see #setIsNotFlaggedFraudulent()
+	 */
 	private boolean isFlaggedFraudulent;
+	/**
+	 * Bank Flag.  True if the Customer's fraudulentFlag is approved. (Can be set by Bank Employee).
+	 * @see #setIsMarkedFraudulent()
+	 * @see #getIsMarkedFraudulent()
+	 * @see #setIsNotMarkedFraudulent()
+	 */
+	private boolean isMarkedFraudulent;
 	private CustomerUser customer; //CustomerUser who owns the transaction.
 	private BasicUser initiator; //BasicUser processing the transaction. Can be tellerUser or CustomerUser?
 	private BasicAccount account; //BasicAccount the transaction is in.
@@ -16,6 +29,7 @@ public class Transaction {
 	private boolean isApplied;
 	private long transactionID;
 	private int transactiontype;
+	private final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4;
 	
 	public Transaction(double amount, CustomerUser customer, BasicUser initiator, int transtype){
 		transactiontype=transtype; //0=withdrawal, 1=deposit, 2=interest, 3=penalty, 4=other
@@ -83,22 +97,44 @@ public class Transaction {
 	 * Returns true if the transaction has been flagged Fraudulent by the CustomerUser.
 	 * @return <b>boolean</b> - returns the FraudulentFlag.
 	 */
-	public boolean getIsFraudulent(){
+	public boolean getIsFlaggedFraudulent(){
 		return isFlaggedFraudulent;
 	}
 	
 	/**
 	 * Method to set a Transaction's fraudulentFlag for use by CustomerUser.
 	 */
-	public void setIsFraudulent(){
+	public void setIsFlaggedFraudulent(){
 		isFlaggedFraudulent = true;
 	}
 	
 	/**
 	 * Method to un-set a Transaction's fraudulentFlag for use by CustomerUser.
 	 */
-	public void setIsNotFraudulent(){
+	public void setIsNotFlaggedFraudulent(){
 		isFlaggedFraudulent = false; 
+	}
+	
+	/**
+	 * Returns true if the transaction has been Marked Fraudulent by the employee.
+	 * @return <b>boolean</b> - returns the FraudulentFlag.
+	 */
+	public boolean getIsMarkedFraudulent(){
+		return isMarkedFraudulent;
+	}
+	
+	/**
+	 * Method to set a Transaction's fraudulentFlag for use by employee.
+	 */
+	public void setIsMarkedFraudulent(){
+		isMarkedFraudulent = true;
+	}
+	
+	/**
+	 * Method to un-set a Transaction's fraudulentFlag for use by employee.
+	 */
+	public void setIsNotMarkedFraudulent(){
+		isMarkedFraudulent = false; 
 	}
 	
 	/**

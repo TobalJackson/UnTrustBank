@@ -39,21 +39,44 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 
 	public abstract void respondToTimeChange(DateTime originalTime, DateTime newTime, Time timeDifference);
 	
-	
+	/**
+	 * Method to return the account's Minimum allowable Balance.
+	 * @return <b>double</b> - returns the account's minimum allowable Balance, set by Operation Manager, can be referenced from BankGlobal.
+	 */
 	public double getMinimumAccountBalance(){
 		return minimumAccountBalance;
 	}
+	
+	/**
+	 * Method to set the account's minimum allowable balance.
+	 * @param min - the double amount corresponding to this account's minimum allowable balance. Should be set by Operations manager 
+	 * or indirectly through BankGlobal process.
+	 */
 	public void setMinimumAccountBalance(double min){
 		minimumAccountBalance = min;
 	}
 	
+	/**
+	 * Method to get this account's maximum allowable balance (intended to be used with account's whose balance is usually negative e.g. Loan accounts)
+	 * @return - returns a double amount corresponding to the account's maximum allowable balance (should be 0 with most loan accounts).
+	 */
 	public double getMaximumAccountBalance(){
 		return maximumAccountBalance;
 	}
+	
+	/**
+	 * Method to set the account's maximum allowable balance.  Should most likely be set by Operation manager or by BankGlobal subroutine.
+	 * @param max - the double value to set the account's maximum allowable balance to.
+	 */
 	public void setMaximumAccountBalance(double max){
 		maximumAccountBalance = max;
 	}
  
+	/**
+	 * Method to append a transaction to the account's transaction log.  Appending a transaction to an account will automatically update the account's accountBalance field. 
+	 * @param transaction - the transaction to be appended to the account's transaction list.
+	 * @param initiator - the user initiating the transaction.
+	 */
 	public void appendTransaction(Transaction transaction, BasicUser initiator){
 		if(isActiveAccount){
 			transactionList.add(transaction);
@@ -64,6 +87,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 			}
 	}
 	
+	/**
+	 * Method which will update the accountBalance field based on all Active Transactions in the transaction list.
+	 * @see {@link #appendTransaction} {@link #accountBalance}
+	 */
 	public void updateCurrentAccountBalance(){
 		double currentbalance=0;
 		for(Transaction t:transactionList){
@@ -84,16 +111,16 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		return transactionList;
 	}
 	public void flagFraudulentTransaction(Transaction t){
-		t.setIsFraudulent();
+		t.setIsFlaggedFraudulent();
 	}
 	public void unflagFraudulentTransaction(Transaction t){
-		t.setIsNotFraudulent();
+		t.setIsNotFlaggedFraudulent();
 	}
 	
 	public ArrayList<Transaction> getFraudulentTransactions(){
 		ArrayList<Transaction> fraudulentTransactions = new ArrayList<Transaction>();
 		for (Transaction t : transactionList){
-			if (t.getIsFraudulent()){
+			if (t.getIsFlaggedFraudulent()){
 				fraudulentTransactions.add(t);
 			}
 		}
@@ -111,6 +138,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	}
 	public CustomerUser getAccountOwner(){
 		return this.owner;
+	}
+	
+	public boolean getIsActiveAccount(){
+		return isActiveAccount;
 	}
 }
 	
