@@ -92,6 +92,7 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 				
 		Transaction penalty = new Transaction(penaltyamount, owner, initiator, 3);
 		transactionList.add(transaction);
+		transactionList.add(penalty);
 		updateCurrentAccountBalance();
 			if(accountBalance< minimumAccountBalance){
 				closeAccount(initiator);

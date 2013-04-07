@@ -99,7 +99,7 @@ public class BankGlobal {
 		switch(duration)
 		{
 		case 0:
-			this.InterestRateCD6Month = newRate;
+			BankGlobal.InterestRateCD6Month = newRate;
 			break;
 		case 1:
 			InterestRateCD1Year = newRate;
@@ -133,33 +133,35 @@ public class BankGlobal {
 	}
 	
 	//Checking
-	double serviceChargeChecking;
-	double overdraftFee;
-	double serviceChargeLimitChecking;
+	private static double serviceChargeChecking;
+	private static double overdraftFee;
+	private static double serviceChargeLimitChecking;
+	private static boolean underlimitfee;
+	
 
-	double getServiceChargeLimitChecking()
+	public static double getServiceChargeLimitChecking()
 	{
-		return this.serviceChargeChecking;
+		return serviceChargeChecking;
 	}
-	void setServiceChargeLimitChecking(double newSCLC)
+	public static void setServiceChargeLimitChecking(double newSCLC)
 	{
-		this.serviceChargeChecking = newSCLC;
+		serviceChargeChecking = newSCLC;
 	}
-	double getOverdraftFee()
+	public static double getOverdraftFee()
 	{
-		return this.overdraftFee;
+		return overdraftFee;
 	}
-	void setOverdraftFee(double newOF)
+	public static void setOverdraftFee(double newOF)
 	{
-		this.overdraftFee = newOF;
+		overdraftFee = newOF;
 	}
 	double getServiceChargeChecking()
 	{
-		return this.serviceChargeLimitChecking;
+		return serviceChargeLimitChecking;
 	}
 	void setServiceChargeChecking(double newSCS)
 	{
-		this.serviceChargeLimitChecking = newSCS;
+		serviceChargeLimitChecking = newSCS;
 	}
 	
 }

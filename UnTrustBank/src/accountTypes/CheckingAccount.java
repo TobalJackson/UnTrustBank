@@ -1,5 +1,14 @@
 package accountTypes;
 
+
+import java.util.Iterator;
+
+import userTypes.BasicUser;
+import userTypes.CustomerUser;
+import bank.BankGlobal;
+import bank.Transaction;
+import dateTime.DateTime;
+import dateTime.Time;
 public class CheckingAccount {
-//dont think it matters how much is in account upon creation, right?
+
 }
