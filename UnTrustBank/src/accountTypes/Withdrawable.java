@@ -1,5 +1,5 @@
 package accountTypes;
 
-interface Withdrawable {
+public interface Withdrawable {
 
 }

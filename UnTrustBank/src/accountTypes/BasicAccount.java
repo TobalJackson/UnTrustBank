@@ -66,8 +66,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	
 	public void updateCurrentAccountBalance(){
 		double currentbalance=0;
+		if(transactionList.size()>0){
 		for(Transaction t:transactionList){
 		currentbalance+=t.getAmount();
+		}
 		}
 		accountBalance=currentbalance;
 	}
@@ -103,6 +105,8 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		Transaction closingTransaction = new Transaction((-accountBalance), owner, initiator, 4);
 		transactionList.add(closingTransaction);
 		isActiveAccount = false;
+		updateCurrentAccountBalance();
+		
 	}
 	
 	public void accountClosedError(){

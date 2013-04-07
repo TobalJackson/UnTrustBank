@@ -74,7 +74,7 @@ public CDAccount(CustomerUser owner, int accountID,
 				maturitydate = accountCreatedOn.add(timetomature5) ;
 			}
 			setMinimumAccountBalance(BankGlobal.getminiumumBalanceCD());
-			
+			updateCurrentAccountBalance();
 		// TODO Auto-generated constructor stub
 	}
 

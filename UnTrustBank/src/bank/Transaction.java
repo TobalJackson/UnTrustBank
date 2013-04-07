@@ -18,7 +18,7 @@ public class Transaction {
 	private int transactiontype;
 	
 	public Transaction(double amount, CustomerUser customer, BasicUser initiator, int transtype){
-		transactiontype=transtype; //0=withdrawal, 1=deposit, 2=interest, 3=penalty, 4=other
+		transactiontype=transtype; //0=withdrawal, 1=deposit, 2=interest, 3=penalty, 4=other, 5=service charge
 		this.timeStamp = new DateTime(); //Transactions are timestamped with when they are instantiated.
 		this.amount = amount;
 		isFlaggedFraudulent = false; //by default, transactions are not fraudulent
