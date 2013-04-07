@@ -4,24 +4,27 @@ package accountTypes;
 //stay put
 // <3
 import javax.swing.*;
-
+import dateTime.Time;
 import bank.Transaction;
 import java.util.ArrayList;
+
+import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import dateTime.DateTime;
+
 public abstract class BasicAccount implements Iterable<BasicAccount>{
-	private ArrayList<Transaction> transactionList;
+	protected ArrayList<Transaction> transactionList;
 	//private double accountBalance;
-	private boolean isActiveAccount;
-	private CustomerUser owner;
-	private double accountBalance; 
-	private int accountID; //acountID is based on other existant accounts, therefore should be generated rather than specified
-	private DateTime accountCreatedOn;
-	private boolean isEmployeesAccount;
-	private double accruedInterest;
-	private double minimumAccountBalance;
-	private double serviceFee;
-	private double maximumAccountBalance;
+	protected boolean isActiveAccount;
+	protected CustomerUser owner;
+	protected double accountBalance; 
+	protected int accountID; //acountID is based on other existant accounts, therefore should be generated rather than specified
+	protected DateTime accountCreatedOn;
+	protected boolean isEmployeesAccount;
+	protected double accruedInterest;
+	protected double minimumAccountBalance;
+	protected double serviceFee;
+	protected double maximumAccountBalance;
 	public BasicAccount(CustomerUser owner, int accountID){ //default constructor only accepts Customer and account ID
 		this.owner = owner;
 		this.accountID = accountID;
@@ -34,6 +37,8 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	}
 	
 
+	public abstract void respondToTimeChange(DateTime originalTime, DateTime newTime, Time timeDifference);
+	
 	
 	public double getMinimumAccountBalance(){
 		return minimumAccountBalance;
@@ -49,9 +54,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		maximumAccountBalance = max;
 	}
  
-	public void appendTransaction(Transaction transaction){
+	public void appendTransaction(Transaction transaction, BasicUser initiator){
 		if(isActiveAccount){
 			transactionList.add(transaction);
+			updateCurrentAccountBalance();
 		}
 		else{
 			accountClosedError();
@@ -64,6 +70,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		currentbalance+=t.getAmount();
 		}
 		accountBalance=currentbalance;
+	}
+	
+	public CustomerUser getOwner(){
+		return owner;
 	}
 	
 	public double getCurrentAccountBalance(){
@@ -89,9 +99,12 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		}
 		return fraudulentTransactions;
 	}
-	public void closeAccount(){
+	public void closeAccount(BasicUser initiator){
+		Transaction closingTransaction = new Transaction((-accountBalance), owner, initiator, 4);
+		transactionList.add(closingTransaction);
 		isActiveAccount = false;
 	}
+	
 	public void accountClosedError(){
 		String st="this account is closed. you're not allowed to do this :/";
 		JOptionPane.showMessageDialog(null,st);	

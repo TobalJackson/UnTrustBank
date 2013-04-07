@@ -1,7 +1,8 @@
 package bank;
 
 import java.util.ArrayList;
-
+import dateTime.DateTime;
+import dateTime.Time;
 import accountTypes.BasicAccount;
 
 import userTypes.CustomerUser;
@@ -10,6 +11,7 @@ public class BankGlobal {
 	
 	ArrayList<CustomerUser> customers = new ArrayList<CustomerUser>();
 	ArrayList<BasicAccount> account = new ArrayList<BasicAccount>();
+	public static DateTime banktime = new DateTime();
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
 	//Yes, but we may need to break up the bank global object to be less cumbersome, divide up the
 	//different control systems for bank.
@@ -60,6 +62,7 @@ public class BankGlobal {
 	private static double InterestRateCD3Year;
 	private static double InterestRateCD4Year;
 	private static double InterestRateCD5Year;
+	
 	public static double getInterestRateCD(int duration)
 	{
 	double rate = 0;
@@ -86,12 +89,17 @@ public class BankGlobal {
 		}
 	return rate;
 	}
+	
+	public static double getminiumumBalanceCD(){
+		return minimumBalanceCD;
+	}
+	
 	void setInterestRateCD(int duration, double newRate)
 	{
 		switch(duration)
 		{
 		case 0:
-			this.InterestRateCD6Month = newRate;
+			BankGlobal.InterestRateCD6Month = newRate;
 			break;
 		case 1:
 			InterestRateCD1Year = newRate;
@@ -110,34 +118,50 @@ public class BankGlobal {
 			break;	
 		}
 	}
+	
+	//look this over, people
+	public static void causeTimechange(Time mytime){
+		
+		DateTime newbanktime=banktime.add(mytime);
+			//loop thru all acounts and call respondToTimeChange
+		banktime=newbanktime;
+		
+	}
+	
+	public static DateTime getBankTime(){
+		return banktime;
+	}
+	
 	//Checking
-	double serviceChargeChecking;
-	double overdraftFee;
-	double serviceChargeLimitChecking;
+	private static double serviceChargeChecking;
+	private static double overdraftFee;
+	private static double serviceChargeLimitChecking;
+	private static boolean underlimitfee;
+	
 
-	double getServiceChargeLimitChecking()
+	public static double getServiceChargeLimitChecking()
 	{
-		return this.serviceChargeChecking;
+		return serviceChargeChecking;
 	}
-	void setServiceChargeLimitChecking(double newSCLC)
+	public static void setServiceChargeLimitChecking(double newSCLC)
 	{
-		this.serviceChargeChecking = newSCLC;
+		serviceChargeChecking = newSCLC;
 	}
-	double getOverdraftFee()
+	public static double getOverdraftFee()
 	{
-		return this.overdraftFee;
+		return overdraftFee;
 	}
-	void setOverdraftFee(double newOF)
+	public static void setOverdraftFee(double newOF)
 	{
-		this.overdraftFee = newOF;
+		overdraftFee = newOF;
 	}
 	double getServiceChargeChecking()
 	{
-		return this.serviceChargeLimitChecking;
+		return serviceChargeLimitChecking;
 	}
 	void setServiceChargeChecking(double newSCS)
 	{
-		this.serviceChargeLimitChecking = newSCS;
+		serviceChargeLimitChecking = newSCS;
 	}
 	
 }

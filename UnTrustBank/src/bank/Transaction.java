@@ -15,14 +15,16 @@ public class Transaction {
 	private boolean isCredit;
 	private boolean isApplied;
 	private long transactionID;
+	private int transactiontype;
 	
-	public Transaction(double amount, CustomerUser customer, BasicUser initiator, boolean isCredit){
+	public Transaction(double amount, CustomerUser customer, BasicUser initiator, int transtype){
+		transactiontype=transtype; //0=withdrawal, 1=deposit, 2=interest, 3=penalty, 4=other
 		this.timeStamp = new DateTime(); //Transactions are timestamped with when they are instantiated.
 		this.amount = amount;
 		isFlaggedFraudulent = false; //by default, transactions are not fraudulent
 		this.customer = customer;
 		this.initiator = initiator;
-		this.isCredit = isCredit;
+		
 		isApplied = true; //by default, transactions are applied to the account
 		getNewTransactionID();
 	}
@@ -44,9 +46,7 @@ public class Transaction {
 	 * This method is called on a transaction to determine whether it was a credit or debit to an account.
 	 * @return <b>boolean</b> - True if the transaction is a Credit, false otherwise.
 	 */
-	public boolean getIsCredit(){
-		return isCredit;
-	}
+
 	
 	/**
 	 * Returns true if the Transaction should be applied to the Account when calculating accountBalance.
