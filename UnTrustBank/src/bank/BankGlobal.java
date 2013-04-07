@@ -5,19 +5,22 @@ import dateTime.DateTime;
 import dateTime.Time;
 import accountTypes.BasicAccount;
 
+import userTypes.AccountManagerUser;
 import userTypes.CustomerUser;
 
 public class BankGlobal {
 	
-	ArrayList<CustomerUser> customers = new ArrayList<CustomerUser>();
-	ArrayList<BasicAccount> account = new ArrayList<BasicAccount>();
+	static ArrayList<CustomerUser> customers = new ArrayList<CustomerUser>();
+	static ArrayList<BasicAccount> account = new ArrayList<BasicAccount>();
 	public static DateTime banktime = new DateTime();
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
 	//Yes, but we may need to break up the bank global object to be less cumbersome, divide up the
 	//different control systems for bank.
 	
 	// Transaction
+	private static long currentCustomerID;
 	private static long currentTransactionID;
+	private static long currentAccountID;
 	
 	/**
 	 * Static method to both increment and return a new TransactionID to tag a Transaction with.  Each transaction will have
@@ -25,6 +28,15 @@ public class BankGlobal {
 	 * to only it's numeric ID, like customerID and accountID.
 	 * @return <b>Long</b> - returns long transactionID of each new transaction processed.
 	 */
+	public static long getNewCustomerID(){
+		currentCustomerID++;
+		return currentCustomerID;
+		
+	}
+	public static long getCurrentCustomerID(){
+		return currentCustomerID;
+	}
+	
 	public static long getNewTransactionID(){
 		currentTransactionID++;
 		return currentTransactionID;
@@ -33,6 +45,16 @@ public class BankGlobal {
 	public static long getCurrentTransactionID(){
 		return currentTransactionID;
 	}
+	
+	public static long getNewAccountID(){
+		currentAccountID++;
+		return currentAccountID;
+		
+	}
+	public static long getCurrentAccountID(){
+		return currentAccountID;
+	}
+
 	
 	// Savings
 	private double serviceChargeSavings;
@@ -120,12 +142,16 @@ public class BankGlobal {
 	}
 	
 	//look this over, people
-	public static void causeTimechange(Time mytime){
+	public static void causeTimeChange(Time mytime){
 		
 		DateTime newbanktime=banktime.add(mytime);
-			//loop thru all acounts and call respondToTimeChange
-		banktime=newbanktime;
+			//loop thru all accounts and call respondToTimeChange
 		
+		for (BasicAccount b: account)
+		{
+			b.respondToTimeChange(banktime, newbanktime, mytime);
+		}
+		banktime = newbanktime;
 	}
 	
 	public static DateTime getBankTime(){
@@ -184,4 +210,15 @@ public class BankGlobal {
 		overdraftlimit = newodl;
 	}
 	
+	private static double LOCoffset;
+	
+	public static void setLOCoffset(double newOffset)
+	{
+		LOCoffset = newOffset;
+	}
+	public static double getLOC(double newOffset)
+	{
+		return AccountManagerUser.getInterestRate() + LOCoffset;
+	}
+		
 }

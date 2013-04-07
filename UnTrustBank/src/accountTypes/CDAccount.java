@@ -9,7 +9,7 @@ import bank.Transaction;
 import dateTime.DateTime;
 import dateTime.Time;
 
-public class CDAccount extends BasicAccount implements Withdrawable, WithdrawRequestable {
+public class CDAccount extends BasicAccount  {
 private int CDDuration;
 private double interestrate;
 private DateTime maturitydate;
@@ -24,6 +24,7 @@ public CDAccount(CustomerUser owner, int accountID,
 			else{
 			CDDuration=myCDDuration;
 			}
+			
 			if(mytransaction.getAmount()<0){
 				throw new IllegalArgumentException();
 				}
@@ -86,6 +87,7 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 		throw new IllegalStateException(); //account closed exception?
 	}
 	
+	if(transaction.getAmount()<0){
 	if(currentbanktime.compare(maturitydate)>0){
 		double penaltyamount= 6*monthsinterest();
 		transactionList.add(transaction);
@@ -101,12 +103,12 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 	else{
 		transactionList.add(transaction);
 		updateCurrentAccountBalance();
-		
-		
-	}
-}
-
-
+	}//close checking maturity date
+	
+	
+	
+	}//close amount is negative
+}//close method
 
 
 @Override
@@ -119,6 +121,9 @@ public double monthsinterest(){
 	return (interestrate * accountBalance);
 }
 
+public int getCDDuration(){
+	return CDDuration;
+	}
 
 
 @Override
