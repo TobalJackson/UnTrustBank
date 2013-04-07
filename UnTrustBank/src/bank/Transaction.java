@@ -27,6 +27,11 @@ public class Transaction {
 	private BasicAccount account; //BasicAccount the transaction is in.
 	private boolean isCredit;
 	private boolean isApplied;
+	
+	/**
+	 * this field holds the integer of the transaction's ID, referenced from BankGlobal.
+	 * @see #amount
+	 */
 	private long transactionID;
 	private int transactiontype;
 	private final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4;
@@ -42,6 +47,7 @@ public class Transaction {
 		isApplied = true; //by default, transactions are applied to the account
 		getNewTransactionID();
 	}
+	
 	/**
 	 * method called in the constructor to get and stamp the Transaction with the current TransactionID.
 	 * @return <b>long</b> - returns long transactionID that the Transaction is then tagged with.
@@ -49,6 +55,7 @@ public class Transaction {
 	public void getNewTransactionID(){
 		this.transactionID = BankGlobal.getNewTransactionID();
 	}
+	
 	/**
 	 * This method is called on a transaction individually.
 	 * @return <b>double</b> - The amount of money the transaction represents.
@@ -56,11 +63,13 @@ public class Transaction {
 	public double getAmount(){ 
 		return amount;
 	}
+	
 	/**
 	 * This method is called on a transaction to determine whether it was a credit or debit to an account.
 	 * @return <b>boolean</b> - True if the transaction is a Credit, false otherwise.
 	 */
 
+	
 	
 	/**
 	 * Returns true if the Transaction should be applied to the Account when calculating accountBalance.
@@ -70,6 +79,7 @@ public class Transaction {
 		return isApplied;
 	}
 	
+	
 	/**
 	 * Fetches the CustomerUser to which the Transaction belongs.
 	 * @return <b>CustomerUser</b> - the CustomerUser to which the Transaction Belongs.
@@ -77,6 +87,7 @@ public class Transaction {
 	public CustomerUser getCustomer(){
 		return customer;
 	}
+	
 	
 	/**
 	 * Fetches the Employee processing (creating) the Transaction.
@@ -86,6 +97,7 @@ public class Transaction {
 		return initiator;
 	}
 	
+	
 	/**
 	 * Method to fetch the BasicAccount that this Transaction belongs to.
 	 * @return <b>BasicAccount</b> - returns the account to which this Transaction belongs.
@@ -93,6 +105,8 @@ public class Transaction {
 	public BasicAccount getAccount(){
 		return account;
 	}
+	
+	
 	/**
 	 * Returns true if the transaction has been flagged Fraudulent by the CustomerUser.
 	 * @return <b>boolean</b> - returns the FraudulentFlag.
@@ -101,6 +115,7 @@ public class Transaction {
 		return isFlaggedFraudulent;
 	}
 	
+	
 	/**
 	 * Method to set a Transaction's fraudulentFlag for use by CustomerUser.
 	 */
@@ -108,12 +123,14 @@ public class Transaction {
 		isFlaggedFraudulent = true;
 	}
 	
+	
 	/**
 	 * Method to un-set a Transaction's fraudulentFlag for use by CustomerUser.
 	 */
 	public void setIsNotFlaggedFraudulent(){
 		isFlaggedFraudulent = false; 
 	}
+	
 	
 	/**
 	 * Returns true if the transaction has been Marked Fraudulent by the employee.
@@ -123,12 +140,14 @@ public class Transaction {
 		return isMarkedFraudulent;
 	}
 	
+	
 	/**
 	 * Method to set a Transaction's fraudulentFlag for use by employee.
 	 */
 	public void setIsMarkedFraudulent(){
 		isMarkedFraudulent = true;
 	}
+	
 	
 	/**
 	 * Method to un-set a Transaction's fraudulentFlag for use by employee.
@@ -137,6 +156,7 @@ public class Transaction {
 		isMarkedFraudulent = false; 
 	}
 	
+	
 	/**
 	 * Getter for the DateTime that this Transaction was created.
 	 * @return <b>DateTime</b> - object representing the Transaction moment of instantiation.
@@ -144,6 +164,7 @@ public class Transaction {
 	public DateTime getTimeStamp(){
 		return this.timeStamp;
 	}
+	
 	
 	/**
 	 * Compares the timeStamp of <b>this</b> Transaction to another argument Transaction's timeStamp.
@@ -154,6 +175,7 @@ public class Transaction {
 	public int compareTime(Transaction transaction){ //allows ordering of transactions based on time
 		return this.getTimeStamp().compare(transaction.getTimeStamp());
 	}
+	
 	/**
 	 * Compares the amount of <b>this</b> Transaction to another argument Transaction's amount.
 	 * 
