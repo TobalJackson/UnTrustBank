@@ -48,15 +48,25 @@ public class CustomerUser extends BasicUser {
 	}
 
 	
-	
+	/**
+	 * Method will append to the CusomerUser's list of owned accounts an <b>argument</b> account.
+	 * @param account - add an existing account BasicAccount to a CustomerUser's accountList (customerAccounts)
+	 */
 	public void addCustomerAccount(BasicAccount account){
 		customerAccounts.add(account);
 	}
 	
+	/**
+	 * Getter to see whether CustomerUser is an Employee.
+	 * @return <b>boolean</b> - true if Customer is Employee, else false.
+	 */
 	public boolean getIsEmployee(){
 		return this.isEmployee;
 	}
-	
+	/**
+	 * Setter for making CustomerUser an EmployeeUser.
+	 * @
+	 */
 	public void setIsEmployee(){
 		this.isEmployee = true;
 	}
