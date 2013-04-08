@@ -1,5 +1,5 @@
 package accountTypes;
 
-public class SavingsAccount {
+public class SavingsAccount implements CustomerTransferSource{
 //intitial positive transaction required in constructor
 }

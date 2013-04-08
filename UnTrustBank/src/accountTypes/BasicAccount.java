@@ -5,6 +5,7 @@ package accountTypes;
 // <3
 import javax.swing.*;
 import dateTime.Time;
+import bank.BankGlobal;
 import bank.Transaction;
 import java.util.ArrayList;
 
@@ -37,6 +38,7 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		this.isEmployeesAccount = owner.getIsEmployee(); //accounts are not employee accounts by default
 		this.accruedInterest = 0;
 		//this.transactionList.add(mytransaction);
+		BankGlobal.appendToGlobalAccountList(this);
 	}
 	
 

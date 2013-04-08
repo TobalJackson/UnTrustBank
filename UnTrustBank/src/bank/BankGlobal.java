@@ -6,12 +6,15 @@ import dateTime.Time;
 import accountTypes.BasicAccount;
 
 import userTypes.AccountManagerUser;
+import userTypes.BasicUser;
 import userTypes.CustomerUser;
 
 public class BankGlobal {
 	
-	static ArrayList<CustomerUser> customers = new ArrayList<CustomerUser>();
-	static ArrayList<BasicAccount> account = new ArrayList<BasicAccount>();
+	private static ArrayList<CustomerUser> customers = new ArrayList<CustomerUser>();
+	private static ArrayList<BasicAccount> accounts = new ArrayList<BasicAccount>();
+	private static ArrayList<BasicUser> employees = new ArrayList<BasicUser>();
+	private static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 	public static DateTime banktime = new DateTime();
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
 	//Yes, but we may need to break up the bank global object to be less cumbersome, divide up the
@@ -22,10 +25,33 @@ public class BankGlobal {
 	private static long currentTransactionID;
 	private static long currentAccountID;
 	
+	
 	/**
-	 * Static method to both increment and return a new TransactionID to tag a Transaction with.  Each transaction will have
-	 * a numeric transactionID field to index them by.  calculation of age of transaction can be expedited by referring
-	 * to only it's numeric ID, like customerID and accountID.
+	 * Method to add a Transaction to the Global Transaction list.
+	 * @param t - the Transaction to be added.
+	 */
+	public static void appendToGlobalTransactionList(Transaction t){
+		transactions.add(t);
+	}
+	
+	/**
+	 * Method to add a BasicAccount to the Global BasicAccount list.
+	 * @param a - the BasicAccount to be added.
+	 */
+	public static void appendToGlobalAccountList(BasicAccount a){
+		accounts.add(a);
+	}
+	
+	/**
+	 * Method to add a CustomerUser to the Global CustomerUser list.
+	 * @param c - the CustomerUser to be added.
+	 */
+	public static void appendToGlobalCustomerList(CustomerUser c){
+		customers.add(c);
+	}
+	
+	/**
+	 * Static method to both increment and return a new TransactionID to tag a Transaction with.  Each transaction will have a numeric transactionID field to index them by.  calculation of age of transaction can be expedited by referring to only it's numeric ID, like customerID and accountID.
 	 * @return <b>Long</b> - returns long transactionID of each new transaction processed.
 	 */
 	public static long getNewCustomerID(){
@@ -147,7 +173,7 @@ public class BankGlobal {
 		DateTime newbanktime=banktime.add(mytime);
 			//loop thru all accounts and call respondToTimeChange
 		
-		for (BasicAccount b: account)
+		for (BasicAccount b: accounts)
 		{
 			b.respondToTimeChange(banktime, newbanktime, mytime);
 		}
@@ -210,6 +236,45 @@ public class BankGlobal {
 		overdraftlimit = newodl;
 	}
 	
+	// Loan
+	private double maximumLoansTotal;
+	private double currentLoansTotal;
+	private double interestRateLoan;
+	private double penaltyFeeLoan;
+
+	double getMaximumLoansTotal()
+	{
+		return this.maximumLoansTotal;
+	}
+	void setMaximumLoansTotal(double newMax)
+	{
+		this.maximumLoansTotal = newMax;
+	}
+	double getCurrentLoansTotal()
+	{
+		return this.currentLoansTotal;
+	}
+	double getInterestRateLoan()
+	{
+		return this.interestRateLoan;
+	}
+	void setInterestRateLoan(double newRate)
+	{
+		this.interestRateLoan = newRate;
+	}
+	double getPenaltyFeeLoan()
+	{
+		return this.penaltyFeeLoan;
+	}
+	void setPenaltyFeeLoan(double newFee)
+	{
+		this.penaltyFeeLoan = newFee;
+	}
+
+	
+	
+	
+	// LOC
 	private static double LOCoffset;
 	
 	public static void setLOCoffset(double newOffset)

@@ -9,7 +9,7 @@ import bank.Transaction;
 import dateTime.DateTime;
 import dateTime.Time;
 
-public class CDAccount extends BasicAccount  {
+public class CDAccount extends BasicAccount implements CustomerTransferSource {
 private int CDDuration;
 private double interestrate;
 private DateTime maturitydate;
