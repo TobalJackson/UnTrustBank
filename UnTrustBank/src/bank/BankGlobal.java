@@ -6,12 +6,14 @@ import dateTime.Time;
 import accountTypes.BasicAccount;
 
 import userTypes.AccountManagerUser;
+import userTypes.BasicUser;
 import userTypes.CustomerUser;
 
 public class BankGlobal {
 	
 	private static ArrayList<CustomerUser> customers = new ArrayList<CustomerUser>();
 	private static ArrayList<BasicAccount> accounts = new ArrayList<BasicAccount>();
+	private static ArrayList<BasicUser> employees = new ArrayList<BasicUser>();
 	private static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 	public static DateTime banktime = new DateTime();
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
@@ -234,6 +236,45 @@ public class BankGlobal {
 		overdraftlimit = newodl;
 	}
 	
+	// Loan
+	private double maximumLoansTotal;
+	private double currentLoansTotal;
+	private double interestRateLoan;
+	private double penaltyFeeLoan;
+
+	double getMaximumLoansTotal()
+	{
+		return this.maximumLoansTotal;
+	}
+	void setMaximumLoansTotal(double newMax)
+	{
+		this.maximumLoansTotal = newMax;
+	}
+	double getCurrentLoansTotal()
+	{
+		return this.currentLoansTotal;
+	}
+	double getInterestRateLoan()
+	{
+		return this.interestRateLoan;
+	}
+	void setInterestRateLoan(double newRate)
+	{
+		this.interestRateLoan = newRate;
+	}
+	double getPenaltyFeeLoan()
+	{
+		return this.penaltyFeeLoan;
+	}
+	void setPenaltyFeeLoan(double newFee)
+	{
+		this.penaltyFeeLoan = newFee;
+	}
+
+	
+	
+	
+	// LOC
 	private static double LOCoffset;
 	
 	public static void setLOCoffset(double newOffset)
