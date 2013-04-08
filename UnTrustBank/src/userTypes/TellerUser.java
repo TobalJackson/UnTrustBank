@@ -6,10 +6,9 @@ import accountTypes.*;
 import bank.Request;
 import bank.Transaction;
 import accountTypes.Withdrawable;
+import accountStatistics.AccountStats;
 
 public class TellerUser extends BasicUser {
-
-	
 	public TellerUser(String firstName, String middleName, String lastName, boolean isMale,
 			DateTime dob, char[] password, String username, int userID){
 		super(firstName, middleName, lastName, isMale, dob, password, username, userID);
@@ -18,9 +17,12 @@ public class TellerUser extends BasicUser {
 	public TellerUser(){
 		super();
 	}
-	
+	/**
+	 * method will return account details of the account
+	 */
 	public getCurrentAccountDetails(BasicAccount account){
-		//return AccountStats
+		//return account stats
+		return new AccountStats(account);
 	}
 	public void transferMoneyFromChecking(double amount, CheckingAccount account1, CheckingAccount account2){
 		//transfer funds of amount amount from account1 to account2

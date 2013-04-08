@@ -191,4 +191,8 @@ public class Transaction {
 		}
 		else return -1;
 	}
+	
+	public int getTransactionType(){
+		return transactiontype;
+	}
 }
