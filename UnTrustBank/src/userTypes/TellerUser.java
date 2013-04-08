@@ -8,7 +8,10 @@ import bank.Transaction;
 import accountTypes.Withdrawable;
 import accountStatistics.AccountStats;
 
+
+
 public class TellerUser extends BasicUser {
+	protected ArrayList<Request> requests;
 	public TellerUser(String firstName, String middleName, String lastName, boolean isMale,
 			DateTime dob, char[] password, String username, int userID){
 		super(firstName, middleName, lastName, isMale, dob, password, username, userID);
@@ -18,34 +21,74 @@ public class TellerUser extends BasicUser {
 		super();
 	}
 	/**
-	 * method will return account details of the account
+	 * method will return account details of the account by inputting the account as a parameter in AccountStats class
+	 * @return AccountStats object made using the account
 	 */
-	public getCurrentAccountDetails(BasicAccount account){
+	public AccountStats getCurrentAccountDetails(BasicAccount account){
 		//return account stats
 		return new AccountStats(account);
 	}
-	public void transferMoneyFromChecking(double amount, CheckingAccount account1, CheckingAccount account2){
+	
+	/**
+	 * creates two Transactions of withdrawal and deposit and applies them to the accounts to move amount from
+	 * account1 to account2
+	 * @param amount
+	 * @param account1
+	 * @param account2
+	 * @param customer
+	 */
+	public void transferMoneyFromChecking(double amount, CheckingAccount account1, CheckingAccount account2, CustomerUser customer){
 		//transfer funds of amount amount from account1 to account2
+		Transaction w = new Transaction(amount, customer, this, 0);
+		Transaction d = new Transaction(amount, customer, this, 1);
 	}
+	
+	
+	//What does this do?
 	public void setUpAutomaticDeposits(BasicAccount account, double amount){
 		//automatically deposit amount to account
 	}
-	public void withdraw(Transaction transaction, Withdrawable account){
+	public void withdraw(Transaction transaction, BasicAccount account){
 		//withdraw amount from account after parsing through the Withdrawable interface
+		account.appendTransaction(transaction, this);
+		
 	}
 	public void deposit(Transaction transaction, BasicAccount account){
 		//deposit amount into account
+		account.appendTransaction(transaction, this);
 	}
+	
+	/**
+	 * sets the field in BasicAccount to indicate that there is a tellerCharge
+	 * @param account
+	 */
 	public void incurTellerCharge(BasicAccount account){
 		//does the account incur a teller charge
+		account.setTellerCharge(true);
 	}
+	
+	/**
+	 * sets the field in BasicAccount to indicate that there is not a tellerCharge
+	 * @param account
+	 */
 	public void waiveTellerCharge(BasicAccount account){
 		//waive the teller charge on account
+		account.setTellerCharge(false);
 	}
-	public pendingRequests(){
+	
+	
+	//how are the requests being sent to the Teller to be added to this ArrayList?
+	public ArrayList<Request> pendingRequests(){
 		//return ArrayLists<Request>
+		return requests;
 	}
+	
+	/**
+	 * turns request directly into a new transaction
+	 * @param request
+	 */
 	public void approveRequests(Request request){
 		//approve request and turn it into a transaction
+		Transaction t = new Transaction(request.getRequestAmount(), request.getCustomer(), this, request.getRequestType());
 	}
 }

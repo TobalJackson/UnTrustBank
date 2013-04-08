@@ -27,6 +27,7 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected double maximumAccountBalance;
 	protected int numWithdrawals;
 	protected int numDeposits;
+	protected boolean hasTellerCharge;
 	public BasicAccount(CustomerUser owner, int accountID){ //default constructor only accepts Customer and account ID
 		this.owner = owner;
 		this.accountID = accountID;
@@ -180,6 +181,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	
 	public int getNumDeposits(){
 		return numDeposits;
+	}
+	
+	public void setTellerCharge(boolean yes){
+		hasTellerCharge=yes;
 	}
 }
 	

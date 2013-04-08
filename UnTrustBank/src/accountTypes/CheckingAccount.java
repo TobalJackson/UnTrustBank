@@ -63,4 +63,7 @@ public void applyUnderLimitServiceCharge(BasicUser initiator){
 		
 	}
 
+	public void changeBalance(double amount){
+		this.
+	}
 }

@@ -15,13 +15,15 @@ public class Request {
 //	private double depositAmount;
 //	private double withdrawalAmount;
 	private DateTime timeStamp;
+	private int requestType;
 
 	
-	public Request(BasicAccount accountRequest, double requestAmount, CustomerUser customerRequestor){
+	public Request(BasicAccount accountRequest, double requestAmount, CustomerUser customerRequestor, int requestType){
 		this.timeStamp = new DateTime();
 		this.accountRequest=accountRequest;
 		this.requestAmount=requestAmount;
 		this.customerRequestor=customerRequestor;
+		this.requestType=requestType;
 	}
 	
 	public double getRequestAmount(){
@@ -38,5 +40,9 @@ public class Request {
 	
 	public DateTime getTime(){
 		return timeStamp;
+	}
+	
+	public int getRequestType(){
+		return requestType;
 	}
 }
