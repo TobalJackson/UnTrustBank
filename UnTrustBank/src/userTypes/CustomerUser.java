@@ -2,8 +2,17 @@ package userTypes;
 
 import dateTime.DateTime;
 import java.util.ArrayList;
-import accountTypes.*;
+import accountTypes.BasicAccount;
+import accountTypes.CustomerTransferSource;
+import accountTypes.LOCAccount;
+import accountTypes.LoanAccount;
+import accountTypes.CDAccount;
+import accountTypes.CheckingAccount;
+import accountTypes.SavingsAccount;
+import accountTypes.ServiceChargeable;
+import bank.BankGlobal;
 import bank.Transaction;
+
 
 /**
  * @author tobaljackson
@@ -17,13 +26,16 @@ public class CustomerUser extends BasicUser {
 	private int SSN;
 	
 	
+	
 	public CustomerUser(String firstName, String middleName, String lastName, boolean isMale,
 			DateTime dob,int ssn, char[] password, String username, int userID){
 		super(firstName, middleName, lastName, isMale, dob, password, username, userID);
 		this.SSN = ssn;
+		BankGlobal.appendToGlobalCustomerList(this);
 	}
 	public CustomerUser(){
 		super();
+		BankGlobal.appendToGlobalCustomerList(this);
 	}
 	
 	/**
@@ -106,6 +118,23 @@ public class CustomerUser extends BasicUser {
 			if (t.getIsFlaggedFraudulent()) fraudulentTransactions.add(t);
 		}
 		return fraudulentTransactions;		
+	}
+	
+	public void transferBetweenOwnAccounts(double amount, BasicAccount source, BasicAccount destination){
+		if(source instanceof CustomerTransferSource){
+			if(source.getAccountOwner() == this){
+				if(destination.getAccountOwner() == this){
+					if(!(source == destination)){
+						if(amount > 0){
+							Transaction withdraw = new Transaction(amount * -1, source.getAccountOwner(), source.getAccountOwner(), Transaction.WITHDRAWAL);
+							source.appendTransaction(withdraw, this);
+							Transaction deposit = new Transaction(amount, source.getAccountOwner(), source.getAccountOwner(), Transaction.DEPOSIT);
+							destination.appendTransaction(deposit, this);
+						}
+					}	
+				}
+			}
+		}
 	}
 	
 	/**
