@@ -1,5 +1,6 @@
 package bank;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import dateTime.DateTime;
@@ -33,11 +34,11 @@ public class BankGlobal {
 	 * Method used by Tellers to get all pending requests.
 	 * @return <b>ArrayList<Request></b> - returns an ArrayList of current pending requests.
 	 */
-	public static HashMap<Integer, Request> getPendingRequests(){
-		HashMap<Integer, Request> pendingRequests = new HashMap<Integer, Request>();
-		for (Request r : pendingRequests.values()){
+	public static ArrayList<Request> getPendingRequests(){
+		ArrayList<Request> pendingRequests = new ArrayList<Request>();
+		for (Request r : pendingRequests){
 			if (!r.isRequestApproved()){
-				pendingRequests.put(currentRequestID, r);
+				pendingRequests.add(r);
 			}
 		}
 		return pendingRequests;
@@ -313,7 +314,7 @@ public class BankGlobal {
 	}
 	public static double getLOC(double newOffset)
 	{
-		return AccountManagerUser.getInterestRate() + LOCoffset;
+		return AccountManagerUser.getGlobalLoanCap() + LOCoffset;
 	}
 	
 	// Cap
