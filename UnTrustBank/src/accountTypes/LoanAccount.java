@@ -6,7 +6,7 @@ import dateTime.DateTime;
 import dateTime.Time;
 import userTypes.CustomerUser;
 
-public class LoanAccount extends BasicAccount{
+public class LoanAccount extends BasicAccount implements Loanable{
 double interestrate;
 double minloanmonthlyloanpayment;
 

@@ -331,6 +331,9 @@ public class BankGlobal {
 	}
 	public void addToUsedCap(int used)
 	{
+		for (BasicAccount account : accounts.values()){
+			if (account instanceof CDAccount)
+		}
 		usedCap += used;
 	}
 	public int getUsedCap()
