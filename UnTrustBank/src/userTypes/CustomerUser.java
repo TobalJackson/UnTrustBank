@@ -11,6 +11,7 @@ import accountTypes.CheckingAccount;
 import accountTypes.SavingsAccount;
 import accountTypes.ServiceChargeable;
 import bank.BankGlobal;
+import bank.Request;
 import bank.Transaction;
 
 
@@ -120,19 +121,45 @@ public class CustomerUser extends BasicUser {
 		return fraudulentTransactions;		
 	}
 	
+	/**
+	 * Method for a customerUser to transfer an amount of money from one owned account to another.  Only able to transfer from accounts of type Checking, CD, and Savings, each of which implement the interface CustomerTransferSource.
+	 * @param amount - the amount of money to withdraw.
+	 * @param source - the source account to transfer from.
+	 * @param destination - the destination account to transfer to.
+	 */
 	public void transferBetweenOwnAccounts(double amount, BasicAccount source, BasicAccount destination){
 		if(source instanceof CustomerTransferSource){
 			if(source.getAccountOwner() == this){
 				if(destination.getAccountOwner() == this){
 					if(!(source == destination)){
 						if(amount > 0){
-							Transaction withdraw = new Transaction(amount * -1, source.getAccountOwner(), source.getAccountOwner(), Transaction.WITHDRAWAL);
+							Transaction withdraw = ((CustomerTransferSource)source).customerTransferWithdrawal(amount);
 							source.appendTransaction(withdraw, this);
-							Transaction deposit = new Transaction(amount, source.getAccountOwner(), source.getAccountOwner(), Transaction.DEPOSIT);
+							Transaction deposit = new Transaction(amount, source.getAccountOwner(), source.getAccountOwner(), Transaction.TRANSFER);
 							destination.appendTransaction(deposit, this);
 						}
-					}	
+						else throw new IllegalArgumentException("Transfers must be positive!");
+					}
+					else throw new IllegalArgumentException("Source and destination accounts cannot be the same!");
 				}
+				else throw new IllegalArgumentException("You must own the account you're transferring to!");
+			}
+			else throw new IllegalArgumentException("You must own the account you're transferring from!");
+		}
+		else throw new IllegalArgumentException("You may not transfer from this account type!");
+	}
+	
+	
+	/**
+	 * Method will allow CustomerUser to request a deposit into an account, adding the request to the accounts pendingRequestList, for view/retrieval by the Customer, as well as to the GlobalRequestList for access by Tellers.
+	 * @param amount - the amount of the deposit request.
+	 * @param account - the account being deposited into.
+	 */
+	public void requestDeposit(double amount, BasicAccount account){//any account is eligible to request a deposit into
+		if (amount > 0){
+			if (account.getAccountOwner() == this){
+				Request r = new Request(account, amount, account.getAccountOwner(), Request.DEPOSIT);
+				account.addRequest(r);
 			}
 		}
 	}
