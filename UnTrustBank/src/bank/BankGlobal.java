@@ -36,7 +36,7 @@ public class BankGlobal {
 	 */
 	public static ArrayList<Request> getPendingRequests(){
 		ArrayList<Request> pendingRequests = new ArrayList<Request>();
-		for (Request r : pendingRequests){
+		for (Request r : requests.values()){
 			if (!r.isRequestApproved()){
 				pendingRequests.add(r);
 			}
@@ -331,6 +331,9 @@ public class BankGlobal {
 	}
 	public void addToUsedCap(int used)
 	{
+		for (BasicAccount account : accounts.values()){
+			if (account instanceof CDAccount)
+		}
 		usedCap += used;
 	}
 	public int getUsedCap()
