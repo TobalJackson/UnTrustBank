@@ -3,6 +3,7 @@ package userTypes;
 import dateTime.DateTime;
 import java.util.ArrayList;
 import accountTypes.*;
+import bank.BankGlobal;
 import bank.Request;
 import bank.Transaction;
 import accountTypes.Withdrawable;
@@ -39,8 +40,8 @@ public class TellerUser extends BasicUser {
 	 */
 	public void transferMoneyFromChecking(double amount, CheckingAccount account1, CheckingAccount account2, CustomerUser customer){
 		//transfer funds of amount amount from account1 to account2
-		Transaction w = new Transaction(amount, customer, this, 0);
-		Transaction d = new Transaction(amount, customer, this, 1);
+		Transaction w = new Transaction(amount, customer, this, Transaction.WITHDRAWAL);
+		Transaction d = new Transaction(amount, customer, this, Transaction.DEPOSIT);
 	}
 	
 	
@@ -76,11 +77,14 @@ public class TellerUser extends BasicUser {
 		account.setTellerCharge(false);
 	}
 	
-	
+	/**
+	 * Method for tellers to request a list of unapproved transactions from BankGlobal.
+	 * @return
+	 */
 	//how are the requests being sent to the Teller to be added to this ArrayList?
-	public ArrayList<Request> pendingRequests(){
+	public ArrayList<Request> getPendingRequests(){
 		//return ArrayLists<Request>
-		return requests;
+		return BankGlobal.getPendingRequests();
 	}
 	
 	/**
@@ -89,6 +93,7 @@ public class TellerUser extends BasicUser {
 	 */
 	public void approveRequests(Request request){
 		//approve request and turn it into a transaction
+		BankGlobal.markRequestProcessed(request);
 		Transaction t = new Transaction(request.getRequestAmount(), request.getCustomer(), this, request.getRequestType());
 	}
 }
