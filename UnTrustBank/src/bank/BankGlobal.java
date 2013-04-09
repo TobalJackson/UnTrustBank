@@ -1,11 +1,11 @@
 package bank;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import dateTime.DateTime;
 import dateTime.Time;
 import accountTypes.BasicAccount;
-import accountTypes.LOCAccount;
 
 import userTypes.AccountManagerUser;
 import userTypes.BasicUser;
@@ -34,11 +34,11 @@ public class BankGlobal {
 	 * Method used by Tellers to get all pending requests.
 	 * @return <b>ArrayList<Request></b> - returns an ArrayList of current pending requests.
 	 */
-	public static HashMap<Integer, Request> getPendingRequests(){
-		HashMap<Integer, Request> pendingRequests = new HashMap<Integer, Request>();
-		for (Request r : pendingRequests.values()){
+	public static ArrayList<Request> getPendingRequests(){
+		ArrayList<Request> pendingRequests = new ArrayList<Request>();
+		for (Request r : requests.values()){
 			if (!r.isRequestApproved()){
-				pendingRequests.put(currentRequestID, r);
+				pendingRequests.add(r);
 			}
 		}
 		return pendingRequests;
@@ -314,32 +314,31 @@ public class BankGlobal {
 	}
 	public static double getLOC(double newOffset)
 	{
-		return AccountManagerUser.getInterestRate() + LOCoffset;
+		return AccountManagerUser.getGlobalLoanCap() + LOCoffset;
 	}
 	
-	// Loan and LOC Cap
-	private double Loancap;
-	private double usedLoanCap;
+	// Cap
+	private int cap;
+	private int usedCap;
 	
-	public void setLoanCap(double newCap)
+	public void setCap(int newCap)
 	{
-		Loancap = newCap;
+		cap = newCap;
 	}
-	public double getCap()
+	public int getCap()
 	{
-		return this.Loancap;
+		return this.cap;
 	}
-	
-	public double UsedCap()
+	public void addToUsedCap(int used)
 	{
-		double used=0;
-		for(BasicAccount myaccount: accounts.values()){
-			//if(myaccount.get)
+		for (BasicAccount account : accounts.values()){
+			if (account instanceof CDAccount)
 		}
-		
-		
-		return used;
+		usedCap += used;
 	}
-
+	public int getUsedCap()
+	{
+		return this.usedCap;
+	}
 	
 }
