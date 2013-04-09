@@ -8,13 +8,14 @@ import dateTime.Time;
 import bank.BankGlobal;
 import bank.Transaction;
 import java.util.ArrayList;
-
+import bank.Request;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import dateTime.DateTime;
 
 public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected ArrayList<Transaction> transactionList;
+	protected ArrayList<Request> requestList;
 	//private double accountBalance;
 	protected boolean isActiveAccount;
 	protected CustomerUser owner;
@@ -31,6 +32,7 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected boolean hasTellerCharge;
 	public BasicAccount(CustomerUser owner, int accountID){ //default constructor only accepts Customer and account ID
 		this.owner = owner;
+		owner.addCustomerAccount(this); //adds the account to the Customer's list of accounts.
 		this.accountID = accountID;
 		
 		this.isActiveAccount = true;
@@ -43,6 +45,24 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	
 
 	public abstract void respondToTimeChange(DateTime originalTime, DateTime newTime, Time timeDifference);
+	
+	public void addRequest(Request request){
+		requestList.add(request);
+	}
+	
+	/**
+	 * Method to get a list of pending requests for an account.
+	 * @return <b>ArrayList<Request></b> - returns an arrayList of an accounts pending requests for use by Customer.
+	 */
+	public ArrayList<Request> getPendingRequests(){
+		ArrayList<Request> result = new ArrayList<Request>();
+		for(Request r : requestList){
+			if(!r.isRequestApproved()){
+				result.add(r);
+			}
+		}
+		return result;
+	}
 	
 	/**
 	 * Method to return the account's Minimum allowable Balance.
@@ -85,7 +105,7 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	public void appendTransaction(Transaction transaction, BasicUser initiator){
 		if(isActiveAccount){
 			transactionList.add(transaction);
-			updateCurrentAccountBalance();
+			updateCurrentAccountBalance(); //could be optimized; can add only the new amount each transaction...
 		}
 		else{
 			accountClosedError();
@@ -112,9 +132,9 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	 * Method to return the CustomerUser who owns the account.
 	 * @return <b>CustomerUser</b> - the owner of this account.
 	 */
-	public CustomerUser getOwner(){
-		return owner;
-	}
+//	public CustomerUser getOwner(){
+//		return owner;
+//	}
 	
 	/**
 	 * Gets the accountBalance as updated by updateCurrentAccountBalance().
@@ -169,6 +189,11 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		String st="this account is closed. you're not allowed to do this :/";
 		JOptionPane.showMessageDialog(null,st);	
 	}
+	
+	/**
+	 * Method to return the CustomerUser who owns the account.
+	 * @return <b>CustomerUser</b> - the owner of this account.
+	 */
 	public CustomerUser getAccountOwner(){
 		return this.owner;
 	}
