@@ -134,7 +134,7 @@ public class CustomerUser extends BasicUser {
 					if(!(source == destination)){
 						if(amount > 0){
 							Transaction withdraw = ((CustomerTransferSource)source).customerTransferWithdrawal(amount);
-							source.appendTransaction(withdraw, this);
+							//source.appendTransaction(withdraw, this); //handled by the customerTransferWithdrawal method
 							Transaction deposit = new Transaction(amount, source.getAccountOwner(), source.getAccountOwner(), Transaction.TRANSFER);
 							destination.appendTransaction(deposit, this);
 						}
