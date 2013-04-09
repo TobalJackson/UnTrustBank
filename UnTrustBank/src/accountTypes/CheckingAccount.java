@@ -19,7 +19,7 @@ public class CheckingAccount extends BasicAccount implements CustomerTransferSou
 	}
 	
 @Override
-public void appendTransaction(Transaction transaction, BasicUser initiator){
+	public void appendTransaction(Transaction transaction, BasicUser initiator){
 //transaction may be positive or negative. just need to make sure a negative transaction...
 //...wouldn't put us under the limit
 	if((accountBalance-transaction.getAmount())<BankGlobal.getOverdraftLimit()){
@@ -31,17 +31,28 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 	updateCurrentAccountBalance();
 }
 	
-	
-public void applyUnderLimitServiceCharge(BasicUser initiator){
-	if(BankGlobal.getunderlimitfeecheckingboolean()){
-		if(this.accountBalance<BankGlobal.getServiceChargeLimitChecking()){
-			Transaction ServiceCharge = new Transaction(BankGlobal.getServiceChargeChecking(), owner, initiator, 5);
-			transactionList.add(ServiceCharge);
-			updateCurrentAccountBalance();
-		}//if this account is under limit
-	} //close if boolean==true
-	updateCurrentAccountBalance(); //just to be safe I think
-} //close method
+	/**
+	 * Method  to construct a new transaction for Transfer.
+	 * @return <b>Transaction</b> - returns a Transaction representing the amount to be withdrawn for the Transfer.
+	 */
+	public Transaction customerTransferWithdrawal(double amount){
+		if (this.getCurrentAccountBalance() - amount > 0){
+			Transaction withdraw = new Transaction(amount * -1, this.getAccountOwner(), this.getAccountOwner(), Transaction.TRANSFER);
+			this.appendTransaction(withdraw, this.getAccountOwner());
+			return withdraw;
+		}
+		else throw new IllegalArgumentException("Insufficient funds");
+	}
+	public void applyUnderLimitServiceCharge(BasicUser initiator){
+		if(BankGlobal.getunderlimitfeecheckingboolean()){
+			if(this.accountBalance<BankGlobal.getServiceChargeLimitChecking()){
+				Transaction ServiceCharge = new Transaction(BankGlobal.getServiceChargeChecking(), owner, initiator, 5);
+				transactionList.add(ServiceCharge);
+				updateCurrentAccountBalance();
+			}//if this account is under limit
+		} //close if boolean==true
+		updateCurrentAccountBalance(); //just to be safe I think
+	} //close method
 	
 
 	@Override
