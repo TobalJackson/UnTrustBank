@@ -30,10 +30,12 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected int numWithdrawals;
 	protected int numDeposits;
 	protected boolean hasTellerCharge;
+	
 	public BasicAccount(CustomerUser owner, int accountID){ //default constructor only accepts Customer and account ID
 		this.owner = owner;
 		owner.addCustomerAccount(this); //adds the account to the Customer's list of accounts.
 		this.accountID = accountID;
+		
 		
 		this.isActiveAccount = true;
 		this.accountCreatedOn = new DateTime(); //new DateTime() constructor specifies the time as now

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import dateTime.DateTime;
 import dateTime.Time;
 import accountTypes.BasicAccount;
+import accountTypes.LOCAccount;
 
 import userTypes.AccountManagerUser;
 import userTypes.BasicUser;
@@ -316,25 +317,29 @@ public class BankGlobal {
 		return AccountManagerUser.getInterestRate() + LOCoffset;
 	}
 	
-	// Cap
-	private int cap;
-	private int usedCap;
+	// Loan and LOC Cap
+	private double Loancap;
+	private double usedLoanCap;
 	
-	public void setCap(int newCap)
+	public void setLoanCap(double newCap)
 	{
-		cap = newCap;
+		Loancap = newCap;
 	}
-	public int getCap()
+	public double getCap()
 	{
-		return this.cap;
+		return this.Loancap;
 	}
-	public void addToUsedCap(int used)
+	
+	public double UsedCap()
 	{
-		usedCap += used;
+		double used=0;
+		for(BasicAccount myaccount: accounts.values()){
+			//if(myaccount.get)
+		}
+		
+		
+		return used;
 	}
-	public int getUsedCap()
-	{
-		return this.usedCap;
-	}
+
 	
 }
