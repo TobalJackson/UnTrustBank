@@ -39,7 +39,7 @@ public class Transaction {
 	 */
 	private long transactionID;
 	private int transactiontype;
-	public static final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4, SERVICE_CHARGE = 5;
+	public static final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4, SERVICE_CHARGE = 5, TRANSFER = 6;
 	
 	public Transaction(double amount, CustomerUser customer, BasicUser initiator, int transtype){
 		transactiontype=transtype; //0=withdrawal, 1=deposit, 2=interest, 3=penalty, 4=other, 5=service charge
@@ -50,8 +50,8 @@ public class Transaction {
 		this.initiator = initiator;
 		
 		isApplied = true; //by default, transactions are applied to the account
-		getNewTransactionID();
-		BankGlobal.appendToGlobalTransactionList(this);
+		getNewTransactionID(); //assigns newest transactionID to this transaction.
+		BankGlobal.appendToGlobalTransactionList(this); //then adds the transaction to the BankGlobal TransactionList.
 	}
 	
 	/**
