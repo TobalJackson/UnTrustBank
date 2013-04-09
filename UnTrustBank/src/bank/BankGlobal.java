@@ -1,6 +1,7 @@
 package bank;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+
 import dateTime.DateTime;
 import dateTime.Time;
 import accountTypes.BasicAccount;
@@ -11,31 +12,32 @@ import userTypes.CustomerUser;
 
 public class BankGlobal {
 	
-	private static ArrayList<CustomerUser> customers = new ArrayList<CustomerUser>();
-	private static ArrayList<BasicAccount> accounts = new ArrayList<BasicAccount>();
-	private static ArrayList<BasicUser> employees = new ArrayList<BasicUser>();
-	private static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-	private static ArrayList<Request> requests = new ArrayList<Request>();
+	private static HashMap<Integer, CustomerUser> customers = new HashMap<Integer, CustomerUser>();
+	private static HashMap<Integer, BasicAccount> accounts = new HashMap<Integer, BasicAccount>();
+	private static HashMap<Integer, BasicUser> employees = new HashMap<Integer, BasicUser>();
+	private static HashMap<Integer, Transaction> transactions = new HashMap<Integer, Transaction>();
+	private static HashMap<Integer, Request> requests = new HashMap<Integer, Request>();
 	public static DateTime banktime = new DateTime();
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
 	//Yes, but we may need to break up the bank global object to be less cumbersome, divide up the
 	//different control systems for bank.
 	
 	// Transaction
-	private static long currentCustomerID;
-	private static long currentTransactionID;
-	private static long currentAccountID;
+	private static int currentCustomerID;
+	private static int currentTransactionID;
+	private static int currentAccountID;
+	private static int currentRequestID;
 	
 	
 	/**
 	 * Method used by Tellers to get all pending requests.
 	 * @return <b>ArrayList<Request></b> - returns an ArrayList of current pending requests.
 	 */
-	public static ArrayList<Request> getPendingRequests(){
-		ArrayList<Request> pendingRequests = new ArrayList<Request>();
-		for (Request r : requests){
+	public static HashMap<Integer, Request> getPendingRequests(){
+		HashMap<Integer, Request> pendingRequests = new HashMap<Integer, Request>();
+		for (Request r : pendingRequests.values()){
 			if (!r.isRequestApproved()){
-				pendingRequests.add(r);
+				pendingRequests.put(currentRequestID, r);
 			}
 		}
 		return pendingRequests;
@@ -54,7 +56,7 @@ public class BankGlobal {
 	 * @param r - the request that is added to the global list of requests.
 	 */
 	public static void appendToGlobalRequestList(Request r){
-		requests.add(r);
+		requests.put(currentRequestID, r);
 	}
 	
 	/**
@@ -62,7 +64,7 @@ public class BankGlobal {
 	 * @param t - the Transaction to be added.
 	 */
 	public static void appendToGlobalTransactionList(Transaction t){
-		transactions.add(t);
+		transactions.put(currentTransactionID, t);
 	}
 	
 	/**
@@ -70,7 +72,7 @@ public class BankGlobal {
 	 * @param a - the BasicAccount to be added.
 	 */
 	public static void appendToGlobalAccountList(BasicAccount a){
-		accounts.add(a);
+		accounts.put(currentAccountID, a);
 	}
 	
 	/**
@@ -78,14 +80,14 @@ public class BankGlobal {
 	 * @param c - the CustomerUser to be added.
 	 */
 	public static void appendToGlobalCustomerList(CustomerUser c){
-		customers.add(c);
+		customers.put(currentCustomerID,c);
 	}
 	
 	/**
 	 * Static method to both increment and return a new TransactionID to tag a Transaction with.  Each transaction will have a numeric transactionID field to index them by.  calculation of age of transaction can be expedited by referring to only it's numeric ID, like customerID and accountID.
 	 * @return <b>Long</b> - returns long transactionID of each new transaction processed.
 	 */
-	public static long getNewCustomerID(){
+	public static int getNewCustomerID(){
 		currentCustomerID++;
 		return currentCustomerID;
 		
@@ -204,7 +206,7 @@ public class BankGlobal {
 		DateTime newbanktime=banktime.add(mytime);
 			//loop thru all accounts and call respondToTimeChange
 		
-		for (BasicAccount b: accounts)
+		for (BasicAccount b: accounts.values())
 		{
 			b.respondToTimeChange(banktime, newbanktime, mytime);
 		}
