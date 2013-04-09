@@ -106,7 +106,10 @@ Request Object:
 
 
 Accounts:
-
+	CustomerTransferSource:Interface
+	
+		+public Transaction customerWithdrawal(double)
+		
 	BasicAccount:Abstract
 	
 		-transactionList(Arraylist<Transaction>)
