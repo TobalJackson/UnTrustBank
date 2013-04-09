@@ -318,5 +318,27 @@ public class BankGlobal {
 	{
 		return AccountManagerUser.getInterestRate() + LOCoffset;
 	}
-		
+	
+	// Cap
+	private int cap;
+	private int usedCap;
+	
+	public void setCap(int newCap)
+	{
+		cap = newCap;
+	}
+	public int getCap()
+	{
+		return this.cap;
+	}
+	public int getUsedCap()
+	{
+		return this.usedCap;
+	}
+	public void addToUsedCap(int used)
+	{
+		usedCap += used;
+	}
+	
+	
 }
