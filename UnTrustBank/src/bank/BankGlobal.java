@@ -15,6 +15,7 @@ public class BankGlobal {
 	private static ArrayList<BasicAccount> accounts = new ArrayList<BasicAccount>();
 	private static ArrayList<BasicUser> employees = new ArrayList<BasicUser>();
 	private static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+	private static ArrayList<Request> requests = new ArrayList<Request>();
 	public static DateTime banktime = new DateTime();
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
 	//Yes, but we may need to break up the bank global object to be less cumbersome, divide up the
@@ -25,6 +26,36 @@ public class BankGlobal {
 	private static long currentTransactionID;
 	private static long currentAccountID;
 	
+	
+	/**
+	 * Method used by Tellers to get all pending requests.
+	 * @return <b>ArrayList<Request></b> - returns an ArrayList of current pending requests.
+	 */
+	public static ArrayList<Request> getPendingRequests(){
+		ArrayList<Request> pendingRequests = new ArrayList<Request>();
+		for (Request r : requests){
+			if (!r.isRequestApproved()){
+				pendingRequests.add(r);
+			}
+		}
+		return pendingRequests;
+	}
+	
+	/**
+	 * Method used by Tellers to mark a pending request as processed.
+	 * @param request - the Request to mark as processed.
+	 */
+	public static void markRequestProcessed(Request request){
+		request.setRequestApproved();
+	}
+	
+	/**
+	 * Method called by Request instantiation to be appended to global list of requests.
+	 * @param r - the request that is added to the global list of requests.
+	 */
+	public static void appendToGlobalRequestList(Request r){
+		requests.add(r);
+	}
 	
 	/**
 	 * Method to add a Transaction to the Global Transaction list.
