@@ -303,9 +303,6 @@ public class BankGlobal {
 	{
 		this.penaltyFeeLoan = newFee;
 	}
-
-	
-	
 	
 	// LOC
 	private static double LOCoffset;
@@ -331,14 +328,13 @@ public class BankGlobal {
 	{
 		return this.cap;
 	}
-	public int getUsedCap()
-	{
-		return this.usedCap;
-	}
 	public void addToUsedCap(int used)
 	{
 		usedCap += used;
 	}
-	
+	public int getUsedCap()
+	{
+		return this.usedCap;
+	}
 	
 }
