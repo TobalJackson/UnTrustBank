@@ -1,8 +1,8 @@
-																		Checking	COD		Loan	LOC		Savings
-Spendable by Customer (includes transfering to other customer accounts)	yes			no		no		yes		no
-Depositable By Customer													no			no		no		no		no
-Request Depositable by Customer											yes			yes		yes		yes		yes
-Request Withdrawable by Customer										no			yes		no		no		yes
-Transfer from this account type to other own accounts by Customer		yes			yes		no		no		yes
-Transfer to this account type from other own accounts by Customer		yes			yes		yes		yes		yes
-Depositable By Other Customer's transfer								yes			no		no		no		no
+																		Checking		COD		Loan	LOC		Savings
+Spendable by Customer (includes transfering to other customer accounts)	yes				no		no		yes		no
+Depositable By Customer													no				no		no		no		no
+Request Depositable by Customer											yes				yes		yes		yes		yes
+Request Withdrawable by Customer										yes//changed	yes		no		no		yes
+Transfer from this account type to other own accounts by Customer		yes				yes		no		no		yes
+Transfer to this account type from other own accounts by Customer		yes				yes		yes		yes		yes
+Depositable By Other Customer's transfer								yes				no		no		no		yes//changed

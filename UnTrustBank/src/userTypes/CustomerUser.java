@@ -133,7 +133,7 @@ public class CustomerUser extends BasicUser {
 				if(destination.getAccountOwner() == this){
 					if(!(source == destination)){
 						if(amount > 0){
-							Transaction withdraw = ((CustomerTransferSource)source).customerTransferWithdrawal(amount);
+							((CustomerTransferSource)source).customerTransferWithdrawal(amount);
 							//source.appendTransaction(withdraw, this); //handled by the customerTransferWithdrawal method
 							Transaction deposit = new Transaction(amount, source.getAccountOwner(), source.getAccountOwner(), Transaction.TRANSFER);
 							destination.appendTransaction(deposit, this);
@@ -149,7 +149,6 @@ public class CustomerUser extends BasicUser {
 		else throw new IllegalArgumentException("You may not transfer from this account type!");
 	}
 	
-	
 	/**
 	 * Method will allow CustomerUser to request a deposit into an account, adding the request to the accounts pendingRequestList, for view/retrieval by the Customer, as well as to the GlobalRequestList for access by Tellers.
 	 * @param amount - the amount of the deposit request.
@@ -162,6 +161,10 @@ public class CustomerUser extends BasicUser {
 				account.addRequest(r);
 			}
 		}
+	}
+	
+	public void requestWithdrawal(double amount, BasicAccount account){//customer can only request withdraw from COD and savings.
+		
 	}
 	
 	/**
