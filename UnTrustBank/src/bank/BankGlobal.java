@@ -9,6 +9,7 @@ import accountTypes.BasicAccount;
 import accountTypes.Loanable;
 import accountTypes.CDAccount;
 
+import sun.rmi.runtime.NewThreadAction;
 import userTypes.AccountManagerUser;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
@@ -122,11 +123,12 @@ public class BankGlobal {
 	
 	
 	private static double CDSavingsOffset;
+	
 	public double getCDSavingsOffset(){
 		
 		return CDSavingsOffset;
 	}
-	
+
 	public void setCDSavingsOffset(double newoffset){
 		if(newoffset > 0 || newoffset <1){
 			CDSavingsOffset=newoffset;
@@ -137,29 +139,46 @@ public class BankGlobal {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
 	// Savings
-	private double serviceChargeSavings;
-	private double interestRateSavings;
+	private static double serviceChargeSavings;
+	private static double interestRateSavings;
+	private static double serviceChargeSavingsthreshold;
+	
 	public double getServiceChargeSavings()
 	{
-		return this.serviceChargeSavings;
+		return serviceChargeSavings;
 	}
 	public void setServiceChargeSavings(double newSCS)
 	{
-		this.serviceChargeSavings = newSCS;
+		serviceChargeSavings = newSCS;
 	}
-	
+	//this is good- Dania
 	public double getInterestRateSavings()
 	{
-		return this.interestRateSavings+CDSavingsOffset;
+		return interestRateSavings+CDSavingsOffset;
 	}
-	public void setInterestRateSavings(double newIRS)
+	public void setInterestRateSavingsoffset(double newIRS)
 	{
-		this.interestRateSavings = newIRS;
+		interestRateSavings = newIRS;
+	}
+	public static double getserviceChargeSavingsthreshold(){
+		return serviceChargeSavingsthreshold;
+	}
+	
+	public static void setserviceChargeSavingsthreshold(double newthreshold){
+		serviceChargeSavingsthreshold=newthreshold;
+		
 	}
 	
 	
-	//CD
+	//CD -this is good
 	private static double minimumBalanceCD;
 	private static double InterestRateCD6Month;
 	private static double InterestRateCD1Year;
@@ -258,6 +277,7 @@ public class BankGlobal {
 	{
 		serviceChargeChecking = newSCLC;
 	}
+	
 	public static double getOverdraftFee()
 	{
 		return overdraftFee;
@@ -293,90 +313,10 @@ public class BankGlobal {
 		overdraftlimit = newodl;
 	}
 	
-	// Loan
-	private double maximumLoansTotal;
-	private double currentLoansTotal;
-	private double interestRateLoan;
-	private double penaltyFeeLoan;
-
-	double getMaximumLoansTotal()
-	{
-		return this.maximumLoansTotal;
-	}
-	void setMaximumLoansTotal(double newMax)
-	{
-		this.maximumLoansTotal = newMax;
-	}
-	double getCurrentLoansTotal()
-	{
-		return this.currentLoansTotal;
-	}
-	double getInterestRateLoan()
-	{
-		return this.interestRateLoan;
-	}
-	void setInterestRateLoan(double newRate)
-	{
-		this.interestRateLoan = newRate;
-	}
-	double getPenaltyFeeLoan()
-	{
-		return this.penaltyFeeLoan;
-	}
-	void setPenaltyFeeLoan(double newFee)
-	{
-		this.penaltyFeeLoan = newFee;
-	}
 	
-
-	// LOC
-	private static double LOCoffset;
 	
-	public static void setLOCoffset(double newOffset)
-	{
-		LOCoffset = newOffset;
-	}
-	public static double getLOC(double newOffset)
-	{
-		return  + LOCoffset;
-	}
-
-	// LOC - I dont think the this method does anything
-//	private static double LOCoffset;
-//	
-//	public static void setLOCoffset(double newOffset)
-//	{
-//		LOCoffset = newOffset;
-//	}
-
-	//huh?
-//	public static double getLOC(double newOffset)
-//	{
-//		return AccountManagerUser.getGlobalLoanCap() + LOCoffset;
-//	}
-
 	
-	// Cap
-	// Loan and LOC Cap
-	
-
-	public void setCap(int newCap)
-	{
-		cap = newCap;
-	}
-	public int getCap()
-	{
-		return this.cap;
-	}
-	public void addToUsedCap(int used)
-	{
-		for (BasicAccount account : accounts.values()){
-			if (account instanceof Loanable){
-				
-			}
-=======
-	
-	//LOC
+	//LOC and Loan
 	private static double LOCinterestOffset;
 	public void setLOCinterestOffset(double newoffset){
 		if(newoffset > 0 || newoffset <1){
@@ -389,7 +329,7 @@ public class BankGlobal {
 		
 	}
 	
-	
+
 	
 private double Loancap;
 //private double usedLoanCap;
@@ -415,6 +355,31 @@ double used=0;
 return used;
 
 }
+private static double interestRateLoan;
+private static double penaltyFeeLoanLC;
+
+public double getInterestRateLoan()
+{
+	return interestRateLoan;
+}
+public void setInterestRateLoan(double newRate)
+{
+	interestRateLoan = newRate;
+}
+public double getPenaltyFeeLoanLC()
+{
+	return penaltyFeeLoanLC;
+}
+void setPenaltyFeeLoan(double newFee)
+{
+	penaltyFeeLoanLC = newFee;
+}
+
+
+public double getLOCinterest(){
+	return getInterestRateLoan()+LOCinterestOffset;
+}
+
 
 }
 
