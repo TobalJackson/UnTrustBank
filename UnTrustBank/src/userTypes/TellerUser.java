@@ -93,16 +93,17 @@ public class TellerUser extends BasicUser {
 	 */
 	public void approveRequests(Request request){
 		//approve request and turn it into a transaction
-		
 		if(request.getRequestType() == Transaction.WITHDRAWAL){
-			if (request.getRequestAmount() < 0){
-				throw new IllegalArgumentException("Requests must be positive!");
-			}
 			if (request.getAccount().getCurrentAccountBalance() - request.getRequestAmount() > 0){
 				Transaction t = new Transaction(request.getRequestAmount() * -1, request.getCustomer(), this, Transaction.WITHDRAWAL);
 				request.getAccount().appendTransaction(t, request.getCustomer());
 				BankGlobal.markRequestProcessed(request);
 			}
+		}
+		else{
+			Transaction t = new Transaction(request.getRequestAmount(), request.getCustomer(), this, Transaction.OTHER);
+			request.getAccount().appendTransaction(t, request.getCustomer());
+			BankGlobal.markRequestProcessed(request);
 		}
 	}
 }

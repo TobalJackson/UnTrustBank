@@ -6,6 +6,7 @@ import java.util.HashMap;
 import dateTime.DateTime;
 import dateTime.Time;
 import accountTypes.BasicAccount;
+import accountTypes.Loanable;
 
 import userTypes.AccountManagerUser;
 import userTypes.BasicUser;
@@ -332,7 +333,9 @@ public class BankGlobal {
 	public void addToUsedCap(int used)
 	{
 		for (BasicAccount account : accounts.values()){
-			if (account instanceof CDAccount)
+			if (account instanceof Loanable){
+				
+			}
 		}
 		usedCap += used;
 	}
