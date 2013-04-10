@@ -11,6 +11,7 @@ import accountTypes.CDAccount;
 import userTypes.AccountManagerUser;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
+import accountTypes.Loanable;
 import userTypes.OperationManagerUser;
 
 public class BankGlobal {
@@ -118,6 +119,23 @@ public class BankGlobal {
 	}
 
 	
+	
+	private static double CDSavingsOffset;
+	public double getCDSavingsOffset(){
+		
+		return CDSavingsOffset;
+	}
+	
+	public void setCDSavingsOffset(double newoffset){
+		if(newoffset > 0 || newoffset <1){
+			CDSavingsOffset=newoffset;
+		}
+		else{
+			throw new IllegalArgumentException("the percent of interest must be between 0 and 1, unless you really want to be an asshole");
+		}
+	}
+	
+	
 	// Savings
 	private double serviceChargeSavings;
 	private double interestRateSavings;
@@ -129,14 +147,16 @@ public class BankGlobal {
 	{
 		this.serviceChargeSavings = newSCS;
 	}
+	
 	public double getInterestRateSavings()
 	{
-		return this.interestRateSavings;
+		return this.interestRateSavings+CDSavingsOffset;
 	}
 	public void setInterestRateSavings(double newIRS)
 	{
 		this.interestRateSavings = newIRS;
 	}
+	
 	
 	//CD
 	private static double minimumBalanceCD;
@@ -153,22 +173,22 @@ public class BankGlobal {
 		switch(duration)
 		{
 		case 0:
-			rate = InterestRateCD6Month;
+			rate = InterestRateCD6Month + CDSavingsOffset;
 			break;
 		case 1:
-			rate = InterestRateCD1Year;
+			rate = InterestRateCD1Year + CDSavingsOffset;
 			break;
 		case 2:
-			rate = InterestRateCD2Year;
+			rate = InterestRateCD2Year + CDSavingsOffset;
 			break;
 		case 3:
-			rate = InterestRateCD3Year;
+			rate = InterestRateCD3Year + CDSavingsOffset;
 			break;
 		case 4:
-			rate = InterestRateCD4Year;
+			rate = InterestRateCD4Year + CDSavingsOffset;
 			break;
 		case 5:
-			rate = InterestRateCD5Year;
+			rate = InterestRateCD5Year + CDSavingsOffset;
 			break;	
 		}
 	return rate;
@@ -307,40 +327,62 @@ public class BankGlobal {
 		this.penaltyFeeLoan = newFee;
 	}
 	
-	// LOC
-	private double LOCoffset;
-	
-	public void setLOCoffset(double newOffset)
-	{
-		LOCoffset = newOffset;
-	}
-	public double getLOC(double newOffset)
-	{
-		return OperationManagerUser.getGlobalInterestRate() + this.LOCoffset;
-	}
+	// LOC - I dont think the this method does anything
+//	private static double LOCoffset;
+//	
+//	public static void setLOCoffset(double newOffset)
+//	{
+//		LOCoffset = newOffset;
+//	}
+
+	//huh?
+//	public static double getLOC(double newOffset)
+//	{
+//		return AccountManagerUser.getGlobalLoanCap() + LOCoffset;
+//	}
 	
 	// Cap
-	private int cap;
-	private int usedCap;
+	// Loan and LOC Cap
 	
-	public void setCap(int newCap)
-	{
-		cap = newCap;
-	}
-	public int getCap()
-	{
-		return this.cap;
-	}
-	public void addToUsedCap(int used)
-	{
-		for (BasicAccount account : accounts.values()){
-			if (account instanceof CDAccount)
+	
+	//LOC
+	private static double LOCinterestOffset;
+	public void setLOCinterestOffset(double newoffset){
+		if(newoffset > 0 || newoffset <1){
+			LOCinterestOffset=newoffset;
 		}
-		usedCap += used;
-	}
-	public int getUsedCap()
-	{
-		return this.usedCap;
+		else{
+			throw new IllegalArgumentException("the percent of interest must be between 0 and 1, unless you really want to be an asshole");
+		}
+		
 	}
 	
+	
+	
+private double Loancap;
+//private double usedLoanCap;
+	
+public void setLoanCap(double newCap)
+{
+		Loancap = newCap;
 }
+
+public double getLoanCap(){
+		return this.Loancap;
+}
+
+	
+public double getUsedLoanCap()
+{
+double used=0;
+	for (BasicAccount account : accounts.values()){
+			if (account instanceof Loanable){
+		used+=((Loanable) account).getLoanCapContribution();
+		}
+	}
+return used;
+
+}
+
+}
+

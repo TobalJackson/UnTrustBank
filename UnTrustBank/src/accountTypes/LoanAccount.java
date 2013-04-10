@@ -5,18 +5,17 @@ import java.util.Iterator;
 import dateTime.DateTime;
 import dateTime.Time;
 import userTypes.CustomerUser;
+import bank.Transaction;
 
-public class LoanAccount extends BasicAccount implements Loanable{
+public class LoanAccount extends BasicAccount implements Loanable {
 double interestrate;
 double minloanmonthlyloanpayment;
 
-	public LoanAccount(CustomerUser owner, int accountID, double maxallowedtospend, double myinterestrate, double myminmontlyloanpayment) {
+public LoanAccount(CustomerUser owner, int accountID,  double myinterestrate, double myminmontlyloanpayment, Transaction initialloan) throws IllegalArgumentException {
 		super(owner, accountID);
 		setMaximumAccountBalance(0);
-		if(maxallowedtospend>0){
-			throw new IllegalArgumentException("cap must be set as negative");
-		}
-		setMinimumAccountBalance(maxallowedtospend);
+		
+
 		if(myinterestrate>1 || myinterestrate <= 0){
 			throw new IllegalArgumentException("interest percentage must be between 0 and 1");
 		}
@@ -25,7 +24,12 @@ double minloanmonthlyloanpayment;
 			throw new IllegalArgumentException("loan payments have to be positive unfortunately");
 		}
 		minloanmonthlyloanpayment=myminmontlyloanpayment;
-		
+		//minaccountbalance here needs to be the amount left on the loan for a BankGlobal
+		//to work properly
+		if(initialloan.getAmount()>=0){
+			throw new IllegalArgumentException("this is a loan, so the intial transaction is negative");
+		}
+		updateCurrentAccountBalance();
 		
 		
 		
@@ -43,8 +47,13 @@ double minloanmonthlyloanpayment;
 	@Override
 	public void respondToTimeChange(DateTime originalTime, DateTime newTime,
 			Time timeDifference){
-		
+		updateCurrentAccountBalance();
 }
+
+	@Override
+	public double getLoanCapContribution() {
+		return accountBalance;
+	}
 	
 	
 	//ok so I need help here - Dania <3
@@ -70,4 +79,3 @@ double minloanmonthlyloanpayment;
 		// TODO Auto-generated method stub
 		
 	}
-}
