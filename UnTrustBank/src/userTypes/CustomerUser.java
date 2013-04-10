@@ -159,18 +159,32 @@ public class CustomerUser extends BasicUser {
 		else throw new IllegalArgumentException("You may not transfer from this account type!");
 	}
 	
+	/**
+	 * Method for a customer to transfer funds from an account they own to another customer's account.
+	 * @param amount - the amount to be transferred. Must be greater than 0.
+	 * @param source - the account to transfer the funds from. Must be an account the customer owns.
+	 * @param destination - the destination account to transfer into.
+	 */
 	public void transferToOtherCustomerAccount(double amount, BasicAccount source, BasicAccount destination){
 		if(amount > 0){
 			if(source.getAccountOwner() == this){
 				if(source instanceof CustomerTransferSource){
 					if(source.getCurrentAccountBalance() - amount > 0){
 						if(destination.getAccountOwner() != this){
-							
+							Transaction withdraw = new Transaction(amount, this, this, Transaction.WITHDRAWAL);
+							source.appendTransaction(withdraw, this);
+							Transaction transfer = new Transaction(amount, destination.getAccountOwner(), this, Transaction.TRANSFER);
+							destination.appendTransaction(transfer, this);
 						}
+						else throw new IllegalArgumentException("This function is for transferring into another user's account!");
 					}
+					else throw new IllegalArgumentException("Insufficient funds!");
 				}
+				else throw new IllegalArgumentException("You may only initiate a transfer from Checking, COD, or Savings account!");
 			}
+			else throw new IllegalArgumentException("You may only transfer from an account you own");
 		}
+		else throw new IllegalArgumentException("Transfer amounts must be positive");
 	}
 	
 	/**
@@ -198,7 +212,7 @@ public class CustomerUser extends BasicUser {
 	 * @param amount - the amount of money to request to withdraw
 	 * @param account - the customer's account to request withdrawing from
 	 */
-	public void requestWithdrawal(double amount, BasicAccount account){//customer can only request withdraw from COD and savings.
+	public void requestWithdrawal(double amount, BasicAccount account) throws IllegalArgumentException{//customer can only request withdraw from COD and savings.
 		if(account instanceof WithdrawRequestable){
 			if(amount > 0){
 				if(account.getAccountOwner() == this){
@@ -227,6 +241,20 @@ public class CustomerUser extends BasicUser {
 	 */
 	public void addCustomerAccount(BasicAccount account){
 		customerAccounts.add(account);
+	}
+	
+	/**
+	 * Method to return a list of a customer's closed accounts.
+	 * @return <b>ArrayList<BasicAccount></b> - an arraylist of the customer's closed accounts.
+	 */
+	public ArrayList<BasicAccount> getClosedAccounts(){
+		ArrayList<BasicAccount> results = new ArrayList<BasicAccount>();
+		for(BasicAccount a : customerAccounts){
+			if(!a.getIsActiveAccount()){
+				results.add(a);
+			}
+		}
+		return results;
 	}
 	
 	/**
