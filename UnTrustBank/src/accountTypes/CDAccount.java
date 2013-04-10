@@ -136,19 +136,11 @@ public void respondToTimeChange(DateTime originalTime, DateTime newTime,
 
 
 
-@Override
-public void requestWithdrawal(double amount) {
-	// TODO Auto-generated method stub
-	
-}
 
 
 
-@Override
-public Transaction customerTransferWithdrawal(double amount) {
-	// TODO Auto-generated method stub
-	return null;
-}
+
+
 }
 	
 	
