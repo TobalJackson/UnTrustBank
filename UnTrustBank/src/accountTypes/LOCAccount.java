@@ -2,12 +2,17 @@ package accountTypes;
 
 import java.util.Iterator;
 
+import bank.Transaction;
+
 import dateTime.DateTime;
 import dateTime.Time;
+import userTypes.BasicUser;
 import userTypes.CustomerUser;
 
 public class LOCAccount extends BasicAccount implements Loanable{
+	private double thismonthspaid;
 
+	
 	public LOCAccount(CustomerUser owner, int accountID, double maxallowedtospend) {
 		super(owner, accountID);
 
@@ -16,10 +21,33 @@ public class LOCAccount extends BasicAccount implements Loanable{
 	}
 	setMinimumAccountBalance(maxallowedtospend);
 	setMaximumAccountBalance(0);
-	
+	thismonthspaid=0;
 	
 	
 	}
+	
+	@Override
+public void appendTransaction(Transaction transaction, BasicUser initiator){
+		
+		//Withdrawals
+		if(transaction.getAmount()<0 && (transaction.getAmount() + getCurrentAccountBalance()) > getMinimumAccountBalance() ){
+			throw new IllegalArgumentException("Hey! You can't go past your LOC Limit");
+			
+		}
+		
+		
+		//Deposits
+		
+		if((transaction.getAmount()+getCurrentAccountBalance())>0){
+			throw new IllegalArgumentException("This deposit would cause the account balance to go over 0.");
+		}
+		transactionList.add(transaction);
+		thismonthspaid+=transaction.getAmount();
+		
+	}
+	
+	
+	
 // initial transaction.....?
 	// Nevermind, BankGlobal stuff doesn't change how stuff should work here. - Michael
 

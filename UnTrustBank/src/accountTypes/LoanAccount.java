@@ -4,12 +4,14 @@ import java.util.Iterator;
 
 import dateTime.DateTime;
 import dateTime.Time;
+import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import bank.Transaction;
 
 public class LoanAccount extends BasicAccount implements Loanable {
-double interestrate;
-double minloanmonthlyloanpayment;
+private double interestrate;
+private double minloanmonthlyloanpayment;
+private double thismonthspaid;
 
 public LoanAccount(CustomerUser owner, int accountID,  double myinterestrate, double myminmontlyloanpayment, Transaction initialloan) throws IllegalArgumentException {
 		super(owner, accountID);
@@ -30,13 +32,27 @@ public LoanAccount(CustomerUser owner, int accountID,  double myinterestrate, do
 			throw new IllegalArgumentException("this is a loan, so the intial transaction is negative");
 		}
 		updateCurrentAccountBalance();
-		
+		thismonthspaid=0;
 		
 		
 		
 		// TODO Auto-generated constructor stub
 	}
 //must have one negative transaction in constructor 
+
+@Override
+public void appendTransaction(Transaction transaction, BasicUser initiator){
+	if(transaction.getAmount()<0){
+		throw new IllegalArgumentException("You already got a loan! No more money for you!");
+		
+	}
+	if((transaction.getAmount()+getCurrentAccountBalance())>0){
+		throw new IllegalArgumentException("This deposit would cause the account balance to go over 0.");
+	}
+	transactionList.add(transaction);
+	thismonthspaid+=transaction.getAmount();
+	
+}
 
 	@Override
 	public Iterator<BasicAccount> iterator() {
