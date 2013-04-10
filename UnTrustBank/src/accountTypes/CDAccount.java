@@ -16,7 +16,7 @@ private DateTime maturitydate;
 
 
 public CDAccount(CustomerUser owner, int accountID,
-			Transaction mytransaction, int myCDDuration, double minaccountbalance) {
+			Transaction mytransaction, int myCDDuration, double minaccountbalance) throws IllegalArgumentException {
 			super(owner, accountID);
 			if(myCDDuration>5 || myCDDuration <0){
 				throw new IllegalArgumentException();
@@ -74,10 +74,12 @@ public CDAccount(CustomerUser owner, int accountID,
 				Time timetomature5 = new Time(1862,0,0,0);
 				maturitydate = accountCreatedOn.add(timetomature5) ;
 			}
+			
 			setMinimumAccountBalance(BankGlobal.getminiumumBalanceCD());
 			updateCurrentAccountBalance();
+}
 		// TODO Auto-generated constructor stub
-	}
+
 
 
 @Override
@@ -130,6 +132,22 @@ public int getCDDuration(){
 public void respondToTimeChange(DateTime originalTime, DateTime newTime,
 		Time timeDifference) {
 
+}
+
+
+
+@Override
+public void requestWithdrawal(double amount) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+@Override
+public Transaction customerTransferWithdrawal(double amount) {
+	// TODO Auto-generated method stub
+	return null;
 }
 }
 	
