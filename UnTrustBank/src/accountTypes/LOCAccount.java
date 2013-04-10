@@ -15,24 +15,9 @@ public class LOCAccount extends BasicAccount implements Loanable{
 		throw new IllegalArgumentException("cap must be set as negative");
 	}
 	setMinimumAccountBalance(maxallowedtospend);
-	setMaximumAccountBalance(0);
-	
-	
-	
+	setMaximumAccountBalance(0);	
 	}
-// initial transaction.....?
-	// Nevermind, BankGlobal stuff doesn't change how stuff should work here. - Michael
-<<<<<<< HEAD
-	private double locCap;
-	public double getLOCCap()
-	{
-		return this.locCap;
-	}
-	public void setLOCCap(double newLOCCap)
-	{
-		this.locCap = newLOCCap;
-	}
-=======
+
 
 	@Override
 	public Iterator<BasicAccount> iterator() {
@@ -52,8 +37,4 @@ public class LOCAccount extends BasicAccount implements Loanable{
 		
 	}
 
-
-	
-	
->>>>>>> branch 'master' of https://github.com/TobalJackson/UnTrustBank.git
 }

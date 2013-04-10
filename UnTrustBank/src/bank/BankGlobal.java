@@ -352,7 +352,7 @@ public class BankGlobal {
 			LOCinterestOffset=newoffset;
 		}
 		else{
-			throw new IllegalArgumentException("the percent of interest must be between 0 and 1, unless you really want to be an asshole");
+			throw new IllegalArgumentException("the percent of interest must be between 0 and 1, unless you really want to be a cocky asshole");
 		}
 		
 	}

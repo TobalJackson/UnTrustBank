@@ -22,10 +22,10 @@ public class AccountManagerUser {
 	
 	public void getLOCCap(LOCAccount a)
 	{
-		a.getLOCCap();
+		a.getMinimumAccountBalance();
 	}
 	public void setLOCCap(LOCAccount a, double newCap)
 	{
-		a.setLOCCap(newCap);
+		a.setMinimumAccountBalance(newCap);
 	}
 }
