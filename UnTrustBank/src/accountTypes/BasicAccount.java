@@ -201,6 +201,9 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		return this.owner;
 	}
 	
+	public int getAccountID(){
+		return accountID;
+	}
 	public boolean getIsActiveAccount(){
 		return isActiveAccount;
 	}
