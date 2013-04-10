@@ -39,7 +39,8 @@ public class Transaction {
 	 */
 	private long transactionID;
 	private int transactiontype;
-	public static final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4, SERVICE_CHARGE = 5, TRANSFER = 6;
+	public static final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4, SERVICE_CHARGE = 5, TRANSFER = 6; 
+	//LOC - dropping under certain limit is service charge in the context, the late charge is a penalty
 	
 	public Transaction(double amount, CustomerUser customer, BasicUser initiator, int transtype){
 		transactiontype=transtype; //0=withdrawal, 1=deposit, 2=interest, 3=penalty, 4=other, 5=service charge
