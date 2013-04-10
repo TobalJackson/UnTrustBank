@@ -5,4 +5,4 @@ Request Depositable by Customer											yes				yes		yes		yes		yes
 Request Withdrawable by Customer										yes//changed	yes		no		no		yes
 Transfer from this account type to other own accounts by Customer		yes				yes		no		no		yes
 Transfer to this account type from other own accounts by Customer		yes				yes		yes		yes		yes
-Depositable By Other Customer's transfer								yes				no		no		no		yes//changed
+Request Depositable By Other Customer's transfer						yes				no		no		no		yes//changed

@@ -240,10 +240,10 @@ Users:
 		+transferBetweenOwnAccounts(double, CheckingAccount, CheckingAccount):void 
 		+requestDeposit(double, WithdrawRequestable):void
 		+requestWithdrawal(double, WithdrawRequestable):void
-		+withdrawFromDirectable(withdrawDirectable):void
-		+deposit(withdrawDirectable):void
+		//+withdrawFromDirectable(withdrawDirectable):void
+		//+deposit(withdrawDirectable):void
 		+isCustomerActive():boolean
-		+transferFunds(Withdrawable, Account):void
+		//+transferFunds(Withdrawable, Account):void
 		+getClosedAccounts(): ArrayList<Account>
 	
 	Teller extends BasicUser

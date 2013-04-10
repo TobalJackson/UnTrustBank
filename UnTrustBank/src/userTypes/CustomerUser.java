@@ -143,8 +143,8 @@ public class CustomerUser extends BasicUser {
 				if(destination.getAccountOwner() == this){
 					if(!(source == destination)){
 						if(amount > 0){
-							((CustomerTransferSource)source).customerTransferWithdrawal(amount);
-							//source.appendTransaction(withdraw, this); //handled by the customerTransferWithdrawal method
+							Transaction withdraw = new Transaction(amount, source.getAccountOwner(), source.getAccountOwner(), Transaction.WITHDRAWAL);
+							source.appendTransaction(withdraw, this); 
 							Transaction deposit = new Transaction(amount, source.getAccountOwner(), source.getAccountOwner(), Transaction.TRANSFER);
 							destination.appendTransaction(deposit, this);
 						}
@@ -157,6 +157,20 @@ public class CustomerUser extends BasicUser {
 			else throw new IllegalArgumentException("You must own the account you're transferring from!");
 		}
 		else throw new IllegalArgumentException("You may not transfer from this account type!");
+	}
+	
+	public void transferToOtherCustomerAccount(double amount, BasicAccount source, BasicAccount destination){
+		if(amount > 0){
+			if(source.getAccountOwner() == this){
+				if(source instanceof CustomerTransferSource){
+					if(source.getCurrentAccountBalance() - amount > 0){
+						if(destination.getAccountOwner() != this){
+							
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	/**
@@ -179,7 +193,11 @@ public class CustomerUser extends BasicUser {
 		else throw new IllegalArgumentException("Deposits must be positive");
 	}
 	
-	
+	/**
+	 * CustomerUser may request a withdrawal from a COD or Savings account they own.  The request amount should be positive.  The request will be sent to the account's pending requests, and a teller may approve it.
+	 * @param amount - the amount of money to request to withdraw
+	 * @param account - the customer's account to request withdrawing from
+	 */
 	public void requestWithdrawal(double amount, BasicAccount account){//customer can only request withdraw from COD and savings.
 		if(account instanceof WithdrawRequestable){
 			if(amount > 0){
@@ -187,8 +205,19 @@ public class CustomerUser extends BasicUser {
 					Request r = new Request(account, amount, this, Transaction.WITHDRAWAL);
 					account.addRequest(r);
 				}
+				else throw new IllegalArgumentException("You may only request a withdrawal from an account you own");
 			}
+			else throw new IllegalArgumentException("Request amount must be positive!");
 		}
+		else throw new IllegalArgumentException("You may only withdraw from COD and Savings accounts");
+	}
+	
+	/**
+	 * Method to retrieve the customer's active status.
+	 * @return <b>boolean</b> -returns true if the customer is an active one, othewise false.
+	 */
+	public boolean isCustomerActive(){
+		return this.isActiveCustomer;
 	}
 	
 	/**
