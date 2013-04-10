@@ -1,7 +1,6 @@
 package userTypes;
 
-import accountTypes.BasicAccount;
-import accountTypes.LOCAccount;
+import accountTypes.*;
 import bank.BankGlobal;
 import dateTime.DateTime;
 import java.util.Scanner;
@@ -62,10 +61,57 @@ public class AccountManagerUser {
 		
 		
 		CustomerUser c = new CustomerUser(firstName, middleName, lastName, isMale, dob, ssn, password2, username, userID);
+		openNewCustomerAccount(c);
+		input.close();
 	}
 	public void openNewCustomerAccount(CustomerUser c)
 	{
-		
+		Scanner input = new Scanner(System.in);
+		System.out.println("What kind of account will " + c.getFirstName() + " have?\n1. Checking\n2. Savings\n3. Line of Credit\n4. Loan\n5. Certificate of Deposit\n(Enter [1-5]: ");
+		int choice = input.nextInt();
+		switch (choice){
+		case 1: setupCheckingAccount(c);
+		break;
+		case 2: setupSavingsAccount(c);
+		break;
+		case 3: setupLOCAccount(c);
+		break;
+		case 4: setupLoanAccount(c);
+		break;
+		case 5: setupCDAccount(c);
+		break;		
+		}	
+		input.close();
+	}
+	public void setupCheckingAccount(CustomerUser c){
+		CheckingAccount a = new CheckingAccount(c, BankGlobal.getNewAccountID());
+		System.out.println("Checking account " + a.getAccountID() + " created successfully.");
+	}
+	
+	public void setupSavingsAccount(CustomerUser c){
+		SavingsAccount a = new SavingsAccount(c, BankGlobal.getNewAccountID());
+		System.out.println("Savings account " + a.getAccountID() + " created successfully.");
+	}
+	
+	public void setupLOCAccount(CustomerUser c){
+		Scanner input = new Scanner(System.in);
+		System.out.println("What will be the LOCAccount's cap?\n");
+		double amount = input.nextDouble();
+		LOCAccount a = new LOCAccount(c, BankGlobal.getNewAccountID(), amount);
+		System.out.println("LOCAccount " + a.getAccountID() + " created successfully.");
+		input.close();
+	}
+	
+	public void setupLoanAccount(CustomerUser c){
+		LoanAccount a = new LoanAccount(c, BankGlobal.getNewAccountID(), interest, minPayment,)//need to change Loan account constructor, make initial loan an amount, construct transaction within constructor.
+	}
+	
+	public void setupCDAccount(CustomerUser c){
+		CDAccount a = new CDAccount(c, BankGlobal.getNewAccountID(), )// do same for CDAccount.
+	}
+	
+	public void setAccountLOCCap(LOCAccount account, double cap){
+		account.setMinimumAccountBalance(cap);
 	}
 	public void closeAccount(CustomerUser c , BasicAccount a)
 	{
@@ -75,9 +121,5 @@ public class AccountManagerUser {
 	public void getLOCCap(LOCAccount a)
 	{
 		a.getMinimumAccountBalance();
-	}
-	public void setLOCCap(LOCAccount a, double newCap)
-	{
-		a.setMinimumAccountBalance(newCap);
 	}
 }
