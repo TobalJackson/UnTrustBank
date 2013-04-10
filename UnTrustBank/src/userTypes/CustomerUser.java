@@ -26,7 +26,10 @@ public class CustomerUser extends BasicUser {
 	private boolean isActiveCustomer;
 	private int SSN;
 	
-	
+	public ArrayList<BasicAccount> getCustomerAccountsList()
+	{
+		return customerAccounts;
+	}
 	
 	public CustomerUser(String firstName, String middleName, String lastName, boolean isMale,
 			DateTime dob,int ssn, char[] password, String username, int userID){
@@ -37,6 +40,11 @@ public class CustomerUser extends BasicUser {
 	public CustomerUser(){
 		super();
 		BankGlobal.appendToGlobalCustomerList(this);
+	}
+	
+	public int getCustomerSSN()
+	{
+		return this.SSN;
 	}
 	
 	/**

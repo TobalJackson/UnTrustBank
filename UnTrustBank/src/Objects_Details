@@ -260,10 +260,10 @@ Users:
 	
 	AccountManager extends BasicUser
 		
-		+getCustomerSSN(Customer):int
-		+openAccount(Customer, BasicAccount):void
-		+closeAccount(Account):void
-		+setLOCCap(Account, double):void
+		+getCustomerSSN(CustomerUser):int
+		+openAccount(CustomerUser, BasicAccount):void
+		+closeAccount(CustomerUser, BasicAccount):void
+		+setLOCCap(BasicAccount, double):void
 		+getGlobalLoanCap():double
 	
 	Accountant extends BasicUser

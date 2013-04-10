@@ -6,11 +6,13 @@ import java.util.HashMap;
 import dateTime.DateTime;
 import dateTime.Time;
 import accountTypes.BasicAccount;
+import accountTypes.CDAccount;
 
 import userTypes.AccountManagerUser;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import accountTypes.Loanable;
+import userTypes.OperationManagerUser;
 
 public class BankGlobal {
 	
