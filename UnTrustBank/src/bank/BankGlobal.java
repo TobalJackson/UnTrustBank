@@ -98,25 +98,25 @@ public class BankGlobal {
 		return currentCustomerID;
 		
 	}
-	public static long getCurrentCustomerID(){
+	public static int getCurrentCustomerID(){
 		return currentCustomerID;
 	}
 	
-	public static long getNewTransactionID(){
+	public static int getNewTransactionID(){
 		currentTransactionID++;
 		return currentTransactionID;
 		
 	}
-	public static long getCurrentTransactionID(){
+	public static int getCurrentTransactionID(){
 		return currentTransactionID;
 	}
 	
-	public static long getNewAccountID(){
+	public static int getNewAccountID(){
 		currentAccountID++;
 		return currentAccountID;
 		
 	}
-	public static long getCurrentAccountID(){
+	public static int getCurrentAccountID(){
 		return currentAccountID;
 	}
 
