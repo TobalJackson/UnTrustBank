@@ -20,7 +20,7 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected boolean isActiveAccount;
 	protected CustomerUser owner;
 	protected double accountBalance; 
-	protected int accountID; //acountID is based on other existant accounts, therefore should be generated rather than specified
+	protected int accountID; //acountID is based on other existent accounts, therefore should be generated rather than specified
 	protected DateTime accountCreatedOn;
 	protected boolean isEmployeesAccount;
 	protected double accruedInterest;

@@ -19,10 +19,7 @@ public class AccountManagerUser {
 		c.getCustomerAccountsList().remove(a);
 	}
 	public void setLOCCap(BasicAccount a, double newCap)
-	{}
-	private static double interestRate;
-	public static double getGlobalLoanCap()
 	{
-		return interestRate;
+		
 	}
 }

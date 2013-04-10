@@ -6,10 +6,12 @@ import java.util.HashMap;
 import dateTime.DateTime;
 import dateTime.Time;
 import accountTypes.BasicAccount;
+import accountTypes.CDAccount;
 
 import userTypes.AccountManagerUser;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
+import userTypes.OperationManagerUser;
 
 public class BankGlobal {
 	
@@ -306,15 +308,15 @@ public class BankGlobal {
 	}
 	
 	// LOC
-	private static double LOCoffset;
+	private double LOCoffset;
 	
-	public static void setLOCoffset(double newOffset)
+	public void setLOCoffset(double newOffset)
 	{
 		LOCoffset = newOffset;
 	}
-	public static double getLOC(double newOffset)
+	public double getLOC(double newOffset)
 	{
-		return AccountManagerUser.getGlobalLoanCap() + LOCoffset;
+		return OperationManagerUser.getGlobalInterestRate() + this.LOCoffset;
 	}
 	
 	// Cap
