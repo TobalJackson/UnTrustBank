@@ -4,10 +4,16 @@ import java.util.Iterator;
 
 import dateTime.DateTime;
 import dateTime.Time;
+import userTypes.CustomerUser;
 import bank.Request;
 import bank.Transaction;
 
-public class SavingsAccount extends BasicAccount implements CustomerTransferSource, WithdrawRequestable, OtherCustomerDepositable{
+public class SavingsAccount extends BasicAccount implements CustomerTransferSource, WithdrawRequestable{
+	public SavingsAccount(CustomerUser owner, int accountID) {
+		super(owner, accountID);
+		// TODO Auto-generated constructor stub
+	}
+
 	public void requestWithdrawal(double amount){
 		if (this.getCurrentAccountBalance() - amount > 0){
 			Request r = new Request(this, amount, this.getAccountOwner(), Transaction.WITHDRAWAL);

@@ -75,6 +75,6 @@ public class CheckingAccount extends BasicAccount implements CustomerTransferSou
 	}
 
 	public void changeBalance(double amount){
-		this.
+	
 	}
 }
