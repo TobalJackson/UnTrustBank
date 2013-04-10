@@ -14,11 +14,6 @@ public class SavingsAccount extends BasicAccount implements CustomerTransferSour
 		// TODO Auto-generated constructor stub
 	}
 
-	public void requestWithdrawal(double amount){
-		if (this.getCurrentAccountBalance() - amount > 0){
-			Request r = new Request(this, amount, this.getAccountOwner(), Transaction.WITHDRAWAL);
-		}
-	}
 //intitial positive transaction required in constructor
 
 	@Override

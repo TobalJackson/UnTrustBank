@@ -31,18 +31,18 @@ public class CheckingAccount extends BasicAccount implements CustomerTransferSou
 	updateCurrentAccountBalance();
 }
 	
-	/**
-	 * Method  to construct a new transaction for Transfer.
-	 * @return <b>Transaction</b> - returns a Transaction representing the amount to be withdrawn for the Transfer.
-	 */
-	public Transaction customerTransferWithdrawal(double amount){
-		if (this.getCurrentAccountBalance() - amount > 0){
-			Transaction withdraw = new Transaction(amount * -1, this.getAccountOwner(), this.getAccountOwner(), Transaction.TRANSFER);
-			this.appendTransaction(withdraw, this.getAccountOwner());
-			return withdraw;
-		}
-		else throw new IllegalArgumentException("Insufficient funds");
-	}
+//	/**
+//	 * Method  to construct a new transaction for Transfer.
+//	 * @return <b>Transaction</b> - returns a Transaction representing the amount to be withdrawn for the Transfer.
+//	 */
+//	public Transaction customerTransferWithdrawal(double amount){
+//		if (this.getCurrentAccountBalance() - amount > 0){
+//			Transaction withdraw = new Transaction(amount * -1, this.getAccountOwner(), this.getAccountOwner(), Transaction.TRANSFER);
+//			this.appendTransaction(withdraw, this.getAccountOwner());
+//			return withdraw;
+//		}
+//		else throw new IllegalArgumentException("Insufficient funds");
+//	} //removed due to customerUser implementation
 	public void applyUnderLimitServiceCharge(BasicUser initiator){
 		if(BankGlobal.getunderlimitfeecheckingboolean()){
 			if(this.accountBalance<BankGlobal.getServiceChargeLimitChecking()){
