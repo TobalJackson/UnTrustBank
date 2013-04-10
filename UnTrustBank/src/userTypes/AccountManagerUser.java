@@ -1,6 +1,7 @@
 package userTypes;
 
 import accountTypes.BasicAccount;
+import accountTypes.LOCAccount;
 
 public class AccountManagerUser {
 // LOC account interest rate is an offset from a global interest rate defined by the operations manager.
@@ -18,8 +19,13 @@ public class AccountManagerUser {
 	{
 		c.getCustomerAccountsList().remove(a);
 	}
-	public void setLOCCap(BasicAccount a, double newCap)
+	
+	public void getLOCCap(LOCAccount a)
 	{
-		
+		a.getLOCCap();
+	}
+	public void setLOCCap(LOCAccount a, double newCap)
+	{
+		a.setLOCCap(newCap);
 	}
 }
