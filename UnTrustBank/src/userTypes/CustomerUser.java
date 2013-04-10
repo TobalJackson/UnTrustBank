@@ -8,8 +8,10 @@ import accountTypes.LOCAccount;
 import accountTypes.LoanAccount;
 import accountTypes.CDAccount;
 import accountTypes.CheckingAccount;
+import accountTypes.OtherCustomerDepositable;
 import accountTypes.SavingsAccount;
 import accountTypes.ServiceChargeable;
+import accountTypes.WithdrawRequestable;
 import bank.BankGlobal;
 import bank.Request;
 import bank.Transaction;
@@ -162,17 +164,31 @@ public class CustomerUser extends BasicUser {
 	 * @param amount - the amount of the deposit request.
 	 * @param account - the account being deposited into.
 	 */
-	public void requestDeposit(double amount, BasicAccount account){//any account is eligible to request a deposit into
+	public void requestDeposit(double amount, BasicAccount account){
 		if (amount > 0){
-			if (account.getAccountOwner() == this){
+			if (account.getAccountOwner() == this){//any account belonging to the customer is eligible to request a deposit into.
 				Request r = new Request(account, amount, account.getAccountOwner(), Request.DEPOSIT);
 				account.addRequest(r);
 			}
+			else if(account instanceof OtherCustomerDepositable){//otherwise only checking and savings account can be deposited into.
+				Request r = new Request(account, amount, this, Request.DEPOSIT);
+				account.addRequest(r);
+			}
+			else throw new IllegalArgumentException("Deposits can only be made into own accounts, or Checking and Savings account of other users");
 		}
+		else throw new IllegalArgumentException("Deposits must be positive");
 	}
 	
+	
 	public void requestWithdrawal(double amount, BasicAccount account){//customer can only request withdraw from COD and savings.
-		
+		if(account instanceof WithdrawRequestable){
+			if(amount > 0){
+				if(account.getAccountOwner() == this){
+					Request r = new Request(account, amount, this, Transaction.WITHDRAWAL);
+					account.addRequest(r);
+				}
+			}
+		}
 	}
 	
 	/**

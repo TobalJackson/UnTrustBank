@@ -10,7 +10,7 @@ import bank.Transaction;
 import dateTime.DateTime;
 import dateTime.Time;
 
-public class CheckingAccount extends BasicAccount implements CustomerTransferSource {
+public class CheckingAccount extends BasicAccount implements CustomerTransferSource, OtherCustomerDepositable {
 
 	public CheckingAccount(CustomerUser owner, int accountID) {
 					

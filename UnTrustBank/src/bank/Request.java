@@ -21,13 +21,18 @@ public class Request {
 
 
 	
-	public Request(BasicAccount accountRequest, double requestAmount, CustomerUser customerRequestor, int requestType){
-		this.timeStamp = new DateTime();
-		this.accountRequest=accountRequest;
-		this.requestAmount=requestAmount;
-		this.customerRequestor=customerRequestor;
-		this.requestType=requestType;
-		BankGlobal.appendToGlobalRequestList(this);
+	public Request(BasicAccount accountRequest, double requestAmount, CustomerUser customerRequestor, int requestType) throws IllegalArgumentException{
+		if (requestAmount < 0){
+			throw new IllegalArgumentException("Requests must be positive!");
+		}
+		else{
+			this.timeStamp = new DateTime();
+			this.accountRequest=accountRequest;
+			this.requestAmount=requestAmount;
+			this.customerRequestor=customerRequestor;
+			this.requestType=requestType;
+			BankGlobal.appendToGlobalRequestList(this);
+		}
 	}
 	
 	public double getRequestAmount(){
