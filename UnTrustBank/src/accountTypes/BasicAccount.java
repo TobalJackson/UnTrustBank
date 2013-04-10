@@ -20,7 +20,7 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected boolean isActiveAccount;
 	protected CustomerUser owner;
 	protected double accountBalance; 
-	protected int accountID; //acountID is based on other existant accounts, therefore should be generated rather than specified
+	protected int accountID; //acountID is based on other existent accounts, therefore should be generated rather than specified
 	protected DateTime accountCreatedOn;
 	protected boolean isEmployeesAccount;
 	protected double accruedInterest;
@@ -30,10 +30,12 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected int numWithdrawals;
 	protected int numDeposits;
 	protected boolean hasTellerCharge;
+	
 	public BasicAccount(CustomerUser owner, int accountID){ //default constructor only accepts Customer and account ID
 		this.owner = owner;
 		owner.addCustomerAccount(this); //adds the account to the Customer's list of accounts.
 		this.accountID = accountID;
+		
 		
 		this.isActiveAccount = true;
 		this.accountCreatedOn = new DateTime(); //new DateTime() constructor specifies the time as now

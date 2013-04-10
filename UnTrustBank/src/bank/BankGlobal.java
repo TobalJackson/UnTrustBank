@@ -7,10 +7,12 @@ import dateTime.DateTime;
 import dateTime.Time;
 import accountTypes.BasicAccount;
 import accountTypes.Loanable;
+import accountTypes.CDAccount;
 
 import userTypes.AccountManagerUser;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
+import userTypes.OperationManagerUser;
 
 public class BankGlobal {
 	
