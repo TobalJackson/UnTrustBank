@@ -70,16 +70,21 @@ public class AccountManagerUser {
 		System.out.println("What kind of account will " + c.getFirstName() + " have?\n1. Checking\n2. Savings\n3. Line of Credit\n4. Loan\n5. Certificate of Deposit\n(Enter [1-5]: ");
 		int choice = input.nextInt();
 		switch (choice){
-		case 1: setupCheckingAccount(c);
-		break;
-		case 2: setupSavingsAccount(c);
-		break;
-		case 3: setupLOCAccount(c);
-		break;
-		case 4: setupLoanAccount(c);
-		break;
-		case 5: setupCDAccount(c);
-		break;		
+		case 1: 
+			setupCheckingAccount(c);
+			break;
+		case 2: 
+			setupSavingsAccount(c);
+			break;
+		case 3: 
+			setupLOCAccount(c);
+			break;
+		case 4: 
+			setupLoanAccount(c);
+			break;
+		case 5: 
+			setupCDAccount(c);
+			break;		
 		}	
 		input.close();
 	}
