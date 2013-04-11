@@ -64,6 +64,11 @@ public class Transaction {
 		this.transactionID = BankGlobal.getNewTransactionID();
 	}
 	
+	public long getTransactionID(){
+		long id=transactionID;
+		return id;
+	}
+	
 	/**
 	 * This method is called on a transaction individually.
 	 * @return <b>double</b> - The amount of money the transaction represents.

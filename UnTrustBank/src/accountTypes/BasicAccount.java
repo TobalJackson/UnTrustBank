@@ -14,6 +14,7 @@ import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import userTypes.OperationManagerUser;
 import dateTime.DateTime;
+import userTypes.AuditorUser;
 
 public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected ArrayList<Transaction> transactionList;
@@ -168,7 +169,7 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	public void flagFraudulentTransaction(Transaction t){
 		t.setIsFlaggedFraudulent();
 	}
-	public void unflagFraudulentTransaction(Transaction t){
+	public void unflagFraudulentTransaction(Transaction t, AuditorUser AM){
 		t.setIsNotFlaggedFraudulent();
 	}
 	

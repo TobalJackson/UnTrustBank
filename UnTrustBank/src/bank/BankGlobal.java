@@ -15,6 +15,7 @@ import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import accountTypes.Loanable;
 import userTypes.OperationManagerUser;
+import bank.Transaction;
 
 public class BankGlobal {
 	
@@ -177,6 +178,16 @@ public class BankGlobal {
 		
 	}
 	
+	
+	public static Transaction findTransactionfromID(long ID){
+				for (Transaction t : transactions.values()){
+					if (t.getTransactionID()==ID){
+						return t;
+					}
+				}
+					return null;
+			
+	}
 	
 	//CD -this is good
 	private static double minimumBalanceCD;
