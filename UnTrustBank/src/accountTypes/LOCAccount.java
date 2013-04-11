@@ -31,10 +31,13 @@ public class LOCAccount extends BasicAccount implements Loanable{
 	@Override
 public void appendTransaction(Transaction transaction, BasicUser initiator){
 		
-		//Withdrawals
+		//Withdrawals - Errors, cant go over limit, unless with penalty
 		if(transaction.getAmount()<0 && (transaction.getAmount() + getCurrentAccountBalance()) > getMinimumAccountBalance() ){
+			if(!(transaction.getTransactionType()==5)){
 			throw new IllegalArgumentException("Hey! You can't go past your LOC Limit");
-			
+			}
+			else{	
+			transactionList.add(transaction);} //this must be a penatly
 		}
 		
 		
@@ -43,9 +46,14 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 		if((transaction.getAmount()+getCurrentAccountBalance())>0){
 			throw new IllegalArgumentException("This deposit would cause the account balance to go over 0.");
 		}
+		
 		transactionList.add(transaction);
 		thismonthspaid+=transaction.getAmount();
 		
+		
+		
+		updateCurrentAccountBalance();
+			
 	}
 	
 	
