@@ -8,6 +8,7 @@ import dateTime.DateTime;
 import dateTime.Time;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
+import userTypes.OperationManagerUser;
 
 public class LOCAccount extends BasicAccount implements Loanable{
 	private double thismonthspaid;
@@ -73,9 +74,11 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 	}
 
 	@Override
-	public void respondToTimeChange(DateTime originalTime, DateTime newTime,
-			Time timeDifference) {
+	public void respondToTimeChange(OperationManagerUser OM) {
+		//calc interest
+		//check for penalties
 		// TODO Auto-generated method stub
+		updateCurrentAccountBalance();
 		
 	}
 

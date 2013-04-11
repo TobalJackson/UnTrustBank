@@ -6,6 +6,7 @@ import dateTime.DateTime;
 import dateTime.Time;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
+import userTypes.OperationManagerUser;
 import bank.Transaction;
 
 public class LoanAccount extends BasicAccount implements Loanable {
@@ -61,8 +62,7 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 	}
 
 	@Override
-	public void respondToTimeChange(DateTime originalTime, DateTime newTime,
-			Time timeDifference){
+	public void respondToTimeChange(OperationManagerUser OM){
 		updateCurrentAccountBalance();
 }
 

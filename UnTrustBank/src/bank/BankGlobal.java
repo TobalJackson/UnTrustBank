@@ -23,7 +23,7 @@ public class BankGlobal {
 	private static HashMap<Integer, BasicUser> employees = new HashMap<Integer, BasicUser>();
 	private static HashMap<Integer, Transaction> transactions = new HashMap<Integer, Transaction>();
 	private static HashMap<Integer, Request> requests = new HashMap<Integer, Request>();
-	public static DateTime banktime = new DateTime();
+	public static DateTime banktime = new DateTime(1);
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
 	//Yes, but we may need to break up the bank global object to be less cumbersome, divide up the
 	//different control systems for bank.
@@ -244,16 +244,16 @@ public class BankGlobal {
 	}
 	
 	//look this over, people
-	public static void causeTimeChange(Time mytime){
+	public static void causeTimeChange(OperationManagerUser OperationManagerCausingTimeChange){
 		
-		DateTime newbanktime=banktime.add(mytime);
+		banktime.JumpAMonth();
 			//loop thru all accounts and call respondToTimeChange
 		
 		for (BasicAccount b: accounts.values())
 		{
-			b.respondToTimeChange(banktime, newbanktime, mytime);
+			b.respondToTimeChange(OperationManagerCausingTimeChange);
 		}
-		banktime = newbanktime;
+	
 	}
 	
 	public static DateTime getBankTime(){

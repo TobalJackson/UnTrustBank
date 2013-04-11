@@ -108,11 +108,11 @@ public class AccountManagerUser {
 	}
 	
 	public void setupLoanAccount(CustomerUser c){
-		LoanAccount a = new LoanAccount(c, BankGlobal.getNewAccountID(), interest, minPayment,)//need to change Loan account constructor, make initial loan an amount, construct transaction within constructor.
+		//LoanAccount a = new LoanAccount(c, BankGlobal.getNewAccountID(), interest, minPayment,)//need to change Loan account constructor, make initial loan an amount, construct transaction within constructor.
 	}
 	
 	public void setupCDAccount(CustomerUser c){
-		CDAccount a = new CDAccount(c, BankGlobal.getNewAccountID(), )// do same for CDAccount.
+		//CDAccount a = new CDAccount(c, BankGlobal.getNewAccountID(), )// do same for CDAccount.
 	}
 	
 	public void setAccountLOCCap(LOCAccount account, double cap){

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import bank.Request;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
+import userTypes.OperationManagerUser;
 import dateTime.DateTime;
 
 public abstract class BasicAccount implements Iterable<BasicAccount>{
@@ -39,7 +40,7 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		
 		
 		this.isActiveAccount = true;
-		this.accountCreatedOn = new DateTime(); //new DateTime() constructor specifies the time as now
+		this.accountCreatedOn = new DateTime(1); //new DateTime() constructor specifies the time as now
 		this.isEmployeesAccount = owner.getIsEmployee(); //accounts are not employee accounts by default
 		this.accruedInterest = 0;
 		//this.transactionList.add(mytransaction);
@@ -47,7 +48,7 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	}
 	
 
-	public abstract void respondToTimeChange(DateTime originalTime, DateTime newTime, Time timeDifference);
+	public abstract void respondToTimeChange(OperationManagerUser OperationManagerIntiatingTimeChange);
 	
 	public void addRequest(Request request){
 		requestList.add(request);

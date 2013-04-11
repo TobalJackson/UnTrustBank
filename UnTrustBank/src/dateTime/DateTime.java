@@ -40,6 +40,26 @@ public class DateTime {
 		checkNewLeapYear();
 	}
 	
+	public DateTime(int day){
+		nowDayAndTime = new GregorianCalendar();
+		currentTimeYear = nowDayAndTime.get(Calendar.YEAR);
+		//Add 1 to the 0-base count of month for a human-readable month.
+		currentTimeMonth = nowDayAndTime.get(Calendar.MONTH) + 1;
+		currentTimeDay = 1;
+		currentTimeHour = nowDayAndTime.get(Calendar.HOUR_OF_DAY);
+		currentTimeMinute = nowDayAndTime.get(Calendar.MINUTE);
+		currentTimeSecond = nowDayAndTime.get(Calendar.SECOND);
+		
+		newTimeYear = currentTimeYear;
+		newTimeMonth = currentTimeMonth;
+		newTimeDay = currentTimeDay;
+		newTimeHour = currentTimeHour;
+		newTimeMinute = currentTimeMinute;
+		newTimeSecond = currentTimeSecond;
+		//check whether this year is a leap year or not, and change the days in February (in daysInMonth) accordingly.
+		checkNewLeapYear();
+	}
+	
 	public DateTime(int year, int month, int day, int hour, int min, int sec){
 		
 		currentTimeYear = year;
@@ -60,6 +80,17 @@ public class DateTime {
 		
 	}
 	
+	public void addSixMonths(){
+		int sixmonth=this.currentTimeMonth+6;
+		sixmonth%=12;
+		this.currentTimeMonth=sixmonth;
+
+	}
+	
+	public void addYears(int numberofyearstoadd){
+		this.currentTimeYear+=numberofyearstoadd;
+	}
+	
 	/**
 	 * checkNewLeapYear will alter the number of days in February based on the newTimeYear of the instance, 28 for non-leap
 	 * years, and 29 days for leap years.  The general formula for leap years is any year divisible by 4 AND NOT 100, or years
@@ -72,6 +103,23 @@ public class DateTime {
 		else{
 			this.daysInMonth[1]= 28;
 		}
+	}
+	
+	
+	/**
+	 *jumps a month into the future. will always put the day at the first of the month. when december comes
+	 *January will be in the next year. only useful for this OM time travel.
+	 */
+	public void JumpAMonth(){
+		currentTimeDay=1;
+		if(currentTimeMonth>0 || currentTimeMonth<12){
+			currentTimeMonth+=1;
+		}
+		if(currentTimeMonth==12){
+			currentTimeMonth=1;
+			currentTimeYear+=1;
+		}
+		
 	}
 	
 	/**
@@ -405,5 +453,6 @@ public class DateTime {
 			finalTime = new Time((dayCount + finalTime.getDays()), finalTime.getHours(), finalTime.getMinutes(), finalTime.getSeconds());
 			return finalTime;
 		}
+		
 	}
 }

@@ -4,7 +4,9 @@ import java.util.Iterator;
 
 import dateTime.DateTime;
 import dateTime.Time;
+import userTypes.BasicUser;
 import userTypes.CustomerUser;
+import userTypes.OperationManagerUser;
 import bank.Request;
 import bank.Transaction;
 
@@ -23,15 +25,9 @@ public class SavingsAccount extends BasicAccount implements CustomerTransferSour
 	}
 
 	@Override
-	public Transaction customerTransferWithdrawal(double amount) {
+	public void respondToTimeChange(OperationManagerUser OM) {
 		// TODO Auto-generated method stub
-		return null;
+		updateCurrentAccountBalance();
 	}
-
-	@Override
-	public void respondToTimeChange(DateTime originalTime, DateTime newTime,
-			Time timeDifference) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

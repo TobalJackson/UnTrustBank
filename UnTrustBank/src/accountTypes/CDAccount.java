@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
+import userTypes.OperationManagerUser;
 import bank.BankGlobal;
 import bank.Transaction;
 import dateTime.DateTime;
@@ -46,33 +47,28 @@ public CDAccount(CustomerUser owner, int accountID,
 			
 			
 			interestrate=BankGlobal.getInterestRateCD(myCDDuration);
+			maturitydate= new DateTime();
 			
 			
 			switch(myCDDuration)
 			{
 			case 0:
-				Time timetomature = new Time(183,0,0,0);
-				maturitydate = accountCreatedOn.add(timetomature) ;
+				maturitydate.addSixMonths();
 				break;
 			case 1:
-				Time timetomature1 = new Time(365,0,0,0);
-				maturitydate = accountCreatedOn.add(timetomature1) ;
+				maturitydate.addYears(1);
 				break;
 			case 2:
-				Time timetomature2 = new Time(730,0,0,0);
-				maturitydate = accountCreatedOn.add(timetomature2) ;
+				maturitydate.addYears(2);
 				break;
 			case 3:
-				Time timetomature3 = new Time(1095,0,0,0);
-				maturitydate = accountCreatedOn.add(timetomature3) ;
+				maturitydate.addYears(3);
 				break;
 			case 4:
-				Time timetomature4 = new Time(1461,0,0,0);
-				maturitydate = accountCreatedOn.add(timetomature4) ;
+				maturitydate.addYears(4);
 				break;
 			case 5:
-				Time timetomature5 = new Time(1862,0,0,0);
-				maturitydate = accountCreatedOn.add(timetomature5) ;
+				maturitydate.addYears(5);
 			}
 			
 			setMinimumAccountBalance(BankGlobal.getminiumumBalanceCD());
@@ -129,9 +125,21 @@ public int getCDDuration(){
 
 
 @Override
-public void respondToTimeChange(DateTime originalTime, DateTime newTime,
-		Time timeDifference) {
+public void respondToTimeChange(OperationManagerUser OM) throws IllegalStateException{
+	DateTime currentbanktime = BankGlobal.getBankTime();
+	if(!isActiveAccount){
+		throw new IllegalStateException("The Account is closed"); //account closed exception?
+	}
+	
+	if(currentbanktime.compare(maturitydate)>0){
+		double addthisinterest = getCurrentAccountBalance()*interestrate;		
+		Transaction ThisInterest= New Transaction(addthisinterest, owner, OM, 2);
+			transactionList.add(ThisInterest);
+	}
+	//collects interest
 
+	updateCurrentAccountBalance();
+	
 }
 
 
