@@ -88,6 +88,7 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 				transactionList.add(Penalty);
 				}
 		}
+		thismonthspaid=0;
 		updateCurrentAccountBalance();
 }
 

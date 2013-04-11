@@ -85,20 +85,34 @@ public void setOffset(double mynewoffset)throws IllegalArgumentException{
 	}
 
 	public double needToPayThisMonth(){
-		double owed = Math.max((interestrate*getCurrentAccountBalance(), BankGlobal.get)
+		double owed = Math.max((interestrate*getCurrentAccountBalance()), BankGlobal.getLOCMinPayment());
 		
 		return owed;
 	}
 	
 	@Override
 	public void respondToTimeChange(OperationManagerUser OM) {
-		//calc interest
-		//check for penalties
-		// TODO Auto-generated method stub
-		double needToPayThisMonth
+
+		if(isActiveAccount){
+		double needToPagarThisMonth=needToPayThisMonth();
+		if(thismonthspaid < needToPagarThisMonth){
+			Transaction PenaltyTime = new Transaction(BankGlobal.getPenaltyFeeLoanLC(), owner, OM, 3);
+			transactionList.add(PenaltyTime);
+		}	//close if need penalty
 		
-		updateCurrentAccountBalance();
+		if(!(getCurrentAccountBalance()==0)){
+		double todaysinterest = interestrate*getCurrentAccountBalance(); //interest not paid on penalty
 		
+		if(todaysinterest+getCurrentAccountBalance()<getMinimumAccountBalance()){ //if interest would push past limit
+			todaysinterest=getMinimumAccountBalance()-getCurrentAccountBalance();
+		}
+		Transaction MoarMoneyz2Bank = new Transaction(todaysinterest, owner, OM, 2);
+		transactionList.add(MoarMoneyz2Bank);
+		accruedInterest+=todaysinterest;
+		}//close if not zero
+		} //close isActive
+		thismonthspaid=0;
+		updateCurrentAccountBalance();	
 	}
 
 }

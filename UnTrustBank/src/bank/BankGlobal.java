@@ -151,20 +151,20 @@ public class BankGlobal {
 	private static double interestRateSavings;
 	private static double serviceChargeSavingsthreshold;
 	
-	public double getServiceChargeSavings()
+	public static double getServiceChargeSavings()
 	{
 		return serviceChargeSavings;
 	}
-	public void setServiceChargeSavings(double newSCS)
+	public static void setServiceChargeSavings(double newSCS)
 	{
 		serviceChargeSavings = newSCS;
 	}
 	//this is good- Dania
-	public double getInterestRateSavings()
+	public static double getInterestRateSavings()
 	{
 		return interestRateSavings+CDSavingsOffset;
 	}
-	public void setInterestRateSavingsoffset(double newIRS)
+	public static void setInterestRateSavingsoffset(double newIRS)
 	{
 		interestRateSavings = newIRS;
 	}
