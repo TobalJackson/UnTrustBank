@@ -14,6 +14,7 @@ import accountTypes.ServiceChargeable;
 import accountTypes.WithdrawRequestable;
 import bank.BankGlobal;
 import bank.Request;
+import userTypes.AccountManagerUser;
 import bank.Transaction;
 
 
@@ -44,7 +45,7 @@ public class CustomerUser extends BasicUser {
 		BankGlobal.appendToGlobalCustomerList(this);
 	}
 	
-	public int getCustomerSSN()
+	public int getCustomerSSN(AccountManagerUser AM)
 	{
 		return this.SSN;
 	}

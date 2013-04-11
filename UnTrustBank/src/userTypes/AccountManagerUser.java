@@ -22,7 +22,7 @@ public class AccountManagerUser {
 	 */
 	public int getCustomerSSN(CustomerUser c)
 	{
-		return c.getCustomerSSN();
+		return c.getCustomerSSN(this);
 	}
 	
 	public void enrollNewCustomer(){
@@ -97,7 +97,9 @@ public class AccountManagerUser {
 	}
 	
 	public void setupSavingsAccount(CustomerUser c){ 
-		SavingsAccount a = new SavingsAccount(c, BankGlobal.getNewAccountID());
+		//System.out.println("How much will your initial deposit be?");
+
+		SavingsAccount a = new SavingsAccount(c, BankGlobal.getNewAccountID(), );
 		System.out.println("Savings account " + a.getAccountID() + " created successfully.");
 	}
 	
