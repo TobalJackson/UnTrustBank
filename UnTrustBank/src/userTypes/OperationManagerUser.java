@@ -2,7 +2,7 @@ package userTypes;
 
 import bank.BankGlobal;
 
-public class OperationManagerUser {
+public class OperationManagerUser extends BasicUser {
 
 	private static double GlobalInterestRate;
 	

@@ -182,11 +182,12 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		return fraudulentTransactions;
 	}
 	public void closeAccount(BasicUser initiator){
+		if(accountBalance>0 || accountBalance <0){
 		Transaction closingTransaction = new Transaction((-accountBalance), owner, initiator, 4);
-		transactionList.add(closingTransaction);
-		isActiveAccount = false;
+		transactionList.add(closingTransaction);}
 		updateCurrentAccountBalance();
-		
+		isActiveAccount = false;
+	
 	}
 	
 	public void accountClosedError(){

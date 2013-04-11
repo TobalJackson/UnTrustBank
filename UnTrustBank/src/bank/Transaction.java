@@ -98,6 +98,9 @@ public class Transaction {
 		return initiator;
 	}
 	
+	public void setAmount(double newAmount){
+		amount=newAmount;
+	}
 	
 	/**
 	 * Method to fetch the BasicAccount that this Transaction belongs to.

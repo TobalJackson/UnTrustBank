@@ -88,12 +88,15 @@ public class AccountManagerUser {
 		}	
 		input.close();
 	}
+	
+	//all interest rates should be positive, between 0 and 1
+	
 	public void setupCheckingAccount(CustomerUser c){
 		CheckingAccount a = new CheckingAccount(c, BankGlobal.getNewAccountID());
 		System.out.println("Checking account " + a.getAccountID() + " created successfully.");
 	}
 	
-	public void setupSavingsAccount(CustomerUser c){
+	public void setupSavingsAccount(CustomerUser c){ 
 		SavingsAccount a = new SavingsAccount(c, BankGlobal.getNewAccountID());
 		System.out.println("Savings account " + a.getAccountID() + " created successfully.");
 	}
@@ -108,6 +111,10 @@ public class AccountManagerUser {
 	}
 	
 	public void setupLoanAccount(CustomerUser c){
+		// Loan can either have a personalized interest rate, or the bank Global "getInterestLoanRate"
+		//if its personalized, it has to be "offset" from the global rate, so just ask the user how much they want it offset
+		//if they want it the same, just put 0
+		// so I suppose have a line to ask if they want to use the global, and if not, what do they want the rate to be?
 		//LoanAccount a = new LoanAccount(c, BankGlobal.getNewAccountID(), interest, minPayment,)//need to change Loan account constructor, make initial loan an amount, construct transaction within constructor.
 	}
 	

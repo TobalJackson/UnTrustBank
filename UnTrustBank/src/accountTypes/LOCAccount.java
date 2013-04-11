@@ -2,6 +2,7 @@ package accountTypes;
 
 import java.util.Iterator;
 
+import bank.BankGlobal;
 import bank.Transaction;
 
 import dateTime.DateTime;
@@ -12,55 +13,65 @@ import userTypes.OperationManagerUser;
 
 public class LOCAccount extends BasicAccount implements Loanable{
 	private double thismonthspaid;
-
+	private double interestOffset;
+	private double interestrate;
 	
-	public LOCAccount(CustomerUser owner, int accountID, double maxallowedtospend) {
+	public LOCAccount(CustomerUser owner, int accountID, double maxallowedtospend, double interestOffsetFromGlobal) throws IllegalArgumentException {
 		super(owner, accountID);
 
 	if(maxallowedtospend>0){
 		throw new IllegalArgumentException("cap must be set as negative");
 	}
 	setMinimumAccountBalance(maxallowedtospend);
-
+	if(interestOffsetFromGlobal+BankGlobal.getLOCinterest()< 0 || interestOffsetFromGlobal+BankGlobal.getLOCinterest()> 1  ){
+		throw new IllegalArgumentException("the final interest rate must be between 0 and 1");
+		
+	}
+	interestrate=interestOffsetFromGlobal+BankGlobal.getLOCinterest();
+	
+	
 	setMaximumAccountBalance(0);
 	thismonthspaid=0;
 	
 	
+	
 
-	setMaximumAccountBalance(0);	
+	setMaximumAccountBalance(0);
+	updateCurrentAccountBalance();
+	
 	}
 	@Override
 public void appendTransaction(Transaction transaction, BasicUser initiator){
 		
 		//Withdrawals - Errors, cant go over limit, unless with penalty
 		if(transaction.getAmount()<0 && (transaction.getAmount() + getCurrentAccountBalance()) > getMinimumAccountBalance() ){
-			if(!(transaction.getTransactionType()==5)){
+			if(!(transaction.getTransactionType()==3)){
 			throw new IllegalArgumentException("Hey! You can't go past your LOC Limit");
 			}
 			else{	
 			transactionList.add(transaction);} //this must be a penatly
 		}
-		
-		
-		//Deposits
-		
+		//Deposits - cant exceed 0
 		if((transaction.getAmount()+getCurrentAccountBalance())>0){
 			throw new IllegalArgumentException("This deposit would cause the account balance to go over 0.");
 		}
 		
-		transactionList.add(transaction);
+		transactionList.add(transaction);  //should be legal deposits and withdrawals
 		thismonthspaid+=transaction.getAmount();
-		
-		
-		
 		updateCurrentAccountBalance();
 			
 	}
 	
+public void setOffset(double mynewoffset)throws IllegalArgumentException{
+	if(mynewoffset+BankGlobal.getLOCinterest() >1 || mynewoffset+BankGlobal.getLOCinterest() <0 ){
+		throw new IllegalArgumentException("the final interest rate must be between 0 and 1");
+	}
+	interestrate=mynewoffset+BankGlobal.getLOCinterest();
+	updateCurrentAccountBalance();
+}
 	
 	
-// initial transaction.....?
-	// Nevermind, BankGlobal stuff doesn't change how stuff should work here. - Michael
+
 
 	@Override
 	public Iterator<BasicAccount> iterator() {
@@ -73,11 +84,19 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 		return getMinimumAccountBalance();
 	}
 
+	public double needToPayThisMonth(){
+		double owed = Math.max((interestrate*getCurrentAccountBalance(), BankGlobal.get)
+		
+		return owed;
+	}
+	
 	@Override
 	public void respondToTimeChange(OperationManagerUser OM) {
 		//calc interest
 		//check for penalties
 		// TODO Auto-generated method stub
+		double needToPayThisMonth
+		
 		updateCurrentAccountBalance();
 		
 	}

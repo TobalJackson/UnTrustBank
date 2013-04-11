@@ -331,20 +331,20 @@ public class BankGlobal {
 	
 
 	
-private double Loancap;
+private static double Loancap;
 //private double usedLoanCap;
 	
-public void setLoanCap(double newCap)
+public static void setLoanCap(double newCap)
 {
 		Loancap = newCap;
 }
 
-public double getLoanCap(){
-		return this.Loancap;
+public static double getLoanCap(){
+		return Loancap;
 }
 
 	
-public double getUsedLoanCap()
+public static double getUsedLoanCap()
 {
 double used=0;
 	for (BasicAccount account : accounts.values()){
@@ -358,28 +358,38 @@ return used;
 private static double interestRateLoan;
 private static double penaltyFeeLoanLC;
 
-public double getInterestRateLoan()
+public static double getInterestRateLoan()
 {
 	return interestRateLoan;
 }
-public void setInterestRateLoan(double newRate)
+public static void setInterestRateLoan(double newRate)
 {
 	interestRateLoan = newRate;
 }
-public double getPenaltyFeeLoanLC()
+public static double getPenaltyFeeLoanLC()
 {
 	return penaltyFeeLoanLC;
 }
-void setPenaltyFeeLoan(double newFee)
+public static void setPenaltyFeeLoan(double newFee)
 {
 	penaltyFeeLoanLC = newFee;
 }
 
 
-public double getLOCinterest(){
+public static double getLOCinterest(){
 	return getInterestRateLoan()+LOCinterestOffset;
 }
 
+public static double LOCMinPayment;
+public static void setLOCMinPayment(double mymin){
+	if(mymin<0){
+		throw new IllegalArgumentException("payments must be positive");
+	}
+	LOCMinPayment=mymin;
+}
+public static double getLOCMinPayment(){
+	return LOCMinPayment;
+}
 
 }
 

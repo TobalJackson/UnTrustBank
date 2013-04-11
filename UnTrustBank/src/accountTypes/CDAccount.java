@@ -9,6 +9,7 @@ import bank.BankGlobal;
 import bank.Transaction;
 import dateTime.DateTime;
 import dateTime.Time;
+import bank.Transaction;
 
 public class CDAccount extends BasicAccount implements CustomerTransferSource, WithdrawRequestable {
 private int CDDuration;
@@ -89,6 +90,7 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 	if(currentbanktime.compare(maturitydate)>0){
 		double penaltyamount= 6*monthsinterest();
 		transactionList.add(transaction);
+		
 				
 		Transaction penalty = new Transaction(penaltyamount, owner, initiator, 3);
 		transactionList.add(transaction);
@@ -133,8 +135,9 @@ public void respondToTimeChange(OperationManagerUser OM) throws IllegalStateExce
 	
 	if(currentbanktime.compare(maturitydate)>0){
 		double addthisinterest = getCurrentAccountBalance()*interestrate;		
-		Transaction ThisInterest= New Transaction(addthisinterest, owner, OM, 2);
+		Transaction ThisInterest= new Transaction(addthisinterest, owner, OM, 2);
 			transactionList.add(ThisInterest);
+			accruedInterest+=addthisinterest;
 	}
 	//collects interest
 
