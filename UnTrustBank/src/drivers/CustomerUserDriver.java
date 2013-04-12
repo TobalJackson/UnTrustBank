@@ -23,8 +23,8 @@ public class CustomerUserDriver {
 		CustomerUser bob = new CustomerUser("Jesse","Charles","Everett", true, dobbob, 555555555, password, "jceverett", 1);
 		TellerUser sally = new TellerUser();
 		AccountManagerUser Chris = new AccountManagerUser();
-		CheckingAccount dollabills = new CheckingAccount(bob, 1);
-		CheckingAccount dolladollabills = new CheckingAccount(bob, 2);
+		CheckingAccount dollabills = new CheckingAccount(bob);
+		CheckingAccount dolladollabills = new CheckingAccount(bob);
 		Transaction moneyz = new Transaction(7000000, bob, sally, 1);
 		
 		System.out.println(moneyz.getAmount());

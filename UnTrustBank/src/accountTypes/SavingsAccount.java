@@ -14,7 +14,7 @@ import bank.Transaction;
 public class SavingsAccount extends BasicAccount implements CustomerTransferSource, WithdrawRequestable{
 	private double interestrate;
 	
-	public SavingsAccount(CustomerUser owner, int accountID, Transaction initialDeposit) throws IllegalArgumentException {
+	public SavingsAccount(CustomerUser owner, Transaction initialDeposit) throws IllegalArgumentException {
 		super(owner);
 		if(initialDeposit.getAmount()<=0){
 			throw new IllegalArgumentException("intial deposit must be positive");

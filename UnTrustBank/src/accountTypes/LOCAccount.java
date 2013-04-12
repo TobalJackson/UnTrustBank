@@ -16,7 +16,7 @@ public class LOCAccount extends BasicAccount implements Loanable{
 	//private double interestOffset;
 	private double interestrate;
 	
-	public LOCAccount(CustomerUser owner, int accountID, double maxallowedtospend, double interestOffsetFromGlobal) throws IllegalArgumentException {
+	public LOCAccount(CustomerUser owner, double maxallowedtospend, double interestOffsetFromGlobal) throws IllegalArgumentException {
 		super(owner);
 
 	if(maxallowedtospend>0){

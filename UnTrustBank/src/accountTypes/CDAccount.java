@@ -17,8 +17,8 @@ private double interestrate;
 private DateTime maturitydate;
 
 
-public CDAccount(CustomerUser owner, int accountID,
-			Transaction mytransaction, int myCDDuration, double minaccountbalance) throws IllegalArgumentException {
+public CDAccount(CustomerUser owner, Transaction mytransaction,
+			int myCDDuration, double minaccountbalance) throws IllegalArgumentException {
 			super(owner);
 			if(myCDDuration>5 || myCDDuration <0){
 				throw new IllegalArgumentException();

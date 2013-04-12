@@ -103,7 +103,7 @@ public class AccountManagerUser extends BasicUser{
 	//all interest rates should be positive, between 0 and 1
 	
 	public void setupCheckingAccount(CustomerUser c){
-		CheckingAccount a = new CheckingAccount(c, BankGlobal.getNewAccountID());
+		CheckingAccount a = new CheckingAccount(c);
 		System.out.println("Checking account " + a.getAccountID() + " created successfully.");
 	}
 	
@@ -111,7 +111,7 @@ public class AccountManagerUser extends BasicUser{
 		Scanner input = new Scanner(System.in);
 		System.out.println("How much will the initial deposit be?");
 		double indep = input.nextDouble();
-		SavingsAccount a = new SavingsAccount(c, BankGlobal.getNewAccountID(), new Transaction(indep, c, this, 1));
+		SavingsAccount a = new SavingsAccount(c, new Transaction(indep, c, this, 1));
 		System.out.println("Savings account " + a.getAccountID() + " created successfully.");
 	}
 	
@@ -121,7 +121,7 @@ public class AccountManagerUser extends BasicUser{
 		double amount = input.nextDouble();
 		System.out.println("What will the interest offset from global(if any, positive or negative or 0)?");
 		double offset=input.nextDouble();
-		LOCAccount a = new LOCAccount(c, BankGlobal.getNewAccountID(), (- amount), offset);
+		LOCAccount a = new LOCAccount(c, (- amount), offset);
 		System.out.println("LOCAccount " + a.getAccountID() + " created successfully.");
 		input.close();
 	}

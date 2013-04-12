@@ -16,7 +16,7 @@ private double minloanmonthlyloanpayment;//have fixed monthly payment required, 
 private double thismonthspaid;
 
 
-public LoanAccount(CustomerUser owner, int accountID,  double myinterestrateoffset, double myminmontlyloanpayment, Transaction initialloan) throws IllegalArgumentException {
+public LoanAccount(CustomerUser owner, double myinterestrateoffset,  double myminmontlyloanpayment, Transaction initialloan) throws IllegalArgumentException {
 		super(owner);
 		setMaximumAccountBalance(0);
 		if(myinterestrateoffset+BankGlobal.getInterestRateLoan()>1 || myinterestrateoffset+BankGlobal.getInterestRateLoan() <= 0){

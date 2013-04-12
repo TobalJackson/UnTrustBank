@@ -13,7 +13,7 @@ import dateTime.Time;
 
 public class CheckingAccount extends BasicAccount implements CustomerTransferSource, OtherCustomerDepositable {
 
-	public CheckingAccount(CustomerUser owner, int accountID) {
+	public CheckingAccount(CustomerUser owner) {
 					
 		super(owner);
 //		updateCurrentAccountBalance();
