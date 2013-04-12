@@ -74,6 +74,7 @@ public CDAccount(CustomerUser owner, int accountID,
 			
 			setMinimumAccountBalance(BankGlobal.getminiumumBalanceCD());
 			updateCurrentAccountBalance();
+		
 }
 		// TODO Auto-generated constructor stub
 

@@ -13,7 +13,7 @@ import userTypes.OperationManagerUser;
 
 public class LOCAccount extends BasicAccount implements Loanable{
 	private double thismonthspaid;
-	private double interestOffset;
+	//private double interestOffset;
 	private double interestrate;
 	
 	public LOCAccount(CustomerUser owner, int accountID, double maxallowedtospend, double interestOffsetFromGlobal) throws IllegalArgumentException {
@@ -38,7 +38,7 @@ public class LOCAccount extends BasicAccount implements Loanable{
 
 	setMaximumAccountBalance(0);
 	updateCurrentAccountBalance();
-	
+
 	}
 	@Override
 public void appendTransaction(Transaction transaction, BasicUser initiator){

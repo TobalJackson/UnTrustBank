@@ -90,6 +90,7 @@ public void appendTransaction(Transaction transaction, BasicUser initiator){
 		}
 		thismonthspaid=0;
 		updateCurrentAccountBalance();
+		
 }
 
 	@Override

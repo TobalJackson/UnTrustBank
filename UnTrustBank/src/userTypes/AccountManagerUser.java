@@ -2,10 +2,11 @@ package userTypes;
 
 import accountTypes.*;
 import bank.BankGlobal;
+import bank.Transaction;
 import dateTime.DateTime;
 import java.util.Scanner;
 
-public class AccountManagerUser {
+public class AccountManagerUser extends BasicUser{
 // LOC account interest rate is an offset from a global interest rate defined by the operations manager.
 // So I used interestRate as the variable name.  If you decide to use something else, then change it in the 
 // getLOC method in BankGlobal.java
@@ -97,9 +98,10 @@ public class AccountManagerUser {
 	}
 	
 	public void setupSavingsAccount(CustomerUser c){ 
-		//System.out.println("How much will your initial deposit be?");
-
-		SavingsAccount a = new SavingsAccount(c, BankGlobal.getNewAccountID(), );
+		Scanner input = new Scanner(System.in);
+		System.out.println("How much will the initial deposit be?");
+		double indep = input.nextDouble();
+		SavingsAccount a = new SavingsAccount(c, BankGlobal.getNewAccountID(), new Transaction(indep, c, this, 1));
 		System.out.println("Savings account " + a.getAccountID() + " created successfully.");
 	}
 	
@@ -107,7 +109,9 @@ public class AccountManagerUser {
 		Scanner input = new Scanner(System.in);
 		System.out.println("What will be the LOCAccount's cap?\n");
 		double amount = input.nextDouble();
-		LOCAccount a = new LOCAccount(c, BankGlobal.getNewAccountID(), amount);
+		System.out.println("What will the interest offset from global(if any)?");
+		double offset=input.nextDouble();
+		LOCAccount a = new LOCAccount(c, BankGlobal.getNewAccountID(), amount, offset);
 		System.out.println("LOCAccount " + a.getAccountID() + " created successfully.");
 		input.close();
 	}

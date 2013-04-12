@@ -17,6 +17,7 @@ public class CheckingAccount extends BasicAccount implements CustomerTransferSou
 					
 		super(owner, accountID);
 		updateCurrentAccountBalance();
+		
 	}
 	
 @Override
