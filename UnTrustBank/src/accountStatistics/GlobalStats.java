@@ -29,14 +29,24 @@ public class GlobalStats {
 private	double LOCLimits;
 private	double LOCCurrentBalances;
 private int LOCNumber;
+private double LOCLimitsAvg;
+private double LOCBalanceAvg;
+
 private double LoanBalance;
 private int LoanNumber;
+private double LoanAvg;
+
 private double CheckingBalance;
 private int CheckingNumber;
+private double CheckingAvg;
+
 private double CDBalance;
 private int CDNumber;
+private double CDAvg;
+
 private double SavingsBalance;
 private int SavingsNumber;
+private double SavingsAvg;
 	
 	
 public GlobalStats(double myLOCLimits, double myLOCCurrentBalances, int myLOCNumber, double myLoanBalance, int myLoanNumber, double myCheckingBalance, int myCheckingNumer, double myCDBalance, int myCDNumber, double mySavingsBalance, int mySavingsNumber){
@@ -46,11 +56,37 @@ public GlobalStats(double myLOCLimits, double myLOCCurrentBalances, int myLOCNum
 	LOCNumber=myLOCNumber;
 	LoanBalance=myLoanBalance;
 	LoanNumber=myLoanNumber;
-
+	CheckingBalance = myCheckingBalance;
+	CheckingNumber=myCheckingNumer;
+	CDBalance=myCDBalance;
+	CDNumber=myCDNumber;
+	SavingsBalance=mySavingsBalance;
+	SavingsNumber=mySavingsNumber;
+	
+	LOCLimitsAvg=LOCLimits/LOCNumber;
+	LOCBalanceAvg=LOCCurrentBalances/LOCNumber;
+	LoanAvg=LoanBalance/LoanNumber;
+	CheckingAvg=CheckingBalance/CheckingNumber;
+	CDAvg= CDBalance/CDNumber;
+	
+	
 	
 	}
 
+public toConsole(){
+	
+	String mystring="";
+	String CDstring1 = "CD Accounts Total Balances: " + CDBalance;
+	System.out.println(CDstring1);
+	String CDstring2 = "Number of CD Accounts: " + CDNumber;
+	System.out.println(CDstring2);
+	//NOTE!!!! NEED TO REPORT ALL ACCOUNTS AS POSITIVE NUMBER. USE MATH.ABS ON LOANS AND LOC. WE'LL IGNORE THE CASE THAT THE CHECKING COULD BE UNDER AVERAGE,
+	//UNLESS YOU WANT TO DEAL WITH THAT NOW. G2G... - DANIA
+	
+	// basically need to take everything above and put it into console lines. should take 5 minutes to write out
 
+	
+}
 	
 	
 	
