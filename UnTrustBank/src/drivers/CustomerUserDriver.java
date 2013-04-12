@@ -27,11 +27,12 @@ public class CustomerUserDriver {
 		CheckingAccount dolladollabills = new CheckingAccount(bob, 2);
 		Transaction moneyz = new Transaction(7000000, bob, sally, 1);
 		
+//		System.out.println(moneyz.getAmount());
 		bob.addCustomerAccount(dollabills);
 		bob.addCustomerAccount(dolladollabills);
 		dollabills.updateCurrentAccountBalance();
-//		sally.deposit(moneyz, dollabills);
-		dollabills.appendTransaction(moneyz, sally);
+		sally.deposit(moneyz, dollabills);
+//		dollabills.appendTransaction(moneyz, sally);
 		dollabills.updateCurrentAccountBalance();
 		System.out.println(dollabills.getCurrentAccountBalance());
 		

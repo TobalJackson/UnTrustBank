@@ -258,6 +258,16 @@ public class CustomerUser extends BasicUser {
 		return results;
 	}
 	
+	public ArrayList<BasicAccount> getOpenAccounts(){
+		ArrayList<BasicAccount> results = new ArrayList<BasicAccount>();
+		for(BasicAccount a : customerAccounts){
+			if(a.getIsActiveAccount()){
+				results.add(a);
+			}
+		}
+		return results;
+	}
+	
 	/**
 	 * Getter to see whether CustomerUser is an Employee.
 	 * @return <b>boolean</b> - true if Customer is Employee, else false.
