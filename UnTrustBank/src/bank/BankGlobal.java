@@ -270,7 +270,7 @@ public class BankGlobal {
 	//Checking
 	
 	private static double overdraftFee;
-	private static double overdraftlimit;
+	private static double overdraftlimit = 0;
 	
 	private static double serviceChargeLimitChecking;
 	private static boolean underlimitfeechecking;

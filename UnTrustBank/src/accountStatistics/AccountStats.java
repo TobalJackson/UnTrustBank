@@ -4,7 +4,7 @@ import dateTime.DateTime;
 import bank.Transaction;
 
 
-public class AccountStats {	
+public abstract class AccountStats {	
 	private int totalTransactions;
 	private int totalAppliedTransactions;
 	private int totalDebits;
@@ -91,7 +91,7 @@ public class AccountStats {
 		int numDeposit=0;
 		int sumWithdraw=0;
 		int sumDeposit=0;
-		this.totalTransactions=account.getFullTransactionHistory().size();
+		this.totalTransactions=account.getAppliedTransactionHistory().size();
 		this.totalAppliedTransactions=account.getAppliedTransactionHistory().size();
 		for(Transaction t: account.getFullTransactionHistory()){
 			if((t.getTransactionType()==WITHDRAWAL)&&((t.getTimeStamp().compare(timeStamp1)) > 0)&&(t.getTimeStamp().compare(timeStamp2)) < 0){
@@ -99,20 +99,20 @@ public class AccountStats {
 			}
 		}
 		this.totalDebits=numWithdraw;
-		for(Transaction t: account.getFullTransactionHistory()){
+		for(Transaction t: account.getAppliedTransactionHistory()){
 			if((t.getTransactionType()==DEPOSIT)&&((t.getTimeStamp().compare(timeStamp1))>0)&&(t.getTimeStamp().compare(timeStamp2))<0){
 				numDeposit++;
 			}
 		}
 		
 		this.totalCredits=numDeposit;
-		for(Transaction t: account.getFullTransactionHistory()){
+		for(Transaction t: account.getAppliedTransactionHistory()){
 			if((t.getTransactionType()==WITHDRAWAL)&&((t.getTimeStamp().compare(timeStamp1))>0)&&(t.getTimeStamp().compare(timeStamp2))<0){
 				sumWithdraw+=t.getAmount();
 			}
 		}
 		this.totalDebitAmount=sumWithdraw;
-		for(Transaction t: account.getFullTransactionHistory()){
+		for(Transaction t: account.getAppliedTransactionHistory()){
 			if((t.getTransactionType()==DEPOSIT)&&((t.getTimeStamp().compare(timeStamp1))>0)&&(t.getTimeStamp().compare(timeStamp2))<0){
 				sumDeposit+=t.getAmount();
 			}

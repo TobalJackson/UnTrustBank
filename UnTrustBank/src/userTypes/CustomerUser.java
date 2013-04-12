@@ -24,7 +24,7 @@ import bank.Transaction;
  */
 public class CustomerUser extends BasicUser {
 	
-	private ArrayList<BasicAccount> customerAccounts;
+	private ArrayList<BasicAccount> customerAccounts = new ArrayList<BasicAccount>();
 	private boolean isEmployee;
 	private boolean isActiveCustomer;
 	private int SSN;
@@ -252,6 +252,16 @@ public class CustomerUser extends BasicUser {
 		ArrayList<BasicAccount> results = new ArrayList<BasicAccount>();
 		for(BasicAccount a : customerAccounts){
 			if(!a.getIsActiveAccount()){
+				results.add(a);
+			}
+		}
+		return results;
+	}
+	
+	public ArrayList<BasicAccount> getOpenAccounts(){
+		ArrayList<BasicAccount> results = new ArrayList<BasicAccount>();
+		for(BasicAccount a : customerAccounts){
+			if(a.getIsActiveAccount()){
 				results.add(a);
 			}
 		}

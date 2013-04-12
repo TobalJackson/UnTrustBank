@@ -25,10 +25,10 @@ public class TellerUser extends BasicUser {
 	 * method will return account details of the account by inputting the account as a parameter in AccountStats class
 	 * @return AccountStats object made using the account
 	 */
-	public AccountStats getCurrentAccountDetails(BasicAccount account){
-		//return account stats
-		return new AccountStats(account);
-	}
+//	public AccountStats getCurrentAccountDetails(BasicAccount account){
+//		//return account stats
+//		return new AccountStats(account);
+//	}
 	
 	/**
 	 * creates two Transactions of withdrawal and deposit and applies them to the accounts to move amount from
