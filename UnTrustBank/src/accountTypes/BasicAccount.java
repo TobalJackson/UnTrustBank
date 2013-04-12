@@ -17,8 +17,8 @@ import dateTime.DateTime;
 import userTypes.AuditorUser;
 
 public abstract class BasicAccount implements Iterable<BasicAccount>{
-	protected ArrayList<Transaction> transactionList;
-	protected ArrayList<Request> requestList;
+	protected ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+	protected ArrayList<Request> requestList = new ArrayList<Request>();
 	//private double accountBalance;
 	protected boolean isActiveAccount;
 	protected CustomerUser owner;
@@ -125,8 +125,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		double currentbalance=0;
 		if(transactionList.size()>0){
 			for(Transaction t:transactionList){
+				System.out.println(transactionList.size());
 				if(t.getIsApplied() == true){
 					currentbalance+=t.getAmount();
+					System.out.println(t.getAmount());
 				}
 			}
 		}

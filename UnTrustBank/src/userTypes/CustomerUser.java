@@ -24,7 +24,7 @@ import bank.Transaction;
  */
 public class CustomerUser extends BasicUser {
 	
-	private ArrayList<BasicAccount> customerAccounts;
+	private ArrayList<BasicAccount> customerAccounts = new ArrayList<BasicAccount>();
 	private boolean isEmployee;
 	private boolean isActiveCustomer;
 	private int SSN;
