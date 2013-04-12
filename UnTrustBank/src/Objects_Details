@@ -1,6 +1,9 @@
 Bank Object:
 
 BankGlobal
+QUESTION: in the constructor for the accounts, you call its method. will it work even though the object isn't created until after that line? 
+can we test that really quick?
+
 
 	//Global
 		-customers:ArrayList<Customer>

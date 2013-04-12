@@ -107,11 +107,11 @@ public class AccountManagerUser extends BasicUser{
 	
 	public void setupLOCAccount(CustomerUser c){
 		Scanner input = new Scanner(System.in);
-		System.out.println("What will be the LOCAccount's cap?\n");
+		System.out.println("What will be the LOCAccount's cap? (input positive number)");
 		double amount = input.nextDouble();
-		System.out.println("What will the interest offset from global(if any)?");
+		System.out.println("What will the interest offset from global(if any, positive or negative or 0)?");
 		double offset=input.nextDouble();
-		LOCAccount a = new LOCAccount(c, BankGlobal.getNewAccountID(), amount, offset);
+		LOCAccount a = new LOCAccount(c, BankGlobal.getNewAccountID(), (- amount), offset);
 		System.out.println("LOCAccount " + a.getAccountID() + " created successfully.");
 		input.close();
 	}
@@ -122,6 +122,10 @@ public class AccountManagerUser extends BasicUser{
 		//if they want it the same, just put 0
 		// so I suppose have a line to ask if they want to use the global, and if not, what do they want the rate to be?
 		//LoanAccount a = new LoanAccount(c, BankGlobal.getNewAccountID(), interest, minPayment,)//need to change Loan account constructor, make initial loan an amount, construct transaction within constructor.
+		Scanner input = new Scanner(System.in);
+		//input those things needed for the constructor below
+		//LoanAccount crapbag = new LoanAccount(c, crapbag.getAccountID(), myinterestrateoffset, myminmontlyloanpayment, initialloan)
+	
 	}
 	
 	public void setupCDAccount(CustomerUser c){
