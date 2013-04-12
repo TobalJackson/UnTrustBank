@@ -34,10 +34,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected int numDeposits;
 	protected boolean hasTellerCharge;
 	
-	public BasicAccount(CustomerUser owner, int accountID){ //default constructor only accepts Customer and account ID
+	public BasicAccount(CustomerUser owner){ //default constructor only accepts Customer and account ID
 		this.owner = owner;
 		owner.addCustomerAccount(this); //adds the account to the Customer's list of accounts.
-		this.accountID = accountID;
+		this.accountID = BankGlobal.getNewAccountID();
 		
 		
 		this.isActiveAccount = true;

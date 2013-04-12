@@ -17,7 +17,7 @@ private double thismonthspaid;
 
 
 public LoanAccount(CustomerUser owner, int accountID,  double myinterestrateoffset, double myminmontlyloanpayment, Transaction initialloan) throws IllegalArgumentException {
-		super(owner, accountID);
+		super(owner);
 		setMaximumAccountBalance(0);
 		if(myinterestrateoffset+BankGlobal.getInterestRateLoan()>1 || myinterestrateoffset+BankGlobal.getInterestRateLoan() <= 0){
 			throw new IllegalArgumentException("interest percentage must be between 0 and 1");

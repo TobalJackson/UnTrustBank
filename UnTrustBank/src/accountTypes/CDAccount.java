@@ -19,7 +19,7 @@ private DateTime maturitydate;
 
 public CDAccount(CustomerUser owner, int accountID,
 			Transaction mytransaction, int myCDDuration, double minaccountbalance) throws IllegalArgumentException {
-			super(owner, accountID);
+			super(owner);
 			if(myCDDuration>5 || myCDDuration <0){
 				throw new IllegalArgumentException();
 			}

@@ -17,7 +17,7 @@ public class LOCAccount extends BasicAccount implements Loanable{
 	private double interestrate;
 	
 	public LOCAccount(CustomerUser owner, int accountID, double maxallowedtospend, double interestOffsetFromGlobal) throws IllegalArgumentException {
-		super(owner, accountID);
+		super(owner);
 
 	if(maxallowedtospend>0){
 		throw new IllegalArgumentException("cap must be set as negative");

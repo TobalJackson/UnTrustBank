@@ -15,7 +15,7 @@ public class CheckingAccount extends BasicAccount implements CustomerTransferSou
 
 	public CheckingAccount(CustomerUser owner, int accountID) {
 					
-		super(owner, accountID);
+		super(owner);
 //		updateCurrentAccountBalance();
 		
 	}
