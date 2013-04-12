@@ -145,6 +145,6 @@ public abstract class AccountStats {
 	}
 	
 //	public AccountStats getAccountStatsInDateRange(BasicAccount account, DateTime timeStamp1, DateTime timeStamp2){
-//		return new AccountStats(account, timeStamp1, timeStamp2);
+//		return AccountStats(account, timeStamp1, timeStamp2);
 //	}
-}
+  }
