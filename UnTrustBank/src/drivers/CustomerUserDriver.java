@@ -68,9 +68,9 @@ public class CustomerUserDriver {
 		System.out.println("dollabills: " + dollabills.getCurrentAccountBalance());
 		
 		//Negative withdrawal
-		Transaction moneyzdosW = new Transaction(-7000000, bob, sally, 0); // still allows a negative deposit
-		sally.deposit(moneyzdosW, dollabills);
-		dollabills.appendTransaction(moneyzdosW, sally); //
+		System.out.println("dollabills: " + dollabills.getCurrentAccountBalance());
+		Transaction moneyzdosW = new Transaction(-7000000, bob, sally, 0); // still allows a negative withdrawal
+		sally.withdraw(moneyzdosW, dollabills);
 		dollabills.updateCurrentAccountBalance();
 		System.out.println("moneyzdosW: " + moneyzdosW.getAmount());
 		System.out.println("dollabills: " + dollabills.getCurrentAccountBalance());
