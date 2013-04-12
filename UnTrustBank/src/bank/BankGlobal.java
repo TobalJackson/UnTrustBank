@@ -16,6 +16,8 @@ import userTypes.CustomerUser;
 import accountTypes.Loanable;
 import userTypes.OperationManagerUser;
 import bank.Transaction;
+import accountStatistics.GlobalStats;
+
 
 public class BankGlobal {
 	
@@ -138,13 +140,6 @@ public class BankGlobal {
 			throw new IllegalArgumentException("the percent of interest must be between 0 and 1, unless you really want to be an asshole");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	// Savings
@@ -332,12 +327,10 @@ public class BankGlobal {
 	public void setLOCinterestOffset(double newoffset){
 		if(newoffset > 0 || newoffset <1){
 			LOCinterestOffset=newoffset;
-
 		}
 		else{
 			throw new IllegalArgumentException("the percent of interest must be between 0 and 1, unless you really want to be a cocky asshole");
-		}
-		
+		}	
 	}
 	
 
@@ -402,5 +395,11 @@ public static double getLOCMinPayment(){
 	return LOCMinPayment;
 }
 
+public static HashMap getAccounts(GlobalStats GS){
+	return accounts;
 }
+
+
+}
+
 

@@ -47,25 +47,29 @@ public class AccountStats {
 		int sumDeposit=0;
 		this.totalTransactions=account.getFullTransactionHistory().size();
 		this.totalAppliedTransactions=account.getAppliedTransactionHistory().size();
-		for(Transaction t: account.getFullTransactionHistory()){
+		
+		for(Transaction t: account.getAppliedTransactionHistory()){
 			if(t.getTransactionType()==WITHDRAWAL){
 				numWithdraw++;
 			}
 		}
 		this.totalDebits=numWithdraw;
-		for(Transaction t: account.getFullTransactionHistory()){
+		
+		for(Transaction t: account.getAppliedTransactionHistory()){
 			if(t.getTransactionType()==DEPOSIT){
 				numDeposit++;
 			}
 		}
 		this.totalCredits=numDeposit;
-		for(Transaction t: account.getFullTransactionHistory()){
+		
+		for(Transaction t: account.getAppliedTransactionHistory()){
 			if(t.getTransactionType()==WITHDRAWAL){
 				sumWithdraw+=t.getAmount();
 			}
 		}
 		this.totalDebitAmount=sumWithdraw;
-		for(Transaction t: account.getFullTransactionHistory()){
+		
+		for(Transaction t: account.getAppliedTransactionHistory()){
 			if(t.getTransactionType()==DEPOSIT){
 				sumDeposit+=t.getAmount();
 			}
@@ -90,7 +94,7 @@ public class AccountStats {
 		this.totalTransactions=account.getFullTransactionHistory().size();
 		this.totalAppliedTransactions=account.getAppliedTransactionHistory().size();
 		for(Transaction t: account.getFullTransactionHistory()){
-			if((t.getTransactionType()==WITHDRAWAL)&&((t.getTimeStamp().compare(timeStamp1))>0)&&(t.getTimeStamp().compare(timeStamp2))<0){
+			if((t.getTransactionType()==WITHDRAWAL)&&((t.getTimeStamp().compare(timeStamp1)) > 0)&&(t.getTimeStamp().compare(timeStamp2)) < 0){
 				numWithdraw++;
 			}
 		}
@@ -100,6 +104,7 @@ public class AccountStats {
 				numDeposit++;
 			}
 		}
+		
 		this.totalCredits=numDeposit;
 		for(Transaction t: account.getFullTransactionHistory()){
 			if((t.getTransactionType()==WITHDRAWAL)&&((t.getTimeStamp().compare(timeStamp1))>0)&&(t.getTimeStamp().compare(timeStamp2))<0){
@@ -139,7 +144,7 @@ public class AccountStats {
 		return totalCreditAmount;
 	}
 	
-	public AccountStats getAccountStatsInDateRange(BasicAccount account, DateTime timeStamp1, DateTime timeStamp2){
-		return new AccountStats(account, timeStamp1, timeStamp2);
-	}
+//	public AccountStats getAccountStatsInDateRange(BasicAccount account, DateTime timeStamp1, DateTime timeStamp2){
+//		return new AccountStats(account, timeStamp1, timeStamp2);
+//	}
 }
