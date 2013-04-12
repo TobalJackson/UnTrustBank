@@ -23,6 +23,10 @@ public abstract class BasicUser {
 	public BasicUser(){ //for testing purposes
 		this("John", "Michael", "Doe", true, new DateTime(1987, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe", 0);
 	}
+	
+	public BasicUser(String FirstName){
+		this(FirstName, "M", "Doe", true, new DateTime(1988, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe", 0);
+	}
 	public String getName(){
 		return (this.firstName + " " + this.middleName + " " + this.lastName);
 	}

@@ -100,6 +100,7 @@ public class AccountStats {
 				numDeposit++;
 			}
 		}
+		
 		this.totalCredits=numDeposit;
 		for(Transaction t: account.getFullTransactionHistory()){
 			if((t.getTransactionType()==WITHDRAWAL)&&((t.getTimeStamp().compare(timeStamp1))>0)&&(t.getTimeStamp().compare(timeStamp2))<0){
