@@ -17,6 +17,7 @@ import accountTypes.Loanable;
 import userTypes.OperationManagerUser;
 import bank.Transaction;
 import accountStatistics.GlobalStats;
+import accountTypes.*;
 
 
 public class BankGlobal {
@@ -399,6 +400,49 @@ public static HashMap getAccounts(GlobalStats GS){
 	return accounts;
 }
 
+public static GlobalStats getGlobalStats(){
+	double LOCLimits=0;
+	double LOCBalance=0;
+int LOCNumber=0;
+double LoanBalance=0;
+int LoanNumber=0;
+ double CheckingBalance=0;
+int CheckingNumber=0;
+double CDBalance = 0;
+ int CDNumber=0;
+double SavingsBalance=0;
+ int SavingsNumber=0;
+		
+	for (BasicAccount a : accounts.values()){
+		if (a instanceof CDAccount){
+			CDBalance+=a.getCurrentAccountBalance();
+			CDNumber+=1;
+		}
+		else if(a instanceof CheckingAccount){
+			CheckingBalance+=a.getCurrentAccountBalance();
+			CheckingNumber+=1;	
+		}
+		else if(a instanceof LoanAccount){
+			LoanBalance=a.getCurrentAccountBalance();
+			LoanNumber+=1;
+		}
+		else if(a instanceof LOCAccount){
+			LOCBalance=a.getCurrentAccountBalance();
+			LOCLimits+=a.getMinimumAccountBalance();
+			LOCNumber+=1;
+			
+		}
+		else if(a instanceof SavingsAccount){
+			SavingsBalance+=a.getCurrentAccountBalance();
+			SavingsNumber+=1;
+		}
+	}	
+	
+		GlobalStats MYGlobalStats = new GlobalStats(LOCLimits, LOCBalance, LOCNumber, LoanBalance, LoanNumber, CheckingBalance, CheckingNumber, CDBalance, CDNumber, SavingsBalance, SavingsNumber);	
+
+	return MYGlobalStats;
+	
+}
 
 }
 
