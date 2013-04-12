@@ -24,14 +24,17 @@ public class CheckingAccount extends BasicAccount implements CustomerTransferSou
 	public void appendTransaction(Transaction transaction, BasicUser initiator){
 //transaction may be positive or negative. just need to make sure a negative transaction...
 //...wouldn't put us under the limit
-	if((accountBalance-transaction.getAmount())<BankGlobal.getOverdraftLimit()){
-		transactionList.add(new Transaction(BankGlobal.getOverdraftFee(), owner, owner, 3));
+		if (transaction.getTransactionType() == Transaction.WITHDRAWAL){
+			if (accountBalance + transaction.getAmount() < BankGlobal.getOverdraftLimit()){
+				transactionList.add(new Transaction(BankGlobal.getOverdraftFee(), owner, owner, 3));
+			}
+			else{
+				transactionList.add(transaction);
+			}
 		}
-	else{
-		transactionList.add(transaction);
+		else transactionList.add(transaction);	
+		updateCurrentAccountBalance();
 	}
-	updateCurrentAccountBalance();
-}
 	
 //	public void applyUnderLimitServiceCharge(BasicUser initiator){
 //		if(BankGlobal.getunderlimitfeecheckingboolean()){
