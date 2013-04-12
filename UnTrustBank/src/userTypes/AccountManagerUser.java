@@ -71,7 +71,10 @@ public class AccountManagerUser extends BasicUser{
 		input.close();
 	}
 	
-	
+	/**
+	 * Method to add a new account to a CustomerUser's accounts.
+	 * @param c - the customer to add the account to.  The customer will end up with one of the 5 account types.
+	 */
 	public void openNewCustomerAccount(CustomerUser c)
 	{
 		Scanner input = new Scanner(System.in);
@@ -139,9 +142,15 @@ public class AccountManagerUser extends BasicUser{
 		//CDAccount a = new CDAccount(c, BankGlobal.getNewAccountID(), )// do same for CDAccount.
 	}
 	
+	/**
+	 * Method to set an account's minimum account balance for use with LOCAccounts.  The value should be negative to represent the borrowed limit.
+	 * @param account - the account to set the LOCCap for.
+	 * @param cap - the amount to set the cap to.
+	 */
 	public void setAccountLOCCap(LOCAccount account, double cap){
 		account.setMinimumAccountBalance(cap);
 	}
+	
 	public void closeAccount(CustomerUser c , BasicAccount a)
 	{
 		c.getCustomerAccountsList().remove(a);
