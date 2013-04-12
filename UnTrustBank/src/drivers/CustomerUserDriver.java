@@ -3,6 +3,8 @@ import userTypes.CustomerUser;
 import userTypes.TellerUser;
 import userTypes.AccountManagerUser;
 import dateTime.DateTime;
+import accountTypes.CheckingAccount;
+import bank.Transaction;
 
 public class CustomerUserDriver {
 
@@ -17,9 +19,22 @@ public class CustomerUserDriver {
 		for(int i=0; i<pass.length(); i++){
 			password[i]=pass.charAt(i);
 		}
+		
 		CustomerUser bob = new CustomerUser("Jesse","Charles","Everett", true, dobbob, 555555555, password, "jceverett", 1);
 		TellerUser sally = new TellerUser();
 		AccountManagerUser Chris = new AccountManagerUser();
+		CheckingAccount dollabills = new CheckingAccount(bob, 1);
+		CheckingAccount dolladollabills = new CheckingAccount(bob, 2);
+		Transaction moneyz = new Transaction(7000000, bob, sally, 1);
+		
+		bob.addCustomerAccount(dollabills);
+		bob.addCustomerAccount(dolladollabills);
+		dollabills.updateCurrentAccountBalance();
+//		sally.deposit(moneyz, dollabills);
+		dollabills.appendTransaction(moneyz, sally);
+		dollabills.updateCurrentAccountBalance();
+		System.out.println(dollabills.getCurrentAccountBalance());
+		
 		System.out.println(bob.getFirstName());
 		System.out.println(bob.getMiddleName());
 		System.out.println(bob.getLastName());
