@@ -47,7 +47,8 @@ private double CDAvg;
 private double SavingsBalance;
 private int SavingsNumber;
 private double SavingsAvg;
-	
+
+private double ALLtheaccounts;
 	
 public GlobalStats(double myLOCLimits, double myLOCCurrentBalances, int myLOCNumber, double myLoanBalance, int myLoanNumber, double myCheckingBalance, int myCheckingNumer, double myCDBalance, int myCDNumber, double mySavingsBalance, int mySavingsNumber){
 	//LOC, Loan, Checking, CDA, Savings
@@ -63,23 +64,69 @@ public GlobalStats(double myLOCLimits, double myLOCCurrentBalances, int myLOCNum
 	SavingsBalance=mySavingsBalance;
 	SavingsNumber=mySavingsNumber;
 	
-	LOCLimitsAvg=LOCLimits/LOCNumber;
-	LOCBalanceAvg=LOCCurrentBalances/LOCNumber;
-	LoanAvg=LoanBalance/LoanNumber;
-	CheckingAvg=CheckingBalance/CheckingNumber;
-	CDAvg= CDBalance/CDNumber;
+	LOCLimitsAvg=Math.round((LOCLimits/LOCNumber)*100)/100;
+	LOCBalanceAvg=Math.round((LOCCurrentBalances/LOCNumber)*100)/100;
+	LoanAvg=Math.round((LoanBalance/LoanNumber)*100)/100;
+	CheckingAvg=Math.round((CheckingBalance/CheckingNumber)*100)/100;
+	CDAvg= Math.round((CDBalance/CDNumber)*100)/100;
 	
-	
+	ALLtheaccounts= CDBalance + CheckingBalance  + LoanBalance + SavingsBalance + LOCLimits;
 	
 	}
 
 public void toConsole(){
 	
-	String mystring="";
-	String CDstring1 = "CD Accounts Total Balances: " + CDBalance;
+	String mystring="Account Stats";
+	System.out.println(mystring);
+	System.out.println("UnTrust's Current Balance of all accounts is " + ALLtheaccounts);
+	System.out.println("Individual Account Types:");
+	
+	
+	String CDstring1 = "CD Accounts Total Balances: $" + CDBalance;
 	System.out.println(CDstring1);
 	String CDstring2 = "Number of CD Accounts: " + CDNumber;
 	System.out.println(CDstring2);
+	String CDstring3 = "Average of CD Account Balances: $" + CDAvg;
+	System.out.println(CDstring3);
+	
+	String CheckingString1 = "Checking Accounts Total Balances: $" + CheckingBalance;
+	System.out.println(CheckingString1);
+	String CheckingString2 = "Number of Checking Accounts: " + CheckingNumber;
+	System.out.println(CheckingString2);
+	String CheckingString3 = "Average of Checking Accounts Balances: $" + CheckingAvg;
+	System.out.println(CheckingString3);
+	
+	String SavingsString1 = "Savings Accounts Total Balances: $" + SavingsBalance;
+	System.out.println(SavingsString1);
+	String SavingsString2 = "Number of Savings Accounts: $" + SavingsNumber;
+	System.out.println(SavingsString2);
+	String SavingsString3 = "Average of Savings Accounts $" + SavingsAvg;
+	System.out.println(SavingsString3);
+	
+	String LoanString1 = "Loan Accounts Total Balances Owed: $" + Math.abs(LoanBalance);
+	System.out.println(LoanString1);
+	String LoanString2 = "Number of Loan Accounts: " + LoanNumber;
+	System.out.println(LoanString2);
+	String LoanString3 = "Average of Loan Accounts: $" + Math.abs(LoanAvg);
+	System.out.println(LoanString3);
+	
+	String LOCString1 = "Line-of-Credit Accounts Total Limits: $" + Math.abs(LOCLimits);
+	System.out.println(LOCString1);
+	String LOCString3="LOC Accounts Total Current Balances owed: $" + Math.abs(LOCCurrentBalances);
+	System.out.println(LOCString3);
+	String LOCString2 = "Number of LOC Accounts: " + LOCNumber;
+	System.out.println(LOCString2);
+	String LOCString4 = "LOC Limits Average: $" + Math.abs(LOCLimitsAvg);
+	System.out.println(LOCString4);
+	String LOCString5 = "LOC Current Balances Average: $" + Math.abs(LOCBalanceAvg);
+	
+	
+	
+	
+	
+	
+	
+	
 	//NOTE!!!! NEED TO REPORT ALL ACCOUNTS AS POSITIVE NUMBER. USE MATH.ABS ON LOANS AND LOC. WE'LL IGNORE THE CASE THAT THE CHECKING COULD BE UNDER AVERAGE,
 	//UNLESS YOU WANT TO DEAL WITH THAT NOW. G2G... - DANIA
 	

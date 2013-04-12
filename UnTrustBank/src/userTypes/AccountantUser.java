@@ -17,7 +17,9 @@ import bank.Request;
 import userTypes.AccountManagerUser;
 import bank.Transaction;
 import userTypes.CustomerUser;
+import accountStatistics.*;
 public class AccountantUser extends BasicUser {
+private GlobalStats	myGlocalStats;
 
 public AccountantUser(String Firstname, String MiddleName, String LastName, boolean IsMale, DateTime DOB, char[] PassWord, String UserName, int UserID ){
 	//String firstName, String middleName, String lastName, boolean isMale,
@@ -27,6 +29,17 @@ public AccountantUser(String Firstname, String MiddleName, String LastName, bool
 }
 public AccountantUser(){
 	super("Carl the Accountant");
+}
+
+public void DisplayGlobalStats(){
+	myGlocalStats = BankGlobal.getGlobalStats();
+	myGlocalStats.toConsole();
+}
+
+public void setGlobalLoanCap(){
+	//need new stream reader
+	//BankGlobal.setLoanCap(Cap);
+	
 }
 
 }
