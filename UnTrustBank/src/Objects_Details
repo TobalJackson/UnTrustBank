@@ -317,6 +317,15 @@ Users:
 
 AccountStatistics:
 
+	-number of accounts (of each type)
+	-sum of balances of accounts for each type
+	-average balances of each type of account
+	-STDeviation (not needed)
+	
+	Teller statistics needed:
+		-account balance
+		-
+
 	AccountStats:Abstract
 	
 		-totalTransactions:int

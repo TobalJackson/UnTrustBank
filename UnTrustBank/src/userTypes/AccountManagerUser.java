@@ -26,6 +26,11 @@ public class AccountManagerUser extends BasicUser{
 		return c.getCustomerSSN(this);
 	}
 	
+	
+	/**
+	 * Method called when the AccountManager selects to enroll a new customer into the system.  Creates a new CustomerUser,
+	 * then prompts to set up an account to give that user.
+	 */
 	public void enrollNewCustomer(){
 		Scanner input = new Scanner(System.in);
 		String firstName, middleName, lastName, username;
@@ -65,6 +70,8 @@ public class AccountManagerUser extends BasicUser{
 		openNewCustomerAccount(c);
 		input.close();
 	}
+	
+	
 	public void openNewCustomerAccount(CustomerUser c)
 	{
 		Scanner input = new Scanner(System.in);
