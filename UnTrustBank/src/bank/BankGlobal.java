@@ -105,6 +105,10 @@ public class BankGlobal {
 	public static int getCurrentCustomerID(){
 		return currentCustomerID;
 	}
+	public static CustomerUser getCustomerByID(int id){
+		return customers.get(id);
+	}
+	
 	
 	public static int getNewTransactionID(){
 		currentTransactionID++;
@@ -113,6 +117,9 @@ public class BankGlobal {
 	}
 	public static int getCurrentTransactionID(){
 		return currentTransactionID;
+	}
+	public static Transaction getTransactionByID(int id){
+		return transactions.get(id);
 	}
 	
 	public static int getNewAccountID(){
@@ -123,7 +130,9 @@ public class BankGlobal {
 	public static int getCurrentAccountID(){
 		return currentAccountID;
 	}
-
+	public static BasicAccount getAccountByID(int id){
+		return accounts.get(id);
+	}
 	
 	
 	private static double CDSavingsOffset;
