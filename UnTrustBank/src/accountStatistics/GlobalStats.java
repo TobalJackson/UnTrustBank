@@ -73,7 +73,7 @@ public GlobalStats(double myLOCLimits, double myLOCCurrentBalances, int myLOCNum
 	
 	}
 
-public toConsole(){
+public void toConsole(){
 	
 	String mystring="";
 	String CDstring1 = "CD Accounts Total Balances: " + CDBalance;
