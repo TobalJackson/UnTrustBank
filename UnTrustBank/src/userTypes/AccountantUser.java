@@ -2,6 +2,8 @@ package userTypes;
 
 import dateTime.DateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import accountTypes.BasicAccount;
 import accountTypes.CustomerTransferSource;
 import accountTypes.LOCAccount;
@@ -45,6 +47,11 @@ public void DisplayGlobalStats(){
 public void setGlobalLoanCap(){
 	//need new stream reader
 	//BankGlobal.setLoanCap(Cap);
+	Scanner input = new Scanner(System.in);
+	System.out.println("The current Loan Cap is $" + (-BankGlobal.getLoanCap()) + ". What would you like the new cap to be?");
+	double newcap = input.nextDouble();
+	BankGlobal.setLoanCap(-newcap);
+	System.out.println("The new Loan Cap is $" + (-BankGlobal.getLoanCap()) + ".");
 	
 }
 

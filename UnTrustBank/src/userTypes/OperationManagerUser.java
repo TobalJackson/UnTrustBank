@@ -18,11 +18,10 @@ public class OperationManagerUser extends BasicUser {
 		BankGlobal.appendToGlobalEmployeeList(this);
 	}
 	
-	
+
 	public void getNewUserID(){
 		this.userID = BankGlobal.getNewEmployeeID();
 	}
-	
 	public void setGlobalInterestRate(double newRate)
 	{
 		this.GlobalInterestRate = newRate;
