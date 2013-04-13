@@ -11,7 +11,7 @@ public abstract class BasicUser {
 	private String username;
 	protected int userID;
 	protected int userType = -1;
-	protected static final int CUSTOMER_USER_TYPE = 0, ACCOUNTANT_USER_TYPE = 1, ACCOUNT_MANAGER_USER_TYPE = 2, 
+	public static final int CUSTOMER_USER_TYPE = 0, ACCOUNTANT_USER_TYPE = 1, ACCOUNT_MANAGER_USER_TYPE = 2, 
 			AUDITOR_USER_TYPE = 3, OPERATION_MANAGER_USER_TYPE = 4, TELLER_USER_TYPE = 5;
 	protected static int johnDoeIndex = 0;
 	public BasicUser(String firstName, String middleName, String lastName, boolean isMale,
