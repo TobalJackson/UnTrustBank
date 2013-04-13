@@ -29,14 +29,18 @@ public class CustomerUser extends BasicUser {
 	private boolean isActiveCustomer;
 	private int SSN;
 	
+	public void getNewUserID(){
+		this.userID = BankGlobal.getNewCustomerID();
+	}
+	
 	public ArrayList<BasicAccount> getCustomerAccountsList()
 	{
 		return customerAccounts;
 	}
 	
 	public CustomerUser(String firstName, String middleName, String lastName, boolean isMale,
-			DateTime dob,int ssn, char[] password, String username, int userID){
-		super(firstName, middleName, lastName, isMale, dob, password, username, userID);
+			DateTime dob,int ssn, char[] password, String username){
+		super(firstName, middleName, lastName, isMale, dob, password, username);
 		this.SSN = ssn;
 		BankGlobal.appendToGlobalCustomerList(this);
 	}

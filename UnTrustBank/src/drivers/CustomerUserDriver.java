@@ -20,7 +20,7 @@ public class CustomerUserDriver {
 			password[i]=pass.charAt(i);
 		}
 		
-		CustomerUser bob = new CustomerUser("Jesse","Charles","Everett", true, dobbob, 555555555, password, "jceverett", 1);
+		CustomerUser bob = new CustomerUser("Jesse","Charles","Everett", true, dobbob, 555555555, password, "jceverett");
 		TellerUser sally = new TellerUser();
 		AccountManagerUser Chris = new AccountManagerUser();
 		CheckingAccount dollabills = new CheckingAccount(bob);

@@ -6,6 +6,10 @@ public class OperationManagerUser extends BasicUser {
 
 	private static double GlobalInterestRate;
 	
+	public void getNewUserID(){
+		this.userID = BankGlobal.getNewEmployeeID();
+	}
+	
 	public void setGlobalInterestRate(double newRate)
 	{
 		this.GlobalInterestRate = newRate;

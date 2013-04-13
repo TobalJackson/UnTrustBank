@@ -26,7 +26,9 @@ public class AccountManagerUser extends BasicUser{
 		return c.getCustomerSSN(this);
 	}
 	
-	
+	public void getNewUserID(){
+		this.userID = BankGlobal.getNewEmployeeID();
+	}
 	/**
 	 * Method called when the AccountManager selects to enroll a new customer into the system.  Creates a new CustomerUser,
 	 * then prompts to set up an account to give that user.
@@ -66,7 +68,7 @@ public class AccountManagerUser extends BasicUser{
 		char[] password2 = password.toCharArray();
 		
 		
-		CustomerUser c = new CustomerUser(firstName, middleName, lastName, isMale, dob, ssn, password2, username, userID);
+		CustomerUser c = new CustomerUser(firstName, middleName, lastName, isMale, dob, ssn, password2, username);
 		openNewCustomerAccount(c);
 		input.close();
 	}
@@ -113,6 +115,7 @@ public class AccountManagerUser extends BasicUser{
 		double indep = input.nextDouble();
 		SavingsAccount a = new SavingsAccount(c, new Transaction(indep, c, this, 1));
 		System.out.println("Savings account " + a.getAccountID() + " created successfully.");
+		input.close();
 	}
 	
 	public void setupLOCAccount(CustomerUser c){
@@ -131,7 +134,8 @@ public class AccountManagerUser extends BasicUser{
 		//if its personalized, it has to be "offset" from the global rate, so just ask the user how much they want it offset
 		//if they want it the same, just put 0
 		// so I suppose have a line to ask if they want to use the global, and if not, what do they want the rate to be?
-		//LoanAccount a = new LoanAccount(c, BankGlobal.getNewAccountID(), interest, minPayment,)//need to change Loan account constructor, make initial loan an amount, construct transaction within constructor.
+		//LoanAccount a = new LoanAccount(c, BankGlobal.getNewAccountID(), interest, minPayment,)//need to change Loan account 
+		//constructor, make initial loan an amount, construct transaction within constructor.
 		Scanner input = new Scanner(System.in);
 		//input those things needed for the constructor below
 		//LoanAccount crapbag = new LoanAccount(c, crapbag.getAccountID(), myinterestrateoffset, myminmontlyloanpayment, initialloan)

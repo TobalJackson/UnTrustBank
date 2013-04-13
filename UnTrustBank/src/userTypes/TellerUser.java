@@ -15,11 +15,15 @@ public class TellerUser extends BasicUser {
 	protected ArrayList<Request> requests;
 	public TellerUser(String firstName, String middleName, String lastName, boolean isMale,
 			DateTime dob, char[] password, String username, int userID){
-		super(firstName, middleName, lastName, isMale, dob, password, username, userID);
+		super(firstName, middleName, lastName, isMale, dob, password, username);
 	}
 	
 	public TellerUser(){
 		super();
+	}
+	
+	public void getNewUserID(){
+		this.userID = BankGlobal.getNewEmployeeID();
 	}
 	/**
 	 * method will return account details of the account by inputting the account as a parameter in AccountStats class

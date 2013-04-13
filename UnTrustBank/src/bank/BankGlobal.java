@@ -37,6 +37,7 @@ public class BankGlobal {
 	private static int currentTransactionID;
 	private static int currentAccountID;
 	private static int currentRequestID;
+	private static int currentEmployeeID;
 	
 	
 	/**
@@ -82,7 +83,7 @@ public class BankGlobal {
 	 * @param a - the BasicAccount to be added.
 	 */
 	public static void appendToGlobalAccountList(BasicAccount a){
-		accounts.put(currentAccountID, a);
+		accounts.put(a.getAccountID(), a);
 	}
 	
 	/**
@@ -90,7 +91,11 @@ public class BankGlobal {
 	 * @param c - the CustomerUser to be added.
 	 */
 	public static void appendToGlobalCustomerList(CustomerUser c){
-		customers.put(currentCustomerID,c);
+		customers.put(c.getUserID(),c);
+	}
+	
+	public static void appendToGlobalEmployeeList(BasicUser c){
+		employees.put(c.getUserID(), c);
 	}
 	
 	/**
@@ -100,13 +105,23 @@ public class BankGlobal {
 	public static int getNewCustomerID(){
 		currentCustomerID++;
 		return currentCustomerID;
-		
 	}
 	public static int getCurrentCustomerID(){
 		return currentCustomerID;
 	}
 	public static CustomerUser getCustomerByID(int id){
 		return customers.get(id);
+	}
+	
+	public static int getNewEmployeeID(){
+		currentEmployeeID++;
+		return currentEmployeeID;
+	}
+	public static int getCurrentEmployeeID(){
+		return currentEmployeeID;
+	}
+	public static BasicUser getEmployeeByID(int id){
+		return employees.get(id);
 	}
 	
 	

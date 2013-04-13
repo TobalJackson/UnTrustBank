@@ -1,4 +1,5 @@
 package userTypes;
+import bank.BankGlobal;
 import dateTime.*;
 public abstract class BasicUser {
 	private String firstName;
@@ -8,9 +9,9 @@ public abstract class BasicUser {
 	private boolean isMale;
 	private char[] password;
 	private String username;
-	private int userID;
+	protected int userID;
 	public BasicUser(String firstName, String middleName, String lastName, boolean isMale,
-			DateTime dob, char[] password, String username, int userID){
+			DateTime dob, char[] password, String username){
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -18,14 +19,17 @@ public abstract class BasicUser {
 		this.dob = dob;
 		this.password = password;
 		this.username = username;
-		this.userID = userID;
+//		this.userID = BankGlobal.getNewCustomerID(); //have the userID set in either the CustomerUser or employee user classes.
+		getNewUserID();
 	}
+	public abstract void getNewUserID();
+	
 	public BasicUser(){ //for testing purposes
-		this("John", "Michael", "Doe", true, new DateTime(1987, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe", 0);
+		this("John", "Michael", "Doe", true, new DateTime(1987, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe");
 	}
 	
 	public BasicUser(String FirstName){
-		this(FirstName, "M", "Doe", true, new DateTime(1988, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe", 0);
+		this(FirstName, "M", "Doe", true, new DateTime(1988, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe");
 	}
 	public String getName(){
 		return (this.firstName + " " + this.middleName + " " + this.lastName);

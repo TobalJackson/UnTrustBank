@@ -21,6 +21,10 @@ public class AuditorUser extends BasicUser {
 // display fraud accounts
 	
 //overturn flag
+	
+	public void getNewUserID(){
+		this.userID = BankGlobal.getNewEmployeeID();
+	}
 public void overturnFlag(long TransactionID){
 	Transaction hello = BankGlobal.findTransactionfromID(TransactionID);
 	hello.setIsNotMarkedFraudulent();

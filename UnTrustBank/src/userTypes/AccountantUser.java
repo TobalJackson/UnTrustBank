@@ -21,16 +21,18 @@ import accountStatistics.*;
 public class AccountantUser extends BasicUser {
 private GlobalStats	myGlocalStats;
 
-public AccountantUser(String Firstname, String MiddleName, String LastName, boolean IsMale, DateTime DOB, char[] PassWord, String UserName, int UserID ){
+public AccountantUser(String Firstname, String MiddleName, String LastName, boolean IsMale, DateTime DOB, char[] PassWord, String UserName ){
 	//String firstName, String middleName, String lastName, boolean isMale,
 	//DateTime dob, char[] password, String username, int userID
-	super(Firstname, MiddleName, LastName, IsMale, DOB, PassWord, UserName, UserID);
-	
+	super(Firstname, MiddleName, LastName, IsMale, DOB, PassWord, UserName);
 }
 public AccountantUser(){
 	super("Carl the Accountant");
 }
 
+public void getNewUserID(){
+	this.userID = BankGlobal.getNewEmployeeID();
+}
 public void DisplayGlobalStats(){
 	myGlocalStats = BankGlobal.getGlobalStats();
 	myGlocalStats.toConsole();
