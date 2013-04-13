@@ -10,7 +10,7 @@ import bank.Transaction;
 import dateTime.DateTime;
 import dateTime.Time;
 import bank.Transaction;
-
+import accountStatistics.*;
 public class CDAccount extends BasicAccount implements CustomerTransferSource, WithdrawRequestable {
 private int CDDuration;
 private double interestrate;
@@ -20,6 +20,7 @@ private DateTime maturitydate;
 public CDAccount(CustomerUser owner, Transaction mytransaction,
 			int myCDDuration, double minaccountbalance) throws IllegalArgumentException {
 			super(owner);
+			this.accountType = BasicAccount.CD_ACCOUNT_TYPE;
 			if(myCDDuration>5 || myCDDuration <0){
 				throw new IllegalArgumentException();
 			}
@@ -146,7 +147,9 @@ public void respondToTimeChange(OperationManagerUser OM) throws IllegalStateExce
 	
 }
 
-
+public AccountStats getAccountStats(){
+	return new CDAccountStats(this);
+}
 
 
 

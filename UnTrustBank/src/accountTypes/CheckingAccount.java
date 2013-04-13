@@ -6,6 +6,7 @@ import java.util.Iterator;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import userTypes.OperationManagerUser;
+import accountStatistics.*;
 import bank.BankGlobal;
 import bank.Transaction;
 import dateTime.DateTime;
@@ -16,6 +17,7 @@ public class CheckingAccount extends BasicAccount implements CustomerTransferSou
 	public CheckingAccount(CustomerUser owner) {
 					
 		super(owner);
+		this.accountType = BasicAccount.CHECKING_ACCOUNT_TYPE;
 //		updateCurrentAccountBalance();
 		
 	}
@@ -77,4 +79,8 @@ public class CheckingAccount extends BasicAccount implements CustomerTransferSou
 	public void changeBalance(double amount){
 	
 	}
+	public AccountStats getAccountStats(){
+		return new CheckingAccountStats(this);
+	}
+	
 }

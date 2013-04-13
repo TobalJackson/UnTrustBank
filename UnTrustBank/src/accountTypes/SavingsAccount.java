@@ -1,7 +1,6 @@
 package accountTypes;
 
 import java.util.Iterator;
-
 import dateTime.DateTime;
 import dateTime.Time;
 import userTypes.BasicUser;
@@ -10,12 +9,14 @@ import userTypes.OperationManagerUser;
 import bank.BankGlobal;
 import bank.Request;
 import bank.Transaction;
+import accountStatistics.*;
 
 public class SavingsAccount extends BasicAccount implements CustomerTransferSource, WithdrawRequestable{
 	private double interestrate;
 	
 	public SavingsAccount(CustomerUser owner, Transaction initialDeposit) throws IllegalArgumentException {
 		super(owner);
+		this.accountType = BasicAccount.SAVINGS_ACCOUNT_TYPE;
 		if(initialDeposit.getAmount()<=0){
 			throw new IllegalArgumentException("intial deposit must be positive");
 		}
@@ -61,6 +62,9 @@ public class SavingsAccount extends BasicAccount implements CustomerTransferSour
 		}
 		
 		updateCurrentAccountBalance();
+	}
+	public AccountStats getAccountStats(){
+		return new SavingsAccountStats(this);
 	}
 	
 }

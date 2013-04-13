@@ -15,6 +15,7 @@ import userTypes.CustomerUser;
 import userTypes.OperationManagerUser;
 import dateTime.DateTime;
 import userTypes.AuditorUser;
+import accountStatistics.*;
 
 public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
@@ -33,8 +34,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 	protected int numWithdrawals;
 	protected int numDeposits;
 	protected boolean hasTellerCharge;
+	protected int accountType = -1;
+	public static final int CD_ACCOUNT_TYPE = 0, CHECKING_ACCOUNT_TYPE = 1, LOAN_ACCOUNT_TYPE = 2, LOC_ACCOUNT_TYPE = 3, SAVINGS_ACCOUNT_TYPE = 4;
 	
-	public BasicAccount(CustomerUser owner){ //default constructor only accepts Customer and account ID
+	public BasicAccount(CustomerUser owner){ //default constructor only accepts Customer
 		this.owner = owner;
 		owner.addCustomerAccount(this); //adds the account to the Customer's list of accounts.
 		this.accountID = BankGlobal.getNewAccountID();
@@ -48,7 +51,8 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		BankGlobal.appendToGlobalAccountList(this);
 	}
 	
-
+	
+	
 	public abstract void respondToTimeChange(OperationManagerUser OperationManagerIntiatingTimeChange);
 	
 	public void addRequest(Request request){
@@ -225,10 +229,39 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		hasTellerCharge=yes;
 	}
 	
-//	@Override
-//	public String toString(){
-//		return "" + this.
-//	}
+	public int getAccountType(){
+		return this.accountType;
+	}
+	
+	public abstract AccountStats getAccountStats();
+		
+	
+	//CD_ACCOUNT_TYPE = 0, CHECKING_ACCOUNT_TYPE = 1, LOAN_ACCOUNT_TYPE = 2, LOC_ACCOUNT_TYPE = 3, SAVINGS_ACCOUNT_TYPE = 4;
+	public String accountTypeToString(int accountType){
+		String result = "";
+		switch (accountType){
+		case 0:
+			result += "CD Account";
+			break;
+		case 1:
+			result += "Checking Account";
+			break;
+		case 2:
+			result += "Loan Account";
+			break;
+		case 3:
+			result += "LOC Account";
+			break;
+		case 4:
+			result += "Savings Account";
+			break;
+		}
+		return result;
+	}
+	//AccountID | AccountType | AccountBalance | Deposits | Withdrawals
+	public void printAccountSummary(){
+		System.out.printf("%4d | %15s | %5d | %3d | %3d" , this.getAccountID(), accountTypeToString(this.getAccountType()), this.getCurrentAccountBalance(), this.getAccountStats().getTotalCredits(), this.getAccountStats().getTotalDebits());
+	}
 }
 	
 

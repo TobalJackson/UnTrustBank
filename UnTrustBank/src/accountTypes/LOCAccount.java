@@ -10,6 +10,7 @@ import dateTime.Time;
 import userTypes.BasicUser;
 import userTypes.CustomerUser;
 import userTypes.OperationManagerUser;
+import accountStatistics.*;
 
 public class LOCAccount extends BasicAccount implements Loanable{
 	private double thismonthspaid;
@@ -18,6 +19,7 @@ public class LOCAccount extends BasicAccount implements Loanable{
 	
 	public LOCAccount(CustomerUser owner, double maxallowedtospend, double interestOffsetFromGlobal) throws IllegalArgumentException {
 		super(owner);
+		this.accountType = BasicAccount.LOC_ACCOUNT_TYPE;
 
 	if(maxallowedtospend>0){
 		throw new IllegalArgumentException("cap must be set as negative");
@@ -115,4 +117,8 @@ public void setOffset(double mynewoffset)throws IllegalArgumentException{
 		updateCurrentAccountBalance();	
 	}
 
+	public AccountStats getAccountStats(){
+		return new LOCAccountStats(this);
+	}
+	
 }
