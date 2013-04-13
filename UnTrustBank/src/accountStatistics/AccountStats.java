@@ -2,6 +2,7 @@ package accountStatistics;
 import accountTypes.BasicAccount;
 import dateTime.DateTime;
 import bank.Transaction;
+import java.util.ArrayList;
 
 
 public abstract class AccountStats {	
@@ -14,24 +15,9 @@ public abstract class AccountStats {
 	private DateTime timeStamp1;
 	private DateTime timeStamp2;
 	private final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4, SERVICE_CHARGE = 5;
+	private ArrayList<Transaction> allTransactions;
+	private ArrayList<Transaction> appliedTransactions;
 	
-//	public AccountStats(int totalTransactions, int totalDebts, int totalCredits, double totalDebitAmount, double totalCreditAmount){
-//		this.totalTransactions=totalTransactions;
-//		this.totalDebts=totalDebts;
-//		this.totalCredits=totalCredits;
-//		this.totalDebitAmount=totalDebitAmount;
-//		this.totalCreditAmount=totalCreditAmount;
-//	}
-//	
-//	public AccountStats(int totalTransactions, int totalDebts, int totalCredits, double totalDebitAmount, double totalCreditAmount, DateTime timeStamp1, DateTime timeStamp2){
-//		this.totalTransactions=totalTransactions;
-//		this.totalDebts=totalDebts;
-//		this.totalCredits=totalCredits;
-//		this.totalDebitAmount=totalDebitAmount;
-//		this.totalCreditAmount=totalCreditAmount;
-//		this.timeStamp1=timeStamp1;
-//		this.timeStamp2=timeStamp2;
-//	}
 	
 	/**
 	 * constructor assigns values to all above fields
@@ -47,6 +33,8 @@ public abstract class AccountStats {
 		int sumDeposit=0;
 		this.totalTransactions=account.getFullTransactionHistory().size();
 		this.totalAppliedTransactions=account.getAppliedTransactionHistory().size();
+		allTransactions = account.getFullTransactionHistory();
+		appliedTransactions = account.getAppliedTransactionHistory();
 		
 		for(Transaction t: account.getAppliedTransactionHistory()){
 			if(t.getTransactionType()==WITHDRAWAL){
@@ -93,6 +81,9 @@ public abstract class AccountStats {
 		int sumDeposit=0;
 		this.totalTransactions=account.getAppliedTransactionHistory().size();
 		this.totalAppliedTransactions=account.getAppliedTransactionHistory().size();
+		allTransactions = account.getFullTransactionHistory();
+		appliedTransactions = account.getAppliedTransactionHistory();
+		
 		for(Transaction t: account.getFullTransactionHistory()){
 			if((t.getTransactionType()==WITHDRAWAL)&&((t.getTimeStamp().compare(timeStamp1)) > 0)&&(t.getTimeStamp().compare(timeStamp2)) < 0){
 				numWithdraw++;
