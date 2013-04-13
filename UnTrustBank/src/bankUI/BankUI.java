@@ -3,7 +3,7 @@ import java.util.Stack;
 import java.util.Scanner;
 
 import bank.BankGlobal;
-//import bank.BankGlobal;
+import bank.BankGlobal;
 public class BankUI {
 //	public static BankGlobal bank = new BankGlobal();
 	Scanner input = new Scanner(System.in);
@@ -13,7 +13,13 @@ public class BankUI {
 				"Please enter your user name: \n");
 		String userName = input.next();
 		input.close();
-		if BankGlobal.
+		if (BankGlobal.userNameExists(userName)){
+			System.out.println("Please input your password: ");
+			String password = input.next();
+			if (password.equals(BankGlobal.getUserByUserName(userName).isPasswordValid(password.toCharArray()))){
+				
+			}
+		}
 	}
 	
 }

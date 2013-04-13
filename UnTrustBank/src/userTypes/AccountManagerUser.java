@@ -10,11 +10,18 @@ public class AccountManagerUser extends BasicUser{
 // LOC account interest rate is an offset from a global interest rate defined by the operations manager.
 // So I used interestRate as the variable name.  If you decide to use something else, then change it in the 
 // getLOC method in BankGlobal.java
-//	+getCustomerSSN(CustomerUser):int
-//	+openAccount(CustomerUser, BasicAccount):void
-//	+closeAccount(CustomerUser, BasicAccount):void
-//	+setLOCCap(LOCAccount, double):void
-//	+getGlobalLoanCap():double
+
+	public AccountManagerUser(String firstName, String middleName, String lastName, boolean isMale, DateTime dob, char[] password, String username){
+		super(firstName, middleName, lastName, isMale, dob, password, username);
+		this.userType = BasicUser.ACCOUNT_MANAGER_USER_TYPE;
+		BankGlobal.appendToGlobalEmployeeList(this);
+	}
+	
+	public AccountManagerUser(){
+		super();
+		this.userType = BasicUser.ACCOUNT_MANAGER_USER_TYPE;
+		BankGlobal.appendToGlobalEmployeeList(this);
+	}
 	
 	/**
 	 * Method to fetch a customerUser's SSN

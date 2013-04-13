@@ -27,6 +27,7 @@ public class BankGlobal {
 	private static HashMap<Integer, BasicUser> employees = new HashMap<Integer, BasicUser>();
 	private static HashMap<Integer, Transaction> transactions = new HashMap<Integer, Transaction>();
 	private static HashMap<Integer, Request> requests = new HashMap<Integer, Request>();
+	private static HashMap<String, BasicUser> credentials = new HashMap<String, BasicUser>();
 	public static DateTime banktime = new DateTime(1);
 	//CHECK TO MAKE SURE THESE THINGS BELOW BELONG IN THE BANKGLOBAL OBJECT
 	//Yes, but we may need to break up the bank global object to be less cumbersome, divide up the
@@ -39,6 +40,8 @@ public class BankGlobal {
 	private static int currentRequestID;
 	private static int currentEmployeeID;
 	
+	
+
 	
 	/**
 	 * Method used by Tellers to get all pending requests.
@@ -124,7 +127,6 @@ public class BankGlobal {
 		return employees.get(id);
 	}
 	
-	
 	public static int getNewTransactionID(){
 		currentTransactionID++;
 		return currentTransactionID;
@@ -149,6 +151,27 @@ public class BankGlobal {
 		return accounts.get(id);
 	}
 	
+	
+	/**
+	 * Method to check if a user name exists in the system.  Returns true if the user name is associated with a customerUser or employee.
+	 * @param userName - the user name to check for (case sensitive).
+	 * @return <b>boolean</b> - returns true if the User name is associated with a user.
+	 */
+	public static boolean userNameExists(String userName){
+		boolean result = false;
+		if(credentials.containsKey(userName)){
+			result = true;
+		}
+		return result;
+	}
+	
+	public static void addLoginInfo(BasicUser user){
+		credentials.put(user.getUsername(), user);
+	}
+	
+	public static BasicUser getUserByUserName(String userName){
+		return credentials.get(userName);
+	}
 	
 	private static double CDSavingsOffset;
 	

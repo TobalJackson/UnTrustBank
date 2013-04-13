@@ -21,6 +21,17 @@ public class AuditorUser extends BasicUser {
 // display fraud accounts
 	
 //overturn flag
+	public AuditorUser(String firstName, String middleName, String lastName, boolean isMale, DateTime dob, char[] password, String username){
+		super(firstName, middleName, lastName, isMale, dob, password, username);
+		this.userType = BasicUser.AUDITOR_USER_TYPE;
+		BankGlobal.appendToGlobalEmployeeList(this);
+	}
+	public AuditorUser(){
+		super();
+		this.userType = BasicUser.AUDITOR_USER_TYPE;
+		BankGlobal.appendToGlobalEmployeeList(this);
+	}
+	
 	
 	public void getNewUserID(){
 		this.userID = BankGlobal.getNewEmployeeID();

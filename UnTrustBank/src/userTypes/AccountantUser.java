@@ -25,9 +25,13 @@ public AccountantUser(String Firstname, String MiddleName, String LastName, bool
 	//String firstName, String middleName, String lastName, boolean isMale,
 	//DateTime dob, char[] password, String username, int userID
 	super(Firstname, MiddleName, LastName, IsMale, DOB, PassWord, UserName);
+	this.userType = BasicUser.ACCOUNTANT_USER_TYPE;
+	BankGlobal.appendToGlobalEmployeeList(this);
 }
 public AccountantUser(){
 	super("Carl the Accountant");
+	this.userType = BasicUser.ACCOUNTANT_USER_TYPE;
+	BankGlobal.appendToGlobalEmployeeList(this);
 }
 
 public void getNewUserID(){

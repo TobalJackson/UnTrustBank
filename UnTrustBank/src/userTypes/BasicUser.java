@@ -10,8 +10,16 @@ public abstract class BasicUser {
 	private char[] password;
 	private String username;
 	protected int userID;
+	protected int userType = -1;
+	protected static final int CUSTOMER_USER_TYPE = 0, ACCOUNTANT_USER_TYPE = 1, ACCOUNT_MANAGER_USER_TYPE = 2, 
+			AUDITOR_USER_TYPE = 3, OPERATION_MANAGER_USER_TYPE = 4, TELLER_USER_TYPE = 5;
+	protected static int johnDoeIndex = 0;
 	public BasicUser(String firstName, String middleName, String lastName, boolean isMale,
-			DateTime dob, char[] password, String username){
+			DateTime dob, char[] password, String username) throws IllegalArgumentException{
+		if (BankGlobal.userNameExists(username)){
+			throw new IllegalArgumentException("This user name is already taken");
+		}
+		else BankGlobal.addLoginInfo(this);
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -22,15 +30,25 @@ public abstract class BasicUser {
 //		this.userID = BankGlobal.getNewCustomerID(); //have the userID set in either the CustomerUser or employee user classes.
 		getNewUserID();
 	}
-	public abstract void getNewUserID();
 	
 	public BasicUser(){ //for testing purposes
-		this("John", "Michael", "Doe", true, new DateTime(1987, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe");
+		this("John", "Michael", "Doe", true, new DateTime(1987, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe" + johnDoeIndex++);
 	}
 	
 	public BasicUser(String FirstName){
-		this(FirstName, "M", "Doe", true, new DateTime(1988, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, "JohnDoe");
+		this(FirstName, "M", "Doe", true, new DateTime(1988, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, FirstName);
 	}
+	
+	public int getUserType(){
+		return userType;
+	}
+	
+	/**
+	 * abstract method implemented separately by CustomerUser and <employee>User classes to get customer and employee ID numbers separately.
+	 */
+	public abstract void getNewUserID();
+	
+	
 	public String getName(){
 		return (this.firstName + " " + this.middleName + " " + this.lastName);
 	}

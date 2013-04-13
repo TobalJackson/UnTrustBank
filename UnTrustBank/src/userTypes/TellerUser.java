@@ -12,14 +12,18 @@ import accountStatistics.AccountStats;
 
 
 public class TellerUser extends BasicUser {
+	
 	protected ArrayList<Request> requests;
+	
 	public TellerUser(String firstName, String middleName, String lastName, boolean isMale,
 			DateTime dob, char[] password, String username, int userID){
 		super(firstName, middleName, lastName, isMale, dob, password, username);
+		this.userType = BasicUser.TELLER_USER_TYPE;
 	}
-	
 	public TellerUser(){
 		super();
+		this.userType = BasicUser.TELLER_USER_TYPE;
+		BankGlobal.appendToGlobalEmployeeList(this);
 	}
 	
 	public void getNewUserID(){
