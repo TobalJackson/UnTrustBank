@@ -4,19 +4,20 @@ import bank.BankGlobal;
 
 public class OperationManagerUser extends BasicUser {
 
-	private static double GlobalInterestRate;
 	
 	public void getNewUserID(){
 		this.userID = BankGlobal.getNewEmployeeID();
 	}
 	
-	public void setGlobalInterestRate(double newRate)
+	
+	
+	public void setLoanInterestRate(double newRate)
 	{
-		this.GlobalInterestRate = newRate;
+		BankGlobal.setInterestRateLoan(newRate);
 	}
-	public static double getGlobalInterestRate()
+	public static double getLoanInterestRate()
 	{
-		return GlobalInterestRate;
+		return BankGlobal.getInterestRateLoan();
 	}
 	
 	public void CauseTimeChange(){

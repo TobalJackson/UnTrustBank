@@ -13,7 +13,10 @@ public class BankUI {
 				"Please enter your user name: \n");
 		String userName = input.next();
 		input.close();
-		if BankGlobal.
+		//write BankGlobal method to loop thru all users - both customers and employees,  and 
+		//compare the username to each user's username- check for a match
+		
+		//if BankGlobal.
 	}
 	
 }
