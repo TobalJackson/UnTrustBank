@@ -79,4 +79,5 @@ public abstract class BasicUser {
 	public int getUserID(){
 		return this.userID;
 	}
+	
 }

@@ -17,6 +17,7 @@ public abstract class AccountStats {
 	private final int WITHDRAWAL = 0, DEPOSIT = 1, INTEREST = 2, PENALTY = 3, OTHER = 4, SERVICE_CHARGE = 5;
 	private ArrayList<Transaction> allTransactions;
 	private ArrayList<Transaction> appliedTransactions;
+	private BasicAccount account;
 	
 	
 	/**
@@ -27,6 +28,7 @@ public abstract class AccountStats {
 	 * @param account
 	 */
 	public AccountStats(BasicAccount account){
+		this.account = account;
 		int numWithdraw=0;
 		int numDeposit=0;
 		int sumWithdraw=0;
@@ -134,8 +136,4 @@ public abstract class AccountStats {
 	public double getTotalCreditAmount(){
 		return totalCreditAmount;
 	}
-	
-//	public AccountStats getAccountStatsInDateRange(BasicAccount account, DateTime timeStamp1, DateTime timeStamp2){
-//		return AccountStats(account, timeStamp1, timeStamp2);
-//	}
   }

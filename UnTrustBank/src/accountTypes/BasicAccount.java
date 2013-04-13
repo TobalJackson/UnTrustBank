@@ -129,10 +129,10 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		double currentbalance=0;
 		if(transactionList.size()>0){
 			for(Transaction t:transactionList){
-				System.out.println(transactionList.size());
+//				System.out.println(transactionList.size());
 				if(t.getIsApplied() == true){
 					currentbalance+=t.getAmount();
-					System.out.println(t.getAmount());
+//					System.out.println(t.getAmount());
 				}
 			}
 		}
@@ -241,27 +241,25 @@ public abstract class BasicAccount implements Iterable<BasicAccount>{
 		String result = "";
 		switch (accountType){
 		case 0:
-			result += "CD Account";
+			result += "CD";
 			break;
 		case 1:
-			result += "Checking Account";
+			result += "Checking";
 			break;
 		case 2:
-			result += "Loan Account";
+			result += "Loan";
 			break;
 		case 3:
-			result += "LOC Account";
+			result += "LOC";
 			break;
 		case 4:
-			result += "Savings Account";
+			result += "Savings";
 			break;
 		}
 		return result;
 	}
-	//AccountID | AccountType | AccountBalance | Deposits | Withdrawals
-	public void printAccountSummary(){
-		System.out.printf("%4d | %15s | %5d | %3d | %3d" , this.getAccountID(), accountTypeToString(this.getAccountType()), this.getCurrentAccountBalance(), this.getAccountStats().getTotalCredits(), this.getAccountStats().getTotalDebits());
-	}
+	
+	
 }
 	
 

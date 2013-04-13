@@ -297,4 +297,12 @@ public class CustomerUser extends BasicUser {
 	public void setIsNotEmployee(){
 		this.isEmployee = false;
 	}
+	public void printAccountSummary(){
+		System.out.printf("%15s|%15s|%15s|%15s|%15s\n", "AccountID", "AccountType", "AccountBalance", "Deposits", "Withdrawals");
+		System.out.printf("%75s\n", "-------------------------------------------------------------------------------");
+		for (BasicAccount account : customerAccounts){
+			System.out.printf("%15d|%15s|%15.2f|%15d|%15d\n" , account.getAccountID(), account.accountTypeToString(account.getAccountType()), account.getCurrentAccountBalance(), account.getAccountStats().getTotalCredits(), account.getAccountStats().getTotalDebits());
+		}
+	}
+	
 }

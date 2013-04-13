@@ -8,6 +8,10 @@ public class CustomerUI {
 	public CustomerUI(CustomerUser user, BankUI uiInstance){
 		menuInstance = uiInstance;
 		this.user = user;
+		customerMenu();
+	}
+	
+	public void customerMenu(){
 		int choice;
 		System.out.println("Customer Menu for " + user.getUsername() + "\n\n" +
 				"Welcome " + user.getFirstName() + ", what would you like to do today?\n\n" +
@@ -20,11 +24,12 @@ public class CustomerUI {
 		input.close();
 		menuChoice(choice);
 	}
+	
 	public void menuChoice(int choice){
 		switch (choice){
-		case 1:
-			viewAccountsMenu();
-			break;
+//		case 1:
+//			viewAccountsMenu();
+//			break;
 		case 2:
 			depositMenu();
 			break;
@@ -38,7 +43,7 @@ public class CustomerUI {
 			this.menuInstance.displayMainMenu();
 		}
 	}
-	private void viewAccountsMenu() {
+	private void viewAccountsMenu(int accountID) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -51,7 +56,13 @@ public class CustomerUI {
 		
 	}
 	private void viewAccountStats() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Account Overview for " + user.getUsername() + "\n\n");
+		user.printAccountSummary();
+		System.out.println("Enter an account ID to view more options for that account, or enter '0' to return");
+		int choice = input.nextInt();
+		if (choice == 0){
+			this.customerMenu();
+		}
+		else viewAccountsMenu(choice);
 	}
 }
