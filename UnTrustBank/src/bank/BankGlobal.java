@@ -34,11 +34,11 @@ public class BankGlobal {
 	//different control systems for bank.
 	
 	// Transaction
-	private static int currentCustomerID;
+	private static int currentCustomerID=500;
 	private static int currentTransactionID;
 	private static int currentAccountID;
 	private static int currentRequestID;
-	private static int currentEmployeeID;
+	private static int currentEmployeeID=1;
 	
 	
 

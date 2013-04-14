@@ -143,9 +143,11 @@ public class AccountManagerUser extends BasicUser{
 		// so I suppose have a line to ask if they want to use the global, and if not, what do they want the rate to be?
 		//LoanAccount a = new LoanAccount(c, BankGlobal.getNewAccountID(), interest, minPayment,)//need to change Loan account 
 		//constructor, make initial loan an amount, construct transaction within constructor.
+		
 		Scanner input = new Scanner(System.in);
+		//System.out.println("")
 		//input those things needed for the constructor below
-		//LoanAccount crapbag = new LoanAccount(c, crapbag.getAccountID(), myinterestrateoffset, myminmontlyloanpayment, initialloan)
+		//LoanAccount LA = new LoanAccount(c, LA.getAccountID(), myinterestrateoffset, myminmontlyloanpayment, initialloan)
 	
 	}
 	
