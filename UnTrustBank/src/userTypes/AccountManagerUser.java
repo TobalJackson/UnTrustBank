@@ -145,7 +145,15 @@ public class AccountManagerUser extends BasicUser{
 		//constructor, make initial loan an amount, construct transaction within constructor.
 		
 		Scanner input = new Scanner(System.in);
-		//System.out.println("")
+		System.out.println("You are creating a loan for " + c.getFirstName() + " " + c.getLastName());
+		System.out.println("How much are we loaning Customer " + c.getLastName() + "? (input as positive number)");
+		double loanamount = input.nextDouble();
+		System.out.println("How much with the interest rate on this loan be offset from the global rate of" + BankGlobal.getInterestRateLoan() + "?");
+		System.out.println("(If it is not offset, please enter 0.");
+		double interestoffset = input.nextDouble();
+		System.out.println("How much is the minimum monthly payment ($) ?");
+		double payments = input.nextDouble();
+		
 		//input those things needed for the constructor below
 		//LoanAccount LA = new LoanAccount(c, LA.getAccountID(), myinterestrateoffset, myminmontlyloanpayment, initialloan)
 	
