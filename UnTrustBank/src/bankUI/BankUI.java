@@ -30,6 +30,7 @@ public class BankUI {
 		}
 	}
 	//Commented out because of angry red squiggles - Dania. Feel free to try and fix it
+	// Angry red squiggles are because there aren't any constructors for the specific UI's - Michael
 	
 	public void getUserContext(BasicUser user){
 //		int userType = user.getUserType();
