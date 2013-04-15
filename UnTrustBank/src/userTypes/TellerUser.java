@@ -21,7 +21,7 @@ public class TellerUser extends BasicUser {
 		this.userType = BasicUser.TELLER_USER_TYPE;
 	}
 	public TellerUser(){
-		super();
+		super("Steven");
 		this.userType = BasicUser.TELLER_USER_TYPE;
 		BankGlobal.appendToGlobalEmployeeList(this);
 	}

@@ -34,11 +34,11 @@ public class BankGlobal {
 	//different control systems for bank.
 	
 	// Transaction
-	private static int currentCustomerID=500;
+	private static int currentCustomerID;
 	private static int currentTransactionID;
 	private static int currentAccountID;
 	private static int currentRequestID;
-	private static int currentEmployeeID=1;
+	private static int currentEmployeeID;
 	
 	
 
@@ -317,7 +317,7 @@ public class BankGlobal {
 	//Checking
 	
 	private static double overdraftFee;
-	private static double overdraftlimit = 0;
+	private static double overdraftlimit;
 	
 	private static double serviceChargeLimitChecking;
 	private static boolean underlimitfeechecking;
@@ -490,6 +490,42 @@ double SavingsBalance=0;
 	return MYGlobalStats;
 	
 }
+
+///////////////// INITIALIZE BANK! GOOD LUCK!
+public static void initializeBank(){
+currentCustomerID=1;
+currentTransactionID=1;
+currentAccountID=1;
+currentRequestID=1;
+currentEmployeeID=500;
+CDSavingsOffset=.05;
+serviceChargeSavings=10;
+interestRateSavings=.02;
+serviceChargeSavingsthreshold=50;
+minimumBalanceCD=100;
+InterestRateCD6Month=.1;
+InterestRateCD1Year=.11;
+InterestRateCD2Year=.12;
+InterestRateCD3Year=.13;
+InterestRateCD4Year=.14;
+InterestRateCD5Year=.15;
+overdraftFee=5;
+overdraftlimit=0;
+serviceChargeLimitChecking=50;
+underlimitfeechecking=true;
+serviceChargeChecking=5;
+LOCinterestOffset=.05;
+Loancap=-2000;
+interestRateLoan=.07;
+penaltyFeeLoanLC=75;
+LOCMinPayment=40;
+
+
+
+}
+
+
+
 
 }
 

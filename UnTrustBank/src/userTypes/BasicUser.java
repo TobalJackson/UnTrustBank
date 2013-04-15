@@ -39,6 +39,11 @@ public abstract class BasicUser {
 		this(FirstName, "M", "Doe", true, new DateTime(1988, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, FirstName);
 	}
 	
+	public BasicUser(String FirstName, boolean ismale){
+		this(FirstName, "M", "Doe", ismale, new DateTime(1988, 2, 8, 8, 0, 0), new char[]{'D', 'o', 'e'}, FirstName);
+	}
+	
+	
 	public int getUserType(){
 		return userType;
 	}

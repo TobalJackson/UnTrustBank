@@ -27,8 +27,9 @@ public class AuditorUser extends BasicUser {
 		BankGlobal.appendToGlobalEmployeeList(this);
 	}
 	public AuditorUser(){
-		super();
+		super("Katie the Auditor", false);
 		this.userType = BasicUser.AUDITOR_USER_TYPE;
+		
 		BankGlobal.appendToGlobalEmployeeList(this);
 	}
 	

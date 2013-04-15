@@ -13,7 +13,7 @@ public class OperationManagerUser extends BasicUser {
 		BankGlobal.appendToGlobalEmployeeList(this);
 	}
 	public OperationManagerUser(){
-		super();
+		super("Daniel the Operation Manager");
 		this.userType = BasicUser.OPERATION_MANAGER_USER_TYPE;
 		BankGlobal.appendToGlobalEmployeeList(this);
 	}

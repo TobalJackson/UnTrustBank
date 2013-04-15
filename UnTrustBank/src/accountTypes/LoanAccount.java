@@ -38,6 +38,7 @@ public LoanAccount(CustomerUser owner, double myinterestrateoffset,  double mymi
 		if(initialloan.getAmount()>=0){ //must have one negative transaction in constructor 
 			throw new IllegalArgumentException("this is a loan, so the intial transaction is negative");
 		}
+		
 		updateCurrentAccountBalance();
 		thismonthspaid=0;
 		

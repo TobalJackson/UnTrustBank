@@ -98,7 +98,7 @@ public void toConsole(){
 	
 	String SavingsString1 = "Savings Accounts Total Balances: $" + SavingsBalance;
 	System.out.println(SavingsString1);
-	String SavingsString2 = "Number of Savings Accounts: $" + SavingsNumber;
+	String SavingsString2 = "Number of Savings Accounts: " + SavingsNumber;
 	System.out.println(SavingsString2);
 	String SavingsString3 = "Average of Savings Accounts $" + SavingsAvg;
 	System.out.println(SavingsString3);

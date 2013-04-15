@@ -29,27 +29,29 @@ public class BankUI {
 			}
 		}
 	}
+	//Commented out because of angry red squiggles - Dania. Feel free to try and fix it
+	
 	public void getUserContext(BasicUser user){
-		int userType = user.getUserType();
-		switch(userType){
-		case BasicUser.CUSTOMER_USER_TYPE:
-			CustomerUI custUI = new CustomerUI((CustomerUser)user, this);
-			break;
-		case BasicUser.ACCOUNT_MANAGER_USER_TYPE:
-			AccountManagerUI acmgrUI = new AccountManagerUI(user);
-			break;
-		case BasicUser.ACCOUNTANT_USER_TYPE:
-			AccountantUI acntntUI = new AccountantUI(user);
-			break;
-		case BasicUser.AUDITOR_USER_TYPE:
-			AuditorUI auditUI = new AuditorUI(user);
-			break;
-		case BasicUser.OPERATION_MANAGER_USER_TYPE:
-			OperationManagerUI opmgrUI = new OperationManagerUI(user);
-			break;
-		case BasicUser.TELLER_USER_TYPE:
-			TellerUI tlrUI = new TellerUI(user);
-			break;
+//		int userType = user.getUserType();
+//		switch(userType){
+//		case BasicUser.CUSTOMER_USER_TYPE:
+//			CustomerUI custUI = new CustomerUI((CustomerUser)user, this);
+//			break;
+//		case BasicUser.ACCOUNT_MANAGER_USER_TYPE:
+//			AccountManagerUI acmgrUI = new AccountManagerUI(user);
+//			break;
+//		case BasicUser.ACCOUNTANT_USER_TYPE:
+//			AccountantUI acntntUI = new AccountantUI(user);
+//			break;
+//		case BasicUser.AUDITOR_USER_TYPE:
+//			AuditorUI auditUI = new AuditorUI(user);
+//			break;
+//		case BasicUser.OPERATION_MANAGER_USER_TYPE:
+//			OperationManagerUI opmgrUI = new OperationManagerUI(user);
+//			break;
+//		case BasicUser.TELLER_USER_TYPE:
+//			TellerUI tlrUI = new TellerUI(user);
+//			break;
 		}
 	}
-}
+
